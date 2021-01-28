@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BlockBase.Dapps.CloudManager.WebApp</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.23/b-1.6.5/b-colvis-1.6.5/r-2.2.7/datatables.min.css" />
+    <link href="~/css/Deployment.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/Home.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/css/HeaderMenu.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <header>
+        <!-- Nav Menu begin -->
+        <div class="navigation-wrap start-header start-style">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="navbar navbar-expand-md navbar-light">
+                            <a class="navbar-brand" title="Home" href="https://blockbase.network/">
+                                <img class="" src="~/img/BlockBase_logo.png" height="64" alt="BlockBase Logo">
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ml-auto py-4 py-md-0">
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
+                                    </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link text-light" asp-area="" asp-controller="Deployment" asp-action="Index"><i class="fas fa-cloud"></i> Deployment</a>
+                                    </li>
+                                    <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+                                        <a class="nav-link text-light" asp-area="" asp-controller="Nodes" asp-action="Index"><i class="fas fa-laptop"></i> Nodes</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Nav Menu End -->
+        <!-- Errorpopup Menu begin -->
+        <div class="modal" id="error-modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Ups</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>@ViewBag.ErrorMsg</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary closebtn" data-bs-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Errorpopup Menu end -->
+        <!-- Breadcrumb begin -->
+        <div class="breadcrumb">
+            @ViewContext.RouteData.Values["controller"].ToString()
+            @if (ViewContext.RouteData.Values["action"].ToString() != "Index")
+            {
+                @:> @Html.ActionLink(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())
+            }
+        </div>
+        <!-- Breadcrumb end -->
+
+    </header>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/1207650100.js" crossorigin="anonymous"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.23/b-1.6.5/b-colvis-1.6.5/r-2.2.7/datatables.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script> var error = '@ViewBag.ErrorMsg' </script>
+    <script>
+        (function ($) {
+            "use strict";
+            if (error) {
+                $('#error-modal').modal('show');
+            }
+            $('.closebtn').click(() => { $('#error-modal').modal('hide'); });
+            $('body').on('mouseenter mouseleave', '.nav-item', function (e) {
+                if ($(window).width() > 750) {
+                    var _d = $(e.target).closest('.nav-item'); _d.addClass('show');
+                    setTimeout(function () {
+                        _d[_d.is(':hover') ? 'addClass' : 'removeClass']('show');
+                    }, 1);
+                }
+            });
+        })(jQuery);
+    </script>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - BlockBase.Dapps.CloudManager.WebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

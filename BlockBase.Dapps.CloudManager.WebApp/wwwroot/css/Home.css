@@ -1,0 +1,13 @@
+﻿.NodeCount * {
+    text-align: left;
+    
+}
+
+.NodeCount {
+    font-weight : 500;
+    color : black;
+    text-align: left;
+    position: absolute;
+    left: 50%;
+    top: 50%
+}

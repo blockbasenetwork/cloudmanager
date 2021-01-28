@@ -5,6 +5,18 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockBase.Dapps.CloudManager.Utils", "BlockBase.Dapps.CloudManager.Utils\BlockBase.Dapps.CloudManager.Utils.csproj", "{7169017D-0DB2-4229-8761-E903177061F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockBase.Dapps.CloudManager.WebApp", "BlockBase.Dapps.CloudManager.WebApp\BlockBase.Dapps.CloudManager.WebApp.csproj", "{3EF71A59-FB1B-429A-88F3-75E21D19AE08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockBase.Dapps.CloudManager.Services", "BlockBase.Dapps.CloudManager.Services\BlockBase.Dapps.CloudManager.Services.csproj", "{9025C1F9-43A4-468E-88BD-029A062117B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockBase.Dapps.CloudManager.Data", "BlockBase.Dapps.CloudManager.Data\BlockBase.Dapps.CloudManager.Data.csproj", "{1E85048B-2F79-4F87-83A2-B5C9207AC9BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockBase.Dapps.CloudManager.DataAccessLayer", "BlockBase.Dapps.CloudManager.DataAccessLayer\BlockBase.Dapps.CloudManager.DataAccessLayer.csproj", "{C75D1051-4DC5-4935-9E2F-B62A85EFFA43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockBase.Dapps.CloudManager.Business", "BlockBase.Dapps.CloudManager.Business\BlockBase.Dapps.CloudManager.Business.csproj", "{BE661362-BD23-488D-B159-D2A4C6F1D96D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{E7D9BDC5-1FD1-48AF-88BC-ADFD8D95F989}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +27,30 @@ Global
 		{7169017D-0DB2-4229-8761-E903177061F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7169017D-0DB2-4229-8761-E903177061F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7169017D-0DB2-4229-8761-E903177061F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EF71A59-FB1B-429A-88F3-75E21D19AE08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EF71A59-FB1B-429A-88F3-75E21D19AE08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EF71A59-FB1B-429A-88F3-75E21D19AE08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EF71A59-FB1B-429A-88F3-75E21D19AE08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9025C1F9-43A4-468E-88BD-029A062117B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9025C1F9-43A4-468E-88BD-029A062117B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9025C1F9-43A4-468E-88BD-029A062117B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9025C1F9-43A4-468E-88BD-029A062117B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E85048B-2F79-4F87-83A2-B5C9207AC9BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E85048B-2F79-4F87-83A2-B5C9207AC9BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E85048B-2F79-4F87-83A2-B5C9207AC9BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E85048B-2F79-4F87-83A2-B5C9207AC9BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C75D1051-4DC5-4935-9E2F-B62A85EFFA43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C75D1051-4DC5-4935-9E2F-B62A85EFFA43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C75D1051-4DC5-4935-9E2F-B62A85EFFA43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C75D1051-4DC5-4935-9E2F-B62A85EFFA43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE661362-BD23-488D-B159-D2A4C6F1D96D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE661362-BD23-488D-B159-D2A4C6F1D96D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE661362-BD23-488D-B159-D2A4C6F1D96D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE661362-BD23-488D-B159-D2A4C6F1D96D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7D9BDC5-1FD1-48AF-88BC-ADFD8D95F989}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7D9BDC5-1FD1-48AF-88BC-ADFD8D95F989}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7D9BDC5-1FD1-48AF-88BC-ADFD8D95F989}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7D9BDC5-1FD1-48AF-88BC-ADFD8D95F989}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

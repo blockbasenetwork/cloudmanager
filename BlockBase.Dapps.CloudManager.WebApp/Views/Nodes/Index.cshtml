@@ -1,0 +1,139 @@
+﻿
+
+<div class="Nodes">
+
+    <table id="requester-table" class="table" style="width:100%">
+        <thead class="thead-light">
+            <tr>
+                <th>Node </th>
+                <th>Status</th>
+                <th>Monthly Cost</th>
+                <th>Stake</th>
+                <th>Balance</th>
+                <th>Health</th>
+            </tr>
+        </thead>
+        @if (Model != null)
+        {
+            <tbody>
+                @foreach (var item in ((IEnumerable<dynamic>)Model).Where(item => item.Type == "Requester" || item.Type == "Full"))
+                {
+                <tr>
+                    <td>
+                        @item.Account
+                    </td>
+                    <td>
+                        <!-- Status -->
+                    </td>
+                    <td>
+                        <!-- Monthly Cost -->
+                    </td>
+                        @item.Stake
+                    <td>
+                        @item.Balance
+                    </td>
+                    <td>
+                        <!-- Health -->
+                    </td>
+                </tr>
+                }
+            </tbody>
+        }
+    </table>
+
+
+    @if(false)
+    {
+        <table id="provider-table" class="table" style="width:100%">
+        <thead class="thead-light">
+            <tr>
+                <th>Node</th>
+                <th>Status</th>
+                <th>Type</th>
+                <th>Producing</th>
+                <th>Events</th>
+                <th>Health</th>
+            </tr>
+        </thead>
+        @if (Model != null)
+        {
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Account
+                        </td>
+                        <td>
+                            @item.Service
+                        </td>
+                        <td>
+                            @item.Status
+                        </td>
+                        <td>
+                            @item.Type
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <i class="fas fa-bars dropbtn"></i>
+                                <div class="dropdown-content">
+
+                                    @if (@item.Status == "ON")
+                                    {
+                                        <a href="/Deployment/StopNode?Account=@item.Account"><i class="fas fa-pause"></i> Pause</a>
+                                        <a href="#"><i class="fas fa-copy"></i> Duplicate</a>
+                                        <a href="/Deployment/RemoveNode?Account=@item.Account"><i class="fas fa-trash"></i> Remove</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Deployment/StartNode?Account=@item.Account"><i class="fas fa-cloud"></i> Deploy</a>
+                                        <a href="#"><i class="fas fa-edit"></i> Edit</a>
+                                        <a href="#"><i class="fas fa-copy"></i> Duplicate</a>
+                                        <a href="/Deployment/RemoveNode?Account=@item.Account"><i class="fas fa-trash"></i> Remove</a>
+                                    }
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        }
+    </table>
+    }
+</div>
+
+<script>
+    $(document).ready(function () {
+        var myTable = $('#table-id').DataTable({
+            dom: 'Bfrtip',
+            buttons: {
+                buttons: [
+                    {
+                        className: "Refresh-btn",
+                            action: function (e, dt, node, config) {
+                            $("#Deployment").load(location.href + " #Deployment");
+                        }
+                    },
+                    {
+                        className: "Add-btn",
+                        action: function (e, dt, node, config) {
+                            alert("redirect para new node page");
+                        }
+                    }
+                ],
+                dom: {
+                    button: {
+                        tag: "button",
+                        className: "btn btn-light"
+                    }
+                }
+            }
+        });
+        $('.Refresh-btn').html('<i class="fas fa-redo"></i> Refresh');
+        $('.Add-btn').html('<i class="fas fa-plus"></i> Add');
+    });
+</script>
+
+
+<link href="~/css/Nodes.css" rel="stylesheet" type="text/css" />

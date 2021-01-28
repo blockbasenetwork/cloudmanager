@@ -1,0 +1,79 @@
+﻿
+using BlockBase.Dapps.CloudManager.Business.Deployment;
+using BlockBase.Dapps.CloudManager.WebApp.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
+{
+    public class DeploymentController : BaseController
+    {
+        private readonly ILogger<HomeController> _logger;
+        private readonly IDeploymentBusinessObject _business;
+
+        public DeploymentController(ILogger<HomeController> logger, IDeploymentBusinessObject business)
+        {
+            _business = business;
+            _logger = logger;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var res = await _business.GetAllNodesAsync();
+            if (!res.HasSucceeded)
+            {
+                RegisterError(res.Exception.Message);
+                return View();
+            }
+            var viewModelList = new List<DeploymentViewModel>();
+            res.Result.ForEach((it) => { viewModelList.Add(new DeploymentViewModel(it)); });
+            return View(res.Result);
+        }
+        
+        public async Task<IActionResult> StopNode(String Account)
+        {
+            var res = await _business.StopNodeAsync(Account);
+            //TODO FAZER ISTO NA CLOUD
+            if (!res.HasSucceeded)
+            {
+                RegisterError(res.Exception.Message);
+                return RedirectToAction("Index");
+            }            
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> StartNode(String Account)
+        {
+            var res = await _business.StartNodeAsync(Account);
+            //TODO FAZER ISTO NA CLOUD
+            if (!res.HasSucceeded)
+            {
+                RegisterError(res.Exception.Message);
+                return RedirectToAction("Deployment");
+            }
+            return RedirectToAction("Deployment");
+        }
+
+        public async Task<IActionResult> RemoveNode(String Account)
+        {
+            var res = await _business.RemoveNodeAsync(Account);
+            //TODO FAZER ISTO NA CLOUD
+            if (!res.HasSucceeded)
+            {
+                RegisterError(res.Exception.Message);
+                return RedirectToAction("Deployment");
+            }
+            return RedirectToAction("Deployment");
+        }
+
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+}

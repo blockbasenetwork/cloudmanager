@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+
+}
+@if (@Model != null)
+{
+    <div class="text-center">
+        <div class="NodeCount">
+            <p>You have @Model.Total nodes</p>
+            Requester      @Model.Requesters<br>
+            Provider      @Model.Providers<br>
+            Full           @Model.Full
+        </div>
+    </div>
+}
+  
