@@ -2,7 +2,7 @@
 using Microsoft.Data.Sqlite;
 using System.Threading.Tasks;
 
-namespace BlockBase.Dapps.CloudManager.Dal
+namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 {
     public class DeployConfigurationsDataAccessObject : BaseDataAccessObject
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BlockBase.Dapps.CloudManager.Business
+namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 {
     public class NodeCountPOCO
     {

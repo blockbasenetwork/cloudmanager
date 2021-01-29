@@ -8,7 +8,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Deployment
 {
     public interface IDeploymentBusinessObject
     {
-        Task<OperResult<List<Node>>> GetAllNodesAsync();
+        Task<OperationResult<List<Node>>> GetAllNodesAsync();
         Task<Operation> StopNodeAsync(string account);
         Task<Operation> StartNodeAsync(string account);
 

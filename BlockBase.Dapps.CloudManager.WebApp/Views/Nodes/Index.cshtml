@@ -7,7 +7,7 @@
             <tr>
                 <th>Node </th>
                 <th>Status</th>
-                <th>Monthly Cost</th>
+                <th>Average Monthly Cost</th>
                 <th>Stake</th>
                 <th>Balance</th>
                 <th>Health</th>
@@ -23,17 +23,20 @@
                         @item.Account
                     </td>
                     <td>
-                        <!-- Status -->
+                        @item.State
                     </td>
                     <td>
-                        <!-- Monthly Cost -->
+                        @item.MonthlyCost
                     </td>
+
+                    <td>
                         @item.Stake
-                    <td>
-                        @item.Balance
                     </td>
                     <td>
-                        <!-- Health -->
+                        @item.Balance<!-- Health -->
+                    </td>
+                    <td>
+                       <!-- Health -->
                     </td>
                 </tr>
                 }
@@ -105,22 +108,16 @@
 
 <script>
     $(document).ready(function () {
-        var myTable = $('#table-id').DataTable({
+        var myTable = $('#requester-table').DataTable({
             dom: 'Bfrtip',
             buttons: {
                 buttons: [
                     {
                         className: "Refresh-btn",
                             action: function (e, dt, node, config) {
-                            $("#Deployment").load(location.href + " #Deployment");
+                                $("#requester-table").load(location.href + "#requester-table");
                         }
                     },
-                    {
-                        className: "Add-btn",
-                        action: function (e, dt, node, config) {
-                            alert("redirect para new node page");
-                        }
-                    }
                 ],
                 dom: {
                     button: {

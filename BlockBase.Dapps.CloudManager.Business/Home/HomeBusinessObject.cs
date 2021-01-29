@@ -1,5 +1,5 @@
 ﻿
-using BlockBase.Dapps.CloudManager.Dal;
+using BlockBase.Dapps.CloudManager.DataAccessLayer;
 using BlockBase.Dapps.CloudManager.Data;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -16,7 +16,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Home
         }
 
 
-        public async Task<OperResult<NodeCountPOCO>> GetNrNodesAsync()
+        public async Task<OperationResult<NodeCountPOCO>> GetNrNodesAsync()
         {
             return await ExecuteFunction(async () => NodesCounter(await _nodeDAO.GetAllAsync()));
 

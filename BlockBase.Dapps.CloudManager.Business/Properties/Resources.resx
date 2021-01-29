@@ -123,4 +123,7 @@
   <data name="RequesterStake" xml:space="preserve">
     <value>http://localhost:8000/api/Requester/CheckCurrentStakeInSidechain</value>
   </data>
+  <data name="SidechainState" xml:space="preserve">
+    <value>http://localhost:8000/api/Network/GetSidechainState?sidechainName=</value>
+  </data>
 </root>

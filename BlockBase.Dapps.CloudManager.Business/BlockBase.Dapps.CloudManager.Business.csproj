@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BlockBase.Dapps.CloudManager.DataAccessLayer\BlockBase.Dapps.CloudManager.DataAccessLayer.csproj" />
     <ProjectReference Include="..\BlockBase.Dapps.CloudManager.Data\BlockBase.Dapps.CloudManager.Data.csproj" />
+    <ProjectReference Include="..\BlockBase.Dapps.CloudManager.Utils\BlockBase.Dapps.CloudManager.Utils.csproj" />
   </ItemGroup>
 
   <ItemGroup>

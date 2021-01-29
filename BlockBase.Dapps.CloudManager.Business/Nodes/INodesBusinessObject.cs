@@ -1,13 +1,11 @@
-﻿using BlockBase.Dapps.CloudManager.Data;
-using System;
+﻿using BlockBase.Dapps.CloudManager.DataAccessLayer;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BlockBase.Dapps.CloudManager.Business.Nodes
 {
     public interface INodesBusinessObject
     {
-        Task<OperResult<List<RequesterPoco>>> GetAllRequestersAssync();
+        Task<OperationResult<List<RequesterPoco>>> GetAllRequestersAsync();
     }
 }

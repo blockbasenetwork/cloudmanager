@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace BlockBase.Dapps.CloudManager.Dal
+namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 {
     public class NodesDataAccessObject : BaseDataAccessObject
     {
@@ -44,11 +44,20 @@ namespace BlockBase.Dapps.CloudManager.Dal
         {
                await SetNodeStatus(account, "OFF");
         }
-        public async Task<List<RequesterPoco>> GetAllRequestersAssync()
+        public async Task<List<RequesterPoco>> GetAllRequestersAsync()
         {
             using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
             {
-                var output = await (con.QueryAsync<RequesterPoco>("Select Account, IP, Type from Nodes where Type = 'Full' or Type = 'Requester'", new DynamicParameters()));
+                var output = await (con.QueryAsync<RequesterPoco>("Select Account, IP from Nodes where Type = 'Full' or Type = 'Requester'", new DynamicParameters()));
+                return output.ToList();
+            }
+        }
+
+        public async Task<List<ProducerPOCO>> GetAllProducersAsync()
+        {
+            using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
+            {
+                var output = await (con.QueryAsync<ProducerPOCO>("Select Account, IP from Nodes where Type = 'Full' or Type = 'Producer'", new DynamicParameters()));
                 return output.ToList();
             }
         }

@@ -1,8 +1,7 @@
-﻿using BlockBase.Dapps.CloudManager.Data;
+﻿
+using BlockBase.Dapps.CloudManager.DataAccessLayer;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
 {

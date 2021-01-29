@@ -68,5 +68,23 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer.Properties {
                 return ResourceManager.GetString("RequesterConfig", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://localhost:8000/api/Requester/CheckCurrentStakeInSidechain.
+        /// </summary>
+        public static string RequesterStake {
+            get {
+                return ResourceManager.GetString("RequesterStake", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://localhost:8000/api/Network/GetSidechainState?sidechainName=.
+        /// </summary>
+        public static string SidechainState {
+            get {
+                return ResourceManager.GetString("SidechainState", resourceCulture);
+            }
+        }
     }
 }

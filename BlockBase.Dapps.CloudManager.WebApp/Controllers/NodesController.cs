@@ -23,7 +23,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         public async Task<IActionResult> Index()
         {
             //Ir buscar o IP e o Nome e o tipo de TODOS os nos da BD para comecar a fazer a tabela
-            var result = await _business.GetAllRequestersAssync();
+            var result = await _business.GetAllRequestersAsync();
             if (!result.HasSucceeded)
             {
                 RegisterError(result.Exception.Message);

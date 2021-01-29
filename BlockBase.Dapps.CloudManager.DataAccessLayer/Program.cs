@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace BlockBase.Dapps.CloudManager.Dal
+namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 {
     class Program
     {

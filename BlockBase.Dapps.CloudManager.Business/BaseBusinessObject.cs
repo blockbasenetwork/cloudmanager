@@ -8,7 +8,7 @@ namespace BlockBase.Dapps.CloudManager.Business
 {
     public abstract class BaseBusinessObject
     {
-        public async Task<OperResult<T>> ExecuteFunction<T>(Func<Task<T>> func)
+        public async Task<OperationResult<T>> ExecuteFunction<T>(Func<Task<T>> func)
         {
             try
             {
@@ -17,12 +17,12 @@ namespace BlockBase.Dapps.CloudManager.Business
                 {
                     var result = await func.Invoke();
                     scope.Complete();
-                    return new OperResult<T>(result);
+                    return new OperationResult<T>(result);
                 }
             }
             catch (Exception e)
             {
-                return new OperResult<T>(e);
+                return new OperationResult<T>(e);
             }
         }
 

@@ -77,5 +77,14 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
                 return ResourceManager.GetString("RequesterStake", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://localhost:8000/api/Network/GetSidechainState?sidechainName=.
+        /// </summary>
+        internal static string SidechainState {
+            get {
+                return ResourceManager.GetString("SidechainState", resourceCulture);
+            }
+        }
     }
 }

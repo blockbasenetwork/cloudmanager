@@ -1,5 +1,5 @@
 ﻿
-using BlockBase.Dapps.CloudManager.Dal;
+using BlockBase.Dapps.CloudManager.DataAccessLayer;
 using BlockBase.Dapps.CloudManager.Data;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -29,7 +29,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Deployment
         }
 
 
-        public async Task<OperResult<List<Node>>> GetAllNodesAsync()
+        public async Task<OperationResult<List<Node>>> GetAllNodesAsync()
         {
             return await ExecuteFunction(async () => await _nodeDAO.GetAllAsync());
         }

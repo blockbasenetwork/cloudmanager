@@ -1,5 +1,5 @@
 ﻿using BlockBase.Dapps.CloudManager.Business.Properties;
-using BlockBase.Dapps.CloudManager.Dal;
+using BlockBase.Dapps.CloudManager.DataAccessLayer;
 using BlockBase.Dapps.CloudManager.Data;
 using BlockBase.Dapps.CloudManager.Utils;
 using Newtonsoft.Json;
@@ -18,37 +18,29 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             _nodeDAO = new NodesDataAccessObject();
         }
 
-        public async Task<OperResult<List<RequesterPoco>>> GetAllRequestersAssync() {
+        public async Task<OperationResult<List<RequesterPoco>>> GetAllRequestersAsync() {
             return await ExecuteFunction(async () => {
-            var nodeList = await _nodeDAO.GetAllRequestersAssync();
+            var nodeList = await _nodeDAO.GetAllRequestersAsync();
             foreach(var it in nodeList)
                 {
-                    await FetchRequesterValues(it); 
+                    await it.FetchRequesterValues(); 
                 }
             return nodeList;
                 });
         }
 
-        private async Task FetchRequesterValues(RequesterPoco requester)
+        public async Task<OperationResult<List<ProducerPOCO>>> GetAllProducersAsync()
         {
-            await FetchBalance(requester);
-            await FetchStake(requester);
-        }
-        private async Task FetchBalance(RequesterPoco requester)
-        {
-            var jsonString = await Fetch.CallAsync(Resources.RequesterConfig);
-            var json = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonString);
-            var currencyBalance = JsonConvert.DeserializeObject<Dictionary<string, object>>(json["response"].ToString())["currencyBalance"];
-            var balance = ((currencyBalance as JArray).First as JValue).Value.ToString();
-            requester.Balance = balance;
+            return await ExecuteFunction(async () => {
+                var nodeList = await _nodeDAO.GetAllProducersAsync();
+                foreach (var it in nodeList)
+                {
+                    await it.FetchRequesterValues();
+                }
+                return nodeList;
+            });
         }
 
-        private async Task FetchStake(RequesterPoco requester)
-        {
-            var requestResult = await Fetch.CallAsync(Resources.RequesterStake);
-            var json = JsonConvert.DeserializeObject<Dictionary<string, string>>(requestResult);
-            var stake = json["response"];
-            requester.Stake = stake;
-        }
+
     }
 }

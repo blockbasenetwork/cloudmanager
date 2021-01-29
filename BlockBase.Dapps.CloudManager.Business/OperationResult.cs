@@ -4,17 +4,17 @@ using System.Text;
 
 namespace BlockBase.Dapps.CloudManager.Business
 {
-    public class OperResult<T> : Operation
+    public class OperationResult<T> : Operation
     {
         public T Result { get; set; }
 
        
-        public OperResult(T result)
+        public OperationResult(T result)
         {
             Result = result;
             this.HasSucceeded = true;
         }
 
-        public OperResult(Exception e) : base(e) { }
+        public OperationResult(Exception e) : base(e) { }
     }
 }

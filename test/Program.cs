@@ -1,4 +1,6 @@
 ﻿using BlockBase.Dapps.CloudManager.Business.Nodes;
+using BlockBase.Dapps.CloudManager.Data;
+using BlockBase.Dapps.CloudManager.DataAccessLayer;
 using BlockBase.Dapps.CloudManager.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -11,11 +13,15 @@ namespace test
     {
         static void Main(string[] args)
         {
-            var requestResult = Fetch.CallAsync("http://localhost:8000/api/Requester/CheckCurrentStakeInSidechain").Result;
-            var json = JsonConvert.DeserializeObject<Dictionary<string, string>>(requestResult);
-            var currencyBalance = json["response"];
-            //var final = ((currencyBalance as JArray).First as JValue).Value.ToString();
-            var x = 10;
+
+
+            NodesBusinessObject bo = new NodesBusinessObject();
+            var x = bo.GetAllRequestersAsync().Result;
+        
+
+            int dx = 10;
         }
+
+       
     }
 }
