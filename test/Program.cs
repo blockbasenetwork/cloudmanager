@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace test
 {
@@ -16,6 +17,9 @@ namespace test
 
 
             NodesBusinessObject bo = new NodesBusinessObject();
+            NodeAppSettingsDataAccessObject dao = new NodeAppSettingsDataAccessObject();
+            var file = File.ReadAllText("C:\\Users\\User01\\Desktop\\node\\Producer\\BlockBase.Node\\appsettings.json");
+            dao.InsertAppSettingAsync("bbaseprod111",file);
             var x = bo.GetAllRequestersAsync().Result;
         
 

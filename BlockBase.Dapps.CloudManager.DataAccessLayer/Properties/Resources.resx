@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ProducingSideChains" xml:space="preserve">
+    <value>http://localhost:8001/api/Provider/GetProducingSidechains</value>
+  </data>
   <data name="RequesterConfig" xml:space="preserve">
     <value>http://localhost:8000/api/Provider/CheckProducerConfig</value>
   </data>

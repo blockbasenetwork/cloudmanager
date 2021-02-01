@@ -18,12 +18,12 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             _nodeDAO = new NodesDataAccessObject();
         }
 
-        public async Task<OperationResult<List<RequesterPoco>>> GetAllRequestersAsync() {
+        public async Task<OperationResult<List<RequesterPOCO>>> GetAllRequestersAsync() {
             return await ExecuteFunction(async () => {
             var nodeList = await _nodeDAO.GetAllRequestersAsync();
             foreach(var it in nodeList)
                 {
-                    await it.FetchRequesterValues(); 
+                    await it.FetchValues(); 
                 }
             return nodeList;
                 });
@@ -35,7 +35,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 var nodeList = await _nodeDAO.GetAllProducersAsync();
                 foreach (var it in nodeList)
                 {
-                    await it.FetchRequesterValues();
+                    await it.FetchValues();
                 }
                 return nodeList;
             });

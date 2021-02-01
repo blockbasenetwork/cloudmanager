@@ -1,17 +1,62 @@
-﻿using System;
+﻿using BlockBase.Dapps.CloudManager.Data;
+using BlockBase.Dapps.CloudManager.DataAccessLayer.Properties;
+using BlockBase.Dapps.CloudManager.Utils;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 {
     public class ProducerPOCO
     {
-        public String Node { get; set; }
+        public string Account { get; set; }
         public bool Status { get; set; }
-        public int Ip{ get; set; }
-        public bool Producing { get; set; }
-        public String Events { get; set; }
-        public String Health { get; set; }
+        public string Ip{ get; set; }
+        public string Type { get; set; }
+        public String Producing { get; set; }
+        public string Events { get; set; }
+        public int Health { get; set; }
 
+        public async Task FetchValues()
+        {
+            await FetchProducing();
+            
+        }
+
+        public async Task FetchProducing()
+        {
+            var jsonString = await Fetch.CallAsync(Resources.ProducingSideChains);
+            var succeeded = bool.Parse(JsonStringNavigator.GetDeeper(jsonString, "succeeded"));
+            if (!succeeded)
+            {
+                this.Producing = "Unconfigured";
+            }
+            var response = JsonStringNavigator.GetDeeper<ProducingSidechain[]>(jsonString, "response");
+            int working = 0;
+            foreach (var sc in response)
+            {
+                if (sc.sidechainState == "Production") working++;
+            }
+            this.Producing = working + "/" + response.Length;
+        }
+
+        public async Task FetchHealth()
+        {
+            var jsonString = await Fetch.CallAsync(Resources.ProducingSideChains);
+            var succeeded = bool.Parse(JsonStringNavigator.GetDeeper(jsonString, "succeeded"));
+            if (!succeeded)
+            {
+                this.Producing = "Unconfigured";
+            }
+            var response = JsonStringNavigator.GetDeeper<ProducingSidechain[]>(jsonString, "response");
+            int working = 0;
+            foreach (var sc in response)
+            {
+                if (isProducing(sc)) working++;
+            }
+            this.Health = (working / response.Length) * 100; 
+        }
+        bool isProducing(ProducingSidechain sc) => sc.sidechainState == "Production" && sc.blocksFailedInCurrentSettlement != 0;
     }
 }

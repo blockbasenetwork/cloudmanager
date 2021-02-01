@@ -6,6 +6,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
 {
     public interface INodesBusinessObject
     {
-        Task<OperationResult<List<RequesterPoco>>> GetAllRequestersAsync();
+        Task<OperationResult<List<RequesterPOCO>>> GetAllRequestersAsync();
+        Task<OperationResult<List<ProducerPOCO>>> GetAllProducersAsync();
     }
 }

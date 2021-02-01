@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 {
-    public class RequesterPoco
+    public class RequesterPOCO
     {
         public String Account { get; set; }
         public String Ip { get; set; }
@@ -18,12 +18,15 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
         public String Balance { get; set; }
         public String Stake { get; set; }
 
-        public async Task FetchRequesterValues()
+        public async Task FetchValues()
         {
-            await FetchBalance();
-            await FetchRequesterStake();
-            await GetAvgMonthlyCost();
-            await FetchRequesterState();
+            if (await FetchRequesterState())
+            {
+                await FetchBalance();
+                await FetchRequesterStake();
+                await GetAvgMonthlyCost();
+            }
+            
         }
         private async Task FetchBalance()
         {
@@ -34,12 +37,18 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
             this.Balance = balance;
         }
 
-        private async Task FetchRequesterState()
+        private async Task<bool> FetchRequesterState()
         {
             var jsonString = await Fetch.CallAsync(Resources.SidechainState + this.Account);
+            var succeeded = bool.Parse(JsonStringNavigator.GetDeeper(jsonString, "succeeded"));
+            if (!succeeded) { 
+                this.State = "No sidechain";
+                return false;
+            }
             var response = JsonStringNavigator.GetDeeper(jsonString, "response");
             var inProduction = bool.Parse(JsonStringNavigator.GetDeeper(response, "inProduction"));
             this.State = inProduction ? "ON" : "OFF";
+            return true;
         }
 
         private async Task FetchRequesterStake()

@@ -44,11 +44,11 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
         {
                await SetNodeStatus(account, "OFF");
         }
-        public async Task<List<RequesterPoco>> GetAllRequestersAsync()
+        public async Task<List<RequesterPOCO>> GetAllRequestersAsync()
         {
             using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
             {
-                var output = await (con.QueryAsync<RequesterPoco>("Select Account, IP from Nodes where Type = 'Full' or Type = 'Requester'", new DynamicParameters()));
+                var output = await (con.QueryAsync<RequesterPOCO>("Select Account, IP from Nodes where Type = 'Full' or Type = 'Requester'", new DynamicParameters()));
                 return output.ToList();
             }
         }
@@ -57,7 +57,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
         {
             using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
             {
-                var output = await (con.QueryAsync<ProducerPOCO>("Select Account, IP from Nodes where Type = 'Full' or Type = 'Producer'", new DynamicParameters()));
+                var output = await (con.QueryAsync<ProducerPOCO>("Select Account, IP, Type from Nodes where Type = 'Full' or Type = 'Producer'", new DynamicParameters()));
                 return output.ToList();
             }
         }

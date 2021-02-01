@@ -1,114 +1,100 @@
 ﻿
 
 <div class="Nodes">
-
-    <table id="requester-table" class="table" style="width:100%">
-        <thead class="thead-light">
-            <tr>
-                <th>Node </th>
-                <th>Status</th>
-                <th>Average Monthly Cost</th>
-                <th>Stake</th>
-                <th>Balance</th>
-                <th>Health</th>
-            </tr>
-        </thead>
-        @if (Model != null)
-        {
-            <tbody>
-                @foreach (var item in ((IEnumerable<dynamic>)Model).Where(item => item.Type == "Requester" || item.Type == "Full"))
-                {
+    <div class="nodes-table">
+        <table id="requester-table" class="table" style="width:100%">
+            <thead class="thead-light">
                 <tr>
-                    <td>
-                        @item.Account
-                    </td>
-                    <td>
-                        @item.State
-                    </td>
-                    <td>
-                        @item.MonthlyCost
-                    </td>
-
-                    <td>
-                        @item.Stake
-                    </td>
-                    <td>
-                        @item.Balance<!-- Health -->
-                    </td>
-                    <td>
-                       <!-- Health -->
-                    </td>
+                    <th>Node </th>
+                    <th>Status</th>
+                    <th>Average Monthly Cost</th>
+                    <th>Stake</th>
+                    <th>Balance</th>
+                    <th>Health</th>
                 </tr>
-                }
-            </tbody>
-        }
-    </table>
+            </thead>
+            @if (Model != null)
+            {
+                <tbody>
+                    @foreach (var item in Model.Requesters)
+                    {
+                        <tr>
+                            <td>
+                                @item.Account
+                            </td>
+                            <td>
+                                @item.State
+                            </td>
+                            <td>
+                                @item.MonthlyCost
+                            </td>
 
+                            <td>
+                                @item.Stake
+                            </td>
+                            <td>
+                                @item.Balance<!-- Health -->
+                            </td>
+                            <td>
+                                <!-- Health -->
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            }
+        </table>
+    </div>
 
-    @if(false)
-    {
+    <div class="nodes-table">
         <table id="provider-table" class="table" style="width:100%">
-        <thead class="thead-light">
-            <tr>
-                <th>Node</th>
-                <th>Status</th>
-                <th>Type</th>
-                <th>Producing</th>
-                <th>Events</th>
-                <th>Health</th>
-            </tr>
-        </thead>
-        @if (Model != null)
-        {
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @item.Account
-                        </td>
-                        <td>
-                            @item.Service
-                        </td>
-                        <td>
-                            @item.Status
-                        </td>
-                        <td>
-                            @item.Type
-                        </td>
-                        <td>
-                            <div class="dropdown">
-                                <i class="fas fa-bars dropbtn"></i>
-                                <div class="dropdown-content">
+            <thead class="thead-light">
+                <tr>
+                    <th>Node</th>
+                    <th>Status</th>
+                    <th>Type</th>
+                    <th>Producing</th>
+                    <th>Events</th>
+                    <th>Health</th>
+                </tr>
+            </thead>
+            @if (Model != null)
+            {
+                <tbody>
 
-                                    @if (@item.Status == "ON")
-                                    {
-                                        <a href="/Deployment/StopNode?Account=@item.Account"><i class="fas fa-pause"></i> Pause</a>
-                                        <a href="#"><i class="fas fa-copy"></i> Duplicate</a>
-                                        <a href="/Deployment/RemoveNode?Account=@item.Account"><i class="fas fa-trash"></i> Remove</a>
-                                    }
-                                    else
-                                    {
-                                        <a href="/Deployment/StartNode?Account=@item.Account"><i class="fas fa-cloud"></i> Deploy</a>
-                                        <a href="#"><i class="fas fa-edit"></i> Edit</a>
-                                        <a href="#"><i class="fas fa-copy"></i> Duplicate</a>
-                                        <a href="/Deployment/RemoveNode?Account=@item.Account"><i class="fas fa-trash"></i> Remove</a>
-                                    }
-
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        }
-    </table>
-    }
+                    @foreach (var item in Model.Producers)
+                    {
+                        <tr>
+                            <td>
+                                @item.Account
+                            </td>
+                            <td>
+                                <!-- Status -->
+                            </td>
+                            <td>
+                                @item.Type
+                            </td>
+                            <td>
+                                @item.Producing
+                            </td>
+                            <td>
+                                <!-- warnings-->
+                            </td>
+                            <td>
+                                @if (item.Health >= 50)
+                                {<p class="text-success">@item.Health%</p>}
+                            else
+                            { <p class="text-danger">@item.Health%</p>}
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            }
+        </table>
+    </div>
 </div>
-
 <script>
     $(document).ready(function () {
-        var myTable = $('#requester-table').DataTable({
+        var reqTable = $('#requester-table').DataTable({
             dom: 'Bfrtip',
             buttons: {
                 buttons: [
@@ -127,8 +113,27 @@
                 }
             }
         });
+
+        var provTable = $('#provider-table').DataTable({
+            dom: 'Bfrtip',
+            buttons: {
+                buttons: [
+                    {
+                        className: "Refresh-btn",
+                        action: function (e, dt, node, config) {
+                            $("#requester-table").load(location.href + "#requester-table");
+                        }
+                    },
+                ],
+                dom: {
+                    button: {
+                        tag: "button",
+                        className: "btn btn-light"
+                    }
+                }
+            }
+        });
         $('.Refresh-btn').html('<i class="fas fa-redo"></i> Refresh');
-        $('.Add-btn').html('<i class="fas fa-plus"></i> Add');
     });
 </script>
 

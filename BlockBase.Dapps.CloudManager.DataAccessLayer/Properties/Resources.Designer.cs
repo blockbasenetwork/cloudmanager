@@ -61,6 +61,15 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to http://localhost:8001/api/Provider/GetProducingSidechains.
+        /// </summary>
+        public static string ProducingSideChains {
+            get {
+                return ResourceManager.GetString("ProducingSideChains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://localhost:8000/api/Provider/CheckProducerConfig.
         /// </summary>
         public static string RequesterConfig {

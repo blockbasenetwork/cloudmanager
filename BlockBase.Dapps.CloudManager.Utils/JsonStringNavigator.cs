@@ -7,12 +7,20 @@ namespace BlockBase.Dapps.CloudManager.Utils
 {
     public static class JsonStringNavigator
     {
-        public static string GetDeeper(string jsonString, string Field)
+        public static String GetDeeper(string jsonString, string Field)
         {
             var jsonObj = JsonConvert.DeserializeObject<Dictionary<string, Object>>(jsonString);
             return jsonObj[Field].ToString();
         }
 
-       
+        public static T GetDeeper<T>(string jsonString, string Field)
+        {
+            var jsonObj = JsonConvert.DeserializeObject<Dictionary<string, Object>>(jsonString);
+            return JsonConvert.DeserializeObject<T>(jsonObj[Field].ToString());
+        }
+
+
+
+
     }
 }
