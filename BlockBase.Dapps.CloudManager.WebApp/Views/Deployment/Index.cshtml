@@ -4,6 +4,7 @@
 <div class="Deployment">
     
     <table id="table-id" class="table" style="width:100%">
+        <p class="table-title">Nodes</p>
         <thead class="thead-light">
             <tr>
                 <th>Account </th>
@@ -13,49 +14,49 @@
                 <th>   </th>
             </tr>
         </thead>
-        @if(Model != null)
+        @if (Model != null)
         {
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @item.Account
-                    </td>
-                    <td>
-                        @item.Service
-                    </td>
-                    <td>
-                        @item.Status
-                    </td>
-                    <td>
-                        @item.Type
-                    </td>
-                    <td>
-                        <div class="dropdown">
-                            <i class="fas fa-bars dropbtn"></i>
-                            <div class="dropdown-content">
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Account
+                        </td>
+                        <td>
+                            @item.Service
+                        </td>
+                        <td>
+                            @item.Status
+                        </td>
+                        <td>
+                            @item.Type
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <i class="fas fa-bars dropbtn"></i>
+                                <div class="dropdown-content">
 
-                                @if (@item.Status == "ON")
-                                {
-                                    <a href="/Deployment/StopNode?Account=@item.Account"><i class="fas fa-pause"></i> Pause</a>
-                                    <a href="#"><i class="fas fa-copy"></i> Duplicate</a>
-                                    <a href="/Deployment/RemoveNode?Account=@item.Account"><i class="fas fa-trash"></i> Remove</a>
-                                }
-                                else
-                                {
-                                    <a href="/Deployment/StartNode?Account=@item.Account"><i class="fas fa-cloud"></i> Deploy</a>
-                                    <a href="#"><i class="fas fa-edit"></i> Edit</a>
-                                    <a href="#"><i class="fas fa-copy"></i> Duplicate</a>
-                                    <a href="/Deployment/RemoveNode?Account=@item.Account"><i class="fas fa-trash"></i> Remove</a>
-                                }
+                                    @if (@item.Status == "ON")
+                                    {
+                                        <a href="/Deployment/StopNode?Account=@item.Account"><i class="fas fa-pause"></i> Pause</a>
+                                        <a href="#"><i class="fas fa-copy"></i> Duplicate</a>
+                                        <a href="/Deployment/RemoveNode?Account=@item.Account"><i class="fas fa-trash"></i> Remove</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Deployment/StartNode?Account=@item.Account"><i class="fas fa-cloud"></i> Deploy</a>
+                                        <a href="#"><i class="fas fa-edit"></i> Edit</a>
+                                        <a href="#"><i class="fas fa-copy"></i> Duplicate</a>
+                                        <a href="/Deployment/RemoveNode?Account=@item.Account"><i class="fas fa-trash"></i> Remove</a>
+                                    }
 
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
+                        </td>
+                    </tr>
+                }
+            </tbody>
         }
     </table>
 </div>

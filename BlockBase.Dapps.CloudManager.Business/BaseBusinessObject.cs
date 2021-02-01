@@ -30,7 +30,7 @@ namespace BlockBase.Dapps.CloudManager.Business
         {
             try
             {
-                using (TransactionScope scope = new TransactionScope())
+                using (TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
                 {
                     await action.Invoke();
                     scope.Complete();

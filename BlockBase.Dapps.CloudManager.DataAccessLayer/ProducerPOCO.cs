@@ -58,5 +58,11 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
             this.Health = (working / response.Length) * 100; 
         }
         bool isProducing(ProducingSidechain sc) => sc.sidechainState == "Production" && sc.blocksFailedInCurrentSettlement != 0;
+
+        public override bool Equals(object obj)
+        {
+            var node = obj as ProducerPOCO;
+            return node.Producing == this.Producing && node.Health == this.Health && node.Ip == this.Ip && node.Events == this.Events && node.Account == this.Account && node.Status == this.Status && node.Type == this.Type;
+        }
     }
 }

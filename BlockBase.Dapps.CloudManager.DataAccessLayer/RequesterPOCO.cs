@@ -59,6 +59,12 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
             this.Stake = stake;
         }
 
+        public override bool Equals(object obj)
+        {
+            var node = obj as RequesterPOCO;
+            return this.Account == node.Account && this.MonthlyCost == node.MonthlyCost && this.Balance == node.Balance && this.Stake == node.Stake && this.Ip == node.Ip && this.State == node.State;
+        }
+
         private async Task GetAvgMonthlyCost()
         {
             var nodeDao = new NodeAppSettingsDataAccessObject();

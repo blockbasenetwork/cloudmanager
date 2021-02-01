@@ -20,12 +20,23 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 
         }
 
+        public async Task<Node> GetNodeAsync(string node)
+        {
+            using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
+            {
+                var output = await (con.QueryAsync<Node>("Select * from Nodes where Account = @node", new { node}));
+                return output.First();
+            }
+        }
+
         public async Task RemoveNode(string account)
         {
             using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
             {
+                var myTransaction = await con.BeginTransactionAsync();
                 await (con.ExecuteAsync(
                     "DELETE FROM Nodes WHERE Account = @account", new { account }));
+                await myTransaction.CommitAsync();
             }
         }
         private async Task SetNodeStatus(string account, string status)

@@ -1,0 +1,27 @@
+{
+    
+      "ValidatorNode": {
+        "IsActive": false,
+        "MinBBTPerEmptyBlock": 0,
+        "MaxStakeToMonthlyIncomeRatio": 0
+      },
+      "HistoryNode": {
+        "IsActive": false,
+        "MinBBTPerEmptyBlock": 0,
+        "MinBBTPerMBRatio": 0,
+        "MaxStakeToMonthlyIncomeRatio": 0,
+        "MaxSidechainGrowthPerMonthInMB": 0
+      },
+      "FullNode": {
+        "IsActive": false,
+        "MinBBTPerEmptyBlock": 0,
+        "MinBBTPerMBRatio": 0,
+        "MaxStakeToMonthlyIncomeRatio": 0,
+        "MaxSidechainGrowthPerMonthInMB": 0
+      },
+      "MaxRatioToStake": 1.0,
+      "MaxNumberOfSidechains": 0,
+      "MaxGrowthPerMonthInMB": 0,
+      "BBTValueAutoConfig": false
+    
+}

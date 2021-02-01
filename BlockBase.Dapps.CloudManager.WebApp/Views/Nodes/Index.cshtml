@@ -1,7 +1,10 @@
 ﻿
 
 <div class="Nodes">
-    <div class="nodes-table">
+    
+
+    <div class="nodes-table" id="reqs">
+        <p class="table-title">Requesters</p>
         <table id="requester-table" class="table" style="width:100%">
             <thead class="thead-light">
                 <tr>
@@ -45,7 +48,8 @@
         </table>
     </div>
 
-    <div class="nodes-table">
+    <div class="nodes-table" id="provs">
+        <p class="table-title">Providers</p>
         <table id="provider-table" class="table" style="width:100%">
             <thead class="thead-light">
                 <tr>
@@ -101,7 +105,7 @@
                     {
                         className: "Refresh-btn",
                             action: function (e, dt, node, config) {
-                                $("#requester-table").load(location.href + "#requester-table");
+                                $("#reqs").load(location.href + "#reqs");
                         }
                     },
                 ],
@@ -121,7 +125,7 @@
                     {
                         className: "Refresh-btn",
                         action: function (e, dt, node, config) {
-                            $("#requester-table").load(location.href + "#requester-table");
+                            $("#provs").load(location.href + "#provs");
                         }
                     },
                 ],

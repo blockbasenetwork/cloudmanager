@@ -29,6 +29,10 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 });
         }
 
+        public async Task RemoveNode(string node)
+        {
+            await ExecuteAction(async () => await _nodeDAO.RemoveNode(node));
+        }
         public async Task<OperationResult<List<ProducerPOCO>>> GetAllProducersAsync()
         {
             return await ExecuteFunction(async () => {
