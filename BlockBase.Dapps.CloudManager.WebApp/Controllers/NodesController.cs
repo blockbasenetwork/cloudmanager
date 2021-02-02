@@ -22,7 +22,6 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         
         public async Task<IActionResult> Index()
         {
-            //Ir buscar o IP e o Nome e o tipo de TODOS os nos da BD para comecar a fazer a tabela
             var requesters = await _business.GetAllRequestersAsync();
             if (!requesters.HasSucceeded)
             {
@@ -37,6 +36,18 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             }
             var viewModel = new NodesViewModel(requesters.Result, producers.Result);
             return View(viewModel);
+        }
+
+        public async Task<IActionResult> Requester(string id)
+        {
+            
+            var res = await _business.GetRequesterAsync(id);
+            if (!res.HasSucceeded)
+            {
+                RegisterError(res.Exception.Message);
+                return View();
+            }
+            return View(new RequesterViewModel(res.Result));
         }
     }
 }

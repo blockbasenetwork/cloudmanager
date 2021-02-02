@@ -28,6 +28,8 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
             }
             
         }
+
+        
         private async Task FetchBalance()
         {
             var jsonString = await Fetch.CallAsync(Resources.RequesterConfig);

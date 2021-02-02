@@ -23,10 +23,20 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             var nodeList = await _nodeDAO.GetAllRequestersAsync();
             foreach(var it in nodeList)
                 {
-                    await it.FetchValues(); 
+                    await it.FetchValues();
                 }
+                nodeList.RemoveAll(it => it.State.Equals("No sidechain"));
             return nodeList;
                 });
+        }
+
+        public async Task<OperationResult<DetailedRequesterPOCO>> GetRequesterAsync(string node)
+        {
+            return await ExecuteFunction<DetailedRequesterPOCO>(async () => {
+                var res = await _nodeDAO.GetRequesterAsync(node);
+                await res.FetchValues();
+                return res;
+            });
         }
 
         public async Task RemoveNode(string node)

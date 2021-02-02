@@ -118,9 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DBLocation" xml:space="preserve">
-    <value>\\..\\BlockBase.Dapps.CloudManager.Data\\DB2.db</value>
-  </data>
-  <data name="DBLocation2" xml:space="preserve">
     <value>\\..\\BlockBase.Dapps.CloudManager.Data\\DB.db</value>
   </data>
   <data name="ProducingSideChains" xml:space="preserve">
@@ -131,6 +128,9 @@
   </data>
   <data name="RequesterStake" xml:space="preserve">
     <value>http://localhost:8000/api/Requester/CheckCurrentStakeInSidechain</value>
+  </data>
+  <data name="SidechainConfiguration" xml:space="preserve">
+    <value>http://localhost:8000/api/Network/GetSidechainConfiguration?sidechainName=</value>
   </data>
   <data name="SidechainState" xml:space="preserve">
     <value>http://localhost:8000/api/Network/GetSidechainState?sidechainName=</value>

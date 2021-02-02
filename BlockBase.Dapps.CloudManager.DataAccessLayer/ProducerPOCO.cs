@@ -21,7 +21,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
         public async Task FetchValues()
         {
             await FetchProducing();
-            
+            await FetchHealth();
         }
 
         public async Task FetchProducing()
@@ -50,12 +50,16 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
                 this.Producing = "Unconfigured";
             }
             var response = JsonStringNavigator.GetDeeper<ProducingSidechain[]>(jsonString, "response");
-            int working = 0;
+            var fractionHealth = 0;
+            if (response.Length == 0) { this.Health = 0; return; }
             foreach (var sc in response)
             {
-                if (isProducing(sc)) working++;
+                if (isProducing(sc)) {
+                    fractionHealth +=sc.blocksProducedInCurrentSettlement / (sc.blocksProducedInCurrentSettlement + sc.blocksFailedInCurrentSettlement);
+                };
             }
-            this.Health = (working / response.Length) * 100; 
+
+            this.Health = (fractionHealth / response.Length) * 100; 
         }
         bool isProducing(ProducingSidechain sc) => sc.sidechainState == "Production" && sc.blocksFailedInCurrentSettlement != 0;
 

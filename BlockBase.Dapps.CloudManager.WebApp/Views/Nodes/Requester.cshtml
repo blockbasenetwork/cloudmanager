@@ -1,0 +1,20 @@
+﻿<div class="detailed-requester">
+    <div class="requester-menu">
+        <ul>
+            <li class="menu-title">Home</li>
+            @if (Model.InProduction)
+            {
+                <li><a href="news.asp"><i class="fas fa-pause text-dark"></i> Pause</a></li>
+            }
+            else
+            {
+                <li><a href="news.asp"><i class="fas fa-play text-success"></i>Resume</a></li>
+            }
+            <li><a href="contact.asp"><i class="fas fa-times text-danger"></i>Terminate</a></li>
+            <li><a href="about.asp"><i class="fas fa-database text-dark"></i>Database</a></li>
+            <li><a href="about.asp"><i class="fas fa-binoculars text-dark"></i>Manage Access</a></li>
+            <li><a href="about.asp"><i class="fas fa-university text-dark"></i>Manage Stake</a></li>
+        </ul>
+
+    </div>
+</div>

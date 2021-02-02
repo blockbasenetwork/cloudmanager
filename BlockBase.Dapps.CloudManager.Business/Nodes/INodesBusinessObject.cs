@@ -8,5 +8,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
     {
         Task<OperationResult<List<RequesterPOCO>>> GetAllRequestersAsync();
         Task<OperationResult<List<ProducerPOCO>>> GetAllProducersAsync();
+
+        Task<OperationResult<DetailedRequesterPOCO>> GetRequesterAsync(string node);
     }
 }

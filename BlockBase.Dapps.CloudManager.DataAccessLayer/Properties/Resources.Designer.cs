@@ -61,20 +61,11 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to \\..\\BlockBase.Dapps.CloudManager.Data\\DB2.db.
+        ///   Looks up a localized string similar to \\..\\BlockBase.Dapps.CloudManager.Data\\DB.db.
         /// </summary>
         public static string DBLocation {
             get {
                 return ResourceManager.GetString("DBLocation", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to \\..\\BlockBase.Dapps.CloudManager.Data\\DB.db.
-        /// </summary>
-        public static string DBLocation2 {
-            get {
-                return ResourceManager.GetString("DBLocation2", resourceCulture);
             }
         }
         
@@ -102,6 +93,15 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer.Properties {
         public static string RequesterStake {
             get {
                 return ResourceManager.GetString("RequesterStake", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://localhost:8000/api/Network/GetSidechainConfiguration?sidechainName=.
+        /// </summary>
+        public static string SidechainConfiguration {
+            get {
+                return ResourceManager.GetString("SidechainConfiguration", resourceCulture);
             }
         }
         

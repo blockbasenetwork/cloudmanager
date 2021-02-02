@@ -19,6 +19,11 @@ namespace BlockBase.Dapps.CloudManager.Utils
             return JsonConvert.DeserializeObject<T>(jsonObj[Field].ToString());
         }
 
+        public static T GetValue<T>(string jsonString)
+        {
+            return JsonConvert.DeserializeObject<T>(jsonString);
+        }
+
 
 
 

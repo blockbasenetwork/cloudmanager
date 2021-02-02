@@ -64,6 +64,14 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
             }
         }
 
+        public async Task<DetailedRequesterPOCO> GetRequesterAsync(string node)
+        {
+            using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
+            {
+                var output = await (con.QueryAsync<DetailedRequesterPOCO>("Select Account from Nodes where (Type = 'Full' or Type = 'Requester') and Account =@node ", new { node}));
+                return output.First();
+            }
+        }
         public async Task<List<ProducerPOCO>> GetAllProducersAsync()
         {
             using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))

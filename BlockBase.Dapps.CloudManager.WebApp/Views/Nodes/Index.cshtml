@@ -23,7 +23,10 @@
                     {
                         <tr>
                             <td>
-                                @item.Account
+                                @Html.ActionLink((string)item.Account, actionName: "Requester",
+                                    controllerName: "Nodes",
+                                    routeValues: new {id= item.Account },
+                                    htmlAttributes: null)
                             </td>
                             <td>
                                 @item.State
@@ -54,7 +57,6 @@
             <thead class="thead-light">
                 <tr>
                     <th>Node</th>
-                    <th>Status</th>
                     <th>Type</th>
                     <th>Producing</th>
                     <th>Events</th>
@@ -69,10 +71,10 @@
                     {
                         <tr>
                             <td>
-                                @item.Account
-                            </td>
-                            <td>
-                                <!-- Status -->
+                                @Html.ActionLink((string)item.Account, actionName: "Provider",
+                                    controllerName: "Nodes",
+                                    routeValues: new { id = item.Account },
+                                    htmlAttributes: null)
                             </td>
                             <td>
                                 @item.Type
@@ -98,46 +100,8 @@
 </div>
 <script>
     $(document).ready(function () {
-        var reqTable = $('#requester-table').DataTable({
-            dom: 'Bfrtip',
-            buttons: {
-                buttons: [
-                    {
-                        className: "Refresh-btn",
-                            action: function (e, dt, node, config) {
-                                $("#reqs").load(location.href + "#reqs");
-                        }
-                    },
-                ],
-                dom: {
-                    button: {
-                        tag: "button",
-                        className: "btn btn-light"
-                    }
-                }
-            }
-        });
-
-        var provTable = $('#provider-table').DataTable({
-            dom: 'Bfrtip',
-            buttons: {
-                buttons: [
-                    {
-                        className: "Refresh-btn",
-                        action: function (e, dt, node, config) {
-                            $("#provs").load(location.href + "#provs");
-                        }
-                    },
-                ],
-                dom: {
-                    button: {
-                        tag: "button",
-                        className: "btn btn-light"
-                    }
-                }
-            }
-        });
-        $('.Refresh-btn').html('<i class="fas fa-redo"></i> Refresh');
+        $('#requester-table').DataTable();
+        $('#provider-table').DataTable();
     });
 </script>
 
