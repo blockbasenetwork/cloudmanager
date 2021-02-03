@@ -50,5 +50,11 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             ViewBag.DetailedRequester = true;
             return View(new RequesterViewModel(res.Result));
         }
+
+        public IActionResult RequesterConfigurations(string id)
+        {
+            ViewBag.DetailedRequester = true;
+            return View(new RequesterOptionViewModel() { Title = "Configurations"});
+        }
     }
 }

@@ -65,54 +65,57 @@
         {
             <div class="detailed-requester">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light req-nav">
-                    <a class="navbar-brand" href="#">@Model.Account</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                    <a class="navbar-brand" href="#">@Model.Title</a>
+                    @if (@Model is BlockBase.Dapps.CloudManager.WebApp.Models.Nodes.RequesterViewModel)
+                    {
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                        <ul class="navbar-nav mr-auto">
-                            @if (Model.InProduction)
-                            {
+                            <ul class="navbar-nav mr-auto">
+                                @if (Model.InProduction)
+                                {
+                                    <li>
+                                        <a href="news.asp"><i class="fas fa-pause"></i> Pause</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="news.asp"><i class="fas fa-play text-success"></i> Resume</a>
+                                    </li>
+                                }
                                 <li>
-                                    <a href="news.asp"><i class="fas fa-pause"></i> Pause</a>
+                                    <a href="#">
+                                        <i class="fas fa-times text-danger">
+                                        </i> Terminate<span class="sr-only">(current)</span>
+                                    </a>
                                 </li>
-                            }
-                            else
-                            {
                                 <li>
-                                    <a href="news.asp"><i class="fas fa-play text-success"></i> Resume</a>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterDatabase">
+                                        <i class="fas fa-database"></i> Database<span class="sr-only">(current)</span>
+                                    </a>
                                 </li>
-                            }
-                            <li>
-                                <a href="#">
-                                    <i class="fas fa-times text-danger">
-                                    </i> Terminate<span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fas fa-database"></i> Database<span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fas fa-binoculars"></i> Manage Access<span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fas fa-university"></i> Manage Stake<span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fas fa-bars"></i> Configurations<span class="sr-only">(current)</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterManageAccess">
+                                        <i class="fas fa-binoculars"></i> Manage Access<span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterStake">
+                                        <i class="fas fa-university"></i> Manage Stake<span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterConfigurations">
+                                        <i class="fas fa-bars"></i> Configurations<span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
                 </nav>
             </div>
         }
@@ -156,7 +159,7 @@
         })(jQuery);
     </script>
 
-  
+
 
 
     @RenderSection("Scripts", required: false)
