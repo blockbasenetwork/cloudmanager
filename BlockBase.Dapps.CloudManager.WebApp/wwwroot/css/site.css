@@ -10,19 +10,19 @@
 }
 
 
-.nav-item:hover .nav-link {
+.item-layout:hover .link-layout {
     color: #5C88C6 !important;
 }
 
 
 @media (min-width: 767px) {
-    .nav-item:hover:after {
+    .item-layout:hover:after {
         bottom: 0;
         opacity: 1;
     }
 }
 
-.nav-item:after {
+.item-layout:after {
     position: absolute;
     bottom: -5px;
     left: 0;
@@ -34,13 +34,13 @@
     transition: all 200ms linear;
 }
 
-.nav-link {
+.link-layout {
     position: relative;
     padding: 5px 0 !important;
     display: inline-block;
 }
 
-.nav-item {
+.item-layout {
     position: relative;
     transition: all 200ms linear;
 }
@@ -60,7 +60,7 @@
 }
 
 @media (max-width: 767px) {
-    .nav-item::before {
+    .item-layout::before {
         position: absolute;
         display: block;
         top: 15px;
@@ -106,7 +106,7 @@
     transition: all 300ms linear;
 }
 
-.nav-link {
+.link-layout {
     color: white !important;
     font-weight: 500;
     transition: all 200ms linear;
@@ -158,8 +158,8 @@ a {
     border-color: #1861ac;
 }
 
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .link-layout.active,
+.nav-pills .show > .link-layout {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
@@ -326,4 +326,14 @@ body {
 .links {
     max-width: 250px;
     padding-top: 40px;
+}
+
+.req-config-card {
+    padding-top: 80px;
+
+}
+
+.card-padding {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlockBase.Dapps.CloudManage
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlockBase.Dapps.CloudManager.Business", "BlockBase.Dapps.CloudManager.Business\BlockBase.Dapps.CloudManager.Business.csproj", "{BE661362-BD23-488D-B159-D2A4C6F1D96D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{B9FF1415-851C-4197-B823-50BCCC87F379}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{B9FF1415-851C-4197-B823-50BCCC87F379}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
