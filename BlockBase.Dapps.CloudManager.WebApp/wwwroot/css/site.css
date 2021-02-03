@@ -75,7 +75,8 @@
 }
 
 
-.navbar-light .navbar-toggler-icon:after, .navbar-light .navbar-toggler-icon:before {
+.navbar-light .navbar-toggler-icon:after,
+.navbar-light .navbar-toggler-icon:before {
     width: 24px;
     position: absolute;
     height: 1px;
@@ -136,9 +137,9 @@
 
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 .nodes-table {
@@ -152,67 +153,72 @@ a {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
     /* Margin bottom by footer height */
     margin: 0;
-   
 }
+
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
-    line-height: 60px; /* Vertically center the text there */
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    line-height: 60px;
+    /* Vertically center the text there */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-size: 1rem;
 }
+
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
     position: relative;
@@ -232,22 +238,22 @@ body {
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
+    /* Links inside the dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
 
- /* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-        background-color: #ddd;
-}
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
@@ -272,18 +278,52 @@ body {
     font-weight: bold;
 }
 
-.requester-menu ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+.detailed-requester li > a {
+    color: #162e49;
+    padding: 15px;
+    font-weight: 500;
 }
 
+    .detailed-requester li > a > i {
+        color: #162e49;
+    }
 
-
-.requester-menu ul li {
-    display: inline;
-    font-size: x-large
+.navbar-brand {
+    padding-right: 50px;
 }
-.menu-title {
-    font-size:x-large
+
+.detailed-requester {
+    border-bottom: 1px solid black
+}
+
+.req-nav {
+    width: 100%
+}
+
+.requester-cards {
+    padding-top: 75px;
+}
+
+.alignleft {
+    float: left;
+    font-weight: bold;
+    color: dimgray
+}
+
+.req-card-header {
+    font-weight: bolder
+}
+
+.alignright {
+    float: right;
+    color: gray;
+}
+
+.card {
+    min-height: 310px;
+}
+
+.links {
+    max-width: 250px;
+    padding-top: 40px;
 }

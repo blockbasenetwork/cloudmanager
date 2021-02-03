@@ -47,6 +47,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterError(res.Exception.Message);
                 return View();
             }
+            ViewBag.DetailedRequester = true;
             return View(new RequesterViewModel(res.Result));
         }
     }

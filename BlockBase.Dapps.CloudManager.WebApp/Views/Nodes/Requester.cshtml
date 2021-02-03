@@ -1,20 +1,64 @@
-﻿<div class="detailed-requester">
-    <div class="requester-menu">
-        <ul>
-            <li class="menu-title">Home</li>
-            @if (Model.InProduction)
-            {
-                <li><a href="news.asp"><i class="fas fa-pause text-dark"></i> Pause</a></li>
-            }
-            else
-            {
-                <li><a href="news.asp"><i class="fas fa-play text-success"></i>Resume</a></li>
-            }
-            <li><a href="contact.asp"><i class="fas fa-times text-danger"></i>Terminate</a></li>
-            <li><a href="about.asp"><i class="fas fa-database text-dark"></i>Database</a></li>
-            <li><a href="about.asp"><i class="fas fa-binoculars text-dark"></i>Manage Access</a></li>
-            <li><a href="about.asp"><i class="fas fa-university text-dark"></i>Manage Stake</a></li>
-        </ul>
-
+﻿<div class="requester-cards">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header req-card-header">
+                    Production
+                </div>
+                <div class="card-body">
+                    <p class="card-text alignleft">Needed Producers
+                    <p class="alignright">@Model.NeededWorkers</p>
+                    <div style="clear: both;"></div>
+                    <p class="card-text alignleft">Working Producers
+                    <p class="alignright">@Model.Working</p>
+                    <div style="clear: both;"></div>
+                    <p class="card-text alignleft">State
+                    <p class="alignright">@Model.State</p>
+                    <div style="clear: both;"></div>
+                    <p class="card-text alignleft">Average Block Reward
+                    <p class="alignright">@Model.AvgBlockReward BTT</p>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header req-card-header">
+                    Metadata
+                </div>
+                <div class="card-body">
+                    <p class="card-text alignleft">Network
+                    <p class="alignright"></p> <!-- todo-->
+                    <div style="clear: both;"></div>
+                    <p class="card-text alignleft">Version
+                    <p class="alignright"></p> <!-- todo-->
+                    <div style="clear: both;"></div>
+                    <p class="card-text alignleft">Created
+                    <p class="alignright"></p><!-- todo-->
+                    <div style="clear: both;"></div>
+                    <p class="card-text alignleft">Total Blocks
+                    <p class="alignright"></p><!-- todo-->
+                    <div style="clear: both;"></div>
+                    <p class="card-text alignleft">Block Header
+                    <p class="alignright"></p><!-- todo-->
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+<div class="links">
+    <h2>Links</h2>
+    <p class="card-text alignleft">Node API
+    <p class="alignright">ICON</p>
+    <div style="clear: both;"></div>
+    <p class="card-text alignleft">Blocksio
+    <p class="alignright">ICON</p>
+    <div style="clear: both;"></div>
+    <p class="card-text alignleft">Charm
+    <p class="alignright">ICON</p>
+    <div style="clear: both;"></div>
+   
+ 
+    
 </div>
