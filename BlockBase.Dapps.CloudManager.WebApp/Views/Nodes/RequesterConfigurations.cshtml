@@ -1,8 +1,8 @@
 ﻿@using BlockBase.Dapps.CloudManager.WebApp.Models.Nodes;
-@model RequesterOptionViewModel
+@model RequesterConfigurationViewModel
 
 <div class="req-config-card" style="max-width: 50%">
-    <form asp-controller="Nodes" asp-action="New">
+    <form asp-controller="Nodes" asp-action="RequesterConfigurations">
         <div class="card-padding">
             <div class="card">
                 <div class="card-header">
@@ -18,51 +18,51 @@
                         <div id="Full" class="tab-pane fade in active show">
                             <div class="form-group col-lg-3 col-md-6 col-sm-12">
                                 <label asp-for="Full.MaxPaymentPerBlock" class="control-label"></label>
-                                <input asp-for="Full.MaxPaymentPerBlock" class="form-control ml-2 required" />
+                                <input asp-for="Full.MaxPaymentPerBlock" type="number" class="form-control ml-2" step=any min=0/>
                                 <span asp-validation-for="Full.MaxPaymentPerBlock" class="text-danger"></span>
                             </div>
                             <div class="form-group col-lg-3 col-md-6 col-sm-12">
                                 <label asp-for="Full.MinPaymentPerBlock" class="control-label"></label>
-                                <input asp-for="Full.MinPaymentPerBlock" class="form-control ml-2" />
+                                <input asp-for="Full.MinPaymentPerBlock" type="number" step=any min=0 class="form-control ml-2" />
                                 <span asp-validation-for="Full.MinPaymentPerBlock" class="text-danger"></span>
                             </div>
                             <div class="form-group col-lg-3 col-md-6 col-sm-12">
                                 <label asp-for="Full.Required" class="control-label"></label>
-                                <input asp-for="Full.Required" class="form-control ml-2" />
+                                <input asp-for="Full.Required" type="number" min=0 class="form-control ml-2" />
                                 <span asp-validation-for="Full.Required" class="text-danger"></span>
                             </div>
                         </div>
                         <div id="Validator" class="tab-pane fade">
                             <div class="form-group col-lg-3 col-md-6 col-sm-12">
                                 <label asp-for="Validator.MaxPaymentPerBlock" class="control-label"></label>
-                                <input asp-for="Validator.MaxPaymentPerBlock" class="form-control ml-2" />
+                                <input asp-for="Validator.MaxPaymentPerBlock" type="number" step=any min=0 class="form-control ml-2" />
                                 <span asp-validation-for="Validator.MaxPaymentPerBlock" class="text-danger"></span>
                             </div>
                             <div class="form-group col-lg-3 col-md-6 col-sm-12">
                                 <label asp-for="Validator.MinPaymentPerBlock" class="control-label"></label>
-                                <input asp-for="Validator.MinPaymentPerBlock" class="form-control ml-2" />
+                                <input asp-for="Validator.MinPaymentPerBlock" type="number"step=any min=0  class="form-control ml-2" />
                                 <span asp-validation-for="Validator.MinPaymentPerBlock" class="text-danger"></span>
                             </div>
                             <div class="form-group col-lg-3 col-md-6 col-sm-12">
                                 <label asp-for="Validator.Required" class="control-label"></label>
-                                <input asp-for="Validator.Required" class="form-control ml-2" />
+                                <input asp-for="Validator.Required" type="number" min=0 class="form-control ml-2" />
                                 <span asp-validation-for="Validator.Required" class="text-danger"></span>
                             </div>
                         </div>
                         <div id="History" class="tab-pane fade">
                             <div class="form-group col-lg-3 col-md-6 col-sm-12">
                                 <label asp-for="History.MaxPaymentPerBlock" class="control-label"></label>
-                                <input asp-for="History.MaxPaymentPerBlock" class="form-control ml-2" />
+                                <input asp-for="History.MaxPaymentPerBlock" type="number" step=any min=0 class="form-control ml-2" />
                                 <span asp-validation-for="History.MaxPaymentPerBlock" class="text-danger"></span>
                             </div>
                             <div class="form-group col-lg-3 col-md-6 col-sm-12">
                                 <label asp-for="History.MinPaymentPerBlock" class="control-label"></label>
-                                <input asp-for="History.MinPaymentPerBlock" class="form-control ml-2" />
+                                <input asp-for="History.MinPaymentPerBlock" type="number" step=any min=0 class="form-control ml-2" />
                                 <span asp-validation-for="History.MinPaymentPerBlock" class="text-danger"></span>
                             </div>
                             <div class="form-group col-lg-3 col-md-6 col-sm-12">
                                 <label asp-for="History.Required" class="control-label"></label>
-                                <input asp-for="History.Required" class="form-control ml-2" />
+                                <input asp-for="History.Required" type="number" min=0 class="form-control ml-2" />
                                 <span asp-validation-for="History.Required" class="text-danger"></span>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                 <div class="card-body">
                     <div class="form-group col-lg-3 col-md-6 col-sm-12">
                         <label asp-for="MinimumCandidatureStake" class="control-label"></label>
-                        <input asp-for="MinimumCandidatureStake" class="form-control ml-2" />
+                        <input asp-for="MinimumCandidatureStake" type="number" step=any min=0 class="form-control ml-2"/>
                         <span asp-validation-for="MinimumCandidatureStake" class="text-danger"></span>
                     </div>
                 </div>
@@ -97,12 +97,12 @@
                 <div class="card-body">
                     <div class="form-group col-lg-3 col-md-6 col-sm-12">
                         <label asp-for="BlockSize" class="control-label"></label>
-                        <input asp-for="BlockSize" class="form-control ml-2" />
+                        <input asp-for="BlockSize" type="number" class="form-control step=any min=0 ml-2"/>
                         <span asp-validation-for="BlockSize" class="text-danger"></span>
                     </div>
                     <div class="form-group col-lg-3 col-md-6 col-sm-12">
                         <label asp-for="TimeBetweenBlocks" class="control-label"></label>
-                        <input asp-for="TimeBetweenBlocks" class="form-control ml-2" />
+                        <input asp-for="TimeBetweenBlocks" type="number" min=0 class="form-control ml-2"/>
                         <span asp-validation-for="TimeBetweenBlocks" class="text-danger"></span>
                     </div>
                 </div>

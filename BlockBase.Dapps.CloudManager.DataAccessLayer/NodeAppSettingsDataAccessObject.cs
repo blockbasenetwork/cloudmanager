@@ -28,6 +28,16 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
             }
         }
 
+        public async Task<NodeAppSettings> InsertNodeSettingsAsync(string node)
+        {
+            using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
+            {
+                var output = await (con.QueryAsync<NodeAppSettings>(
+                    "Select * from NodeAppSettings where Node=@node", new { node }));
+                return output.First();
+            }
+        }
+
 
 
     }

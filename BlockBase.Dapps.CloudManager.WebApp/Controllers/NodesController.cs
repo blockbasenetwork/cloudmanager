@@ -1,4 +1,5 @@
 ﻿using BlockBase.Dapps.CloudManager.Business.Nodes;
+using BlockBase.Dapps.CloudManager.Data;
 using BlockBase.Dapps.CloudManager.WebApp.Models.Nodes;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             _logger = logger;
         }
 
-        
+
         public async Task<IActionResult> Index()
         {
             var requesters = await _business.GetAllRequestersAsync();
@@ -40,7 +41,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
 
         public async Task<IActionResult> Requester(string id)
         {
-            
+
             var res = await _business.GetRequesterAsync(id);
             if (!res.HasSucceeded)
             {
@@ -54,7 +55,13 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         public IActionResult RequesterConfigurations(string id)
         {
             ViewBag.DetailedRequester = true;
-            return View(new RequesterOptionViewModel() { Title = "Configurations"});
+            return View(new RequesterConfigurationViewModel() { Title = "Configurations" });
+        }
+        [HttpPost]
+        public IActionResult RequesterConfigurations(RequesterConfigurationViewModel vm)
+        {
+            RequesterConfiguration rc = vm.ToData();
+            return View();
         }
     }
 }
