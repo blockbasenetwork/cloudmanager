@@ -13,39 +13,43 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
     public class NodesBusinessObject : BaseBusinessObject, INodesBusinessObject
     {
         private readonly NodesDataAccessObject _nodeDAO;
-        public NodesBusinessObject()
+        private readonly NodeAppSettingsDataAccessObject _nodeAppSettingsDAO;
+
+        public NodesBusinessObject() : base()
         {
             _nodeDAO = new NodesDataAccessObject();
+            _nodeAppSettingsDAO = new NodeAppSettingsDataAccessObject();
         }
 
-        public async Task<OperationResult<List<RequesterPOCO>>> GetAllRequestersAsync() {
-            return await ExecuteFunction(async () => {
-            var nodeList = await _nodeDAO.GetAllRequestersAsync();
-            foreach(var it in nodeList)
+        public async Task<OperationResult<List<RequesterPOCO>>> GetAllRequestersAsync()
+        {
+            return await ExecuteFunction(async () =>
+            {
+                var nodeList = await _nodeDAO.GetAllRequestersAsync();
+                foreach (var it in nodeList)
                 {
                     await it.FetchValues();
                 }
                 nodeList.RemoveAll(it => it.State.Equals("No sidechain"));
-            return nodeList;
-                });
+                return nodeList;
+            });
         }
 
         public async Task<OperationResult<DetailedRequesterPOCO>> GetRequesterAsync(string node)
         {
-            return await ExecuteFunction<DetailedRequesterPOCO>(async () => {
+            return await ExecuteFunction<DetailedRequesterPOCO>(async () =>
+            {
                 var res = await _nodeDAO.GetRequesterAsync(node);
                 await res.FetchValues();
                 return res;
             });
         }
 
-        public async Task RemoveNode(string node)
-        {
-            await ExecuteAction(async () => await _nodeDAO.RemoveNode(node));
-        }
+      
         public async Task<OperationResult<List<ProducerPOCO>>> GetAllProducersAsync()
         {
-            return await ExecuteFunction(async () => {
+            return await ExecuteFunction(async () =>
+            {
                 var nodeList = await _nodeDAO.GetAllProducersAsync();
                 foreach (var it in nodeList)
                 {
@@ -55,6 +59,12 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             });
         }
 
-
+        public async Task<Operation> UpdateAppSettings(RequesterConfiguration rc)
+        {
+            return await ExecuteAction(async () =>
+            {
+                //var nodeappSettings = _nodeAppSettingsDAO.GetNodeSettingsAsync();
+            });
+        }
     }
 }

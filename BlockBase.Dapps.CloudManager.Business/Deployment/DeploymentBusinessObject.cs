@@ -9,39 +9,43 @@ namespace BlockBase.Dapps.CloudManager.Business.Deployment
     public class DeploymentBusinessObject : BaseBusinessObject, IDeploymentBusinessObject
     {
         private readonly NodesDataAccessObject _nodeDAO;
-        private readonly DeployConfigurationsDataAccessObject _deployDAO;
-        public DeploymentBusinessObject()
+        public DeploymentBusinessObject() : base()
         {
             _nodeDAO = new NodesDataAccessObject();
-            _deployDAO = new DeployConfigurationsDataAccessObject();
+            
         }
 
         
 
         public async Task<Operation> StartNodeAsync(string account)
         {
-            return await ExecuteAction(async () => await _nodeDAO.StartNodeAsync(account));
+            return await ExecuteAction(async () => await _cloudPlugin.StartNodeAsync(account));
+            
         }
 
         public async Task<Operation> StopNodeAsync(string account)
         {
-            return await ExecuteAction(async () => await _nodeDAO.StopNodeAsync(account));
+            return await ExecuteAction(async () => await _cloudPlugin.StopNodeAsync(account));
         }
 
 
         public async Task<OperationResult<List<Node>>> GetAllNodesAsync()
         {
-            return await ExecuteFunction(async () => await _nodeDAO.GetAllAsync());
+            return await ExecuteFunction(async () => await _cloudPlugin.GetAllAsync());
         }
 
         public async Task<Operation> RemoveNodeAsync(string account)
         {
             return await ExecuteAction(async () =>
             {
-                await _nodeDAO.RemoveNode(account);
-                await _deployDAO.RemoveNode(account);
+                await _nodeDAO.RemoveNodeAsync(account);
+                await _cloudPlugin.RemoveNode(account);
             });
         }
 
+        public Task<Operation> Duplicate(string account)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -121,18 +121,18 @@
     <value>\\..\\BlockBase.Dapps.CloudManager.Data\\DB.db</value>
   </data>
   <data name="ProducingSideChains" xml:space="preserve">
-    <value>http://localhost:8001/api/Provider/GetProducingSidechains</value>
+    <value>/api/Provider/GetProducingSidechains</value>
   </data>
   <data name="RequesterConfig" xml:space="preserve">
-    <value>http://localhost:8000/api/Provider/CheckProducerConfig</value>
+    <value>/api/Provider/CheckProducerConfig</value>
   </data>
   <data name="RequesterStake" xml:space="preserve">
-    <value>http://localhost:8000/api/Requester/CheckCurrentStakeInSidechain</value>
+    <value>/api/Requester/CheckCurrentStakeInSidechain</value>
   </data>
   <data name="SidechainConfiguration" xml:space="preserve">
-    <value>http://localhost:8000/api/Network/GetSidechainConfiguration?sidechainName=</value>
+    <value>/api/Network/GetSidechainConfiguration?sidechainName=</value>
   </data>
   <data name="SidechainState" xml:space="preserve">
-    <value>http://localhost:8000/api/Network/GetSidechainState?sidechainName=</value>
+    <value>/api/Network/GetSidechainState?sidechainName=</value>
   </data>
 </root>

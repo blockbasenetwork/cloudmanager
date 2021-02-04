@@ -10,12 +10,12 @@ namespace BlockBase.Dapps.CloudManager.Business.Home
     public class HomeBusinessObject : BaseBusinessObject, IHomeBusinessObject
     {
         private readonly NodesDataAccessObject _nodeDAO;
-        public HomeBusinessObject()
+        public HomeBusinessObject() : base()
         {
             _nodeDAO = new NodesDataAccessObject();
         }
 
-
+        
         public async Task<OperationResult<NodeCountPOCO>> GetNrNodesAsync()
         {
             return await ExecuteFunction(async () => NodesCounter(await _nodeDAO.GetAllAsync()));

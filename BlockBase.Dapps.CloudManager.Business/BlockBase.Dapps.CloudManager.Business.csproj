@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BlockBase.Dapps.CloudManager.DataAccessLayer\BlockBase.Dapps.CloudManager.DataAccessLayer.csproj" />
     <ProjectReference Include="..\BlockBase.Dapps.CloudManager.Data\BlockBase.Dapps.CloudManager.Data.csproj" />
+    <ProjectReference Include="..\BlockBase.Dapps.CloudManager.Services\BlockBase.Dapps.CloudManager.Services.csproj" />
     <ProjectReference Include="..\BlockBase.Dapps.CloudManager.Utils\BlockBase.Dapps.CloudManager.Utils.csproj" />
   </ItemGroup>
 

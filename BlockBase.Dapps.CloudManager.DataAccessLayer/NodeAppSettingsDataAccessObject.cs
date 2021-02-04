@@ -28,13 +28,12 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
             }
         }
 
-        public async Task<NodeAppSettings> InsertNodeSettingsAsync(string node)
+        public async Task UpdateNodeSettingsAsync(string node, string appSettings)
         {
             using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
             {
                 var output = await (con.QueryAsync<NodeAppSettings>(
-                    "Select * from NodeAppSettings where Node=@node", new { node }));
-                return output.First();
+                    "SET  AppSettings = @appSettings WHERE Node=@node", new {appSettings, node }));
             }
         }
 

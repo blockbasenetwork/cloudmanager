@@ -11,6 +11,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Deployment
         Task<OperationResult<List<Node>>> GetAllNodesAsync();
         Task<Operation> StopNodeAsync(string account);
         Task<Operation> StartNodeAsync(string account);
+        Task<Operation> Duplicate(string account);
 
         Task<Operation> RemoveNodeAsync(string account);
     }

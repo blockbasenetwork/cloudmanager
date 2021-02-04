@@ -29,16 +29,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
             }
         }
 
-        public async Task RemoveNode(string account)
-        {
-            using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
-            {
-                var myTransaction = await con.BeginTransactionAsync();
-                await (con.ExecuteAsync(
-                    "DELETE FROM Nodes WHERE Account = @account", new { account }));
-                await myTransaction.CommitAsync();
-            }
-        }
+       
         private async Task SetNodeStatus(string account, string status)
         {
             using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
@@ -68,7 +59,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
         {
             using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
             {
-                var output = await (con.QueryAsync<DetailedRequesterPOCO>("Select Account from Nodes where (Type = 'Full' or Type = 'Requester') and Account =@node ", new { node}));
+                var output = await (con.QueryAsync<DetailedRequesterPOCO>("Select Account, IP from Nodes where (Type = 'Full' or Type = 'Requester') and Account =@node ", new { node}));
                 return output.First();
             }
         }
@@ -81,6 +72,16 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
             }
         }
 
+        public async Task RemoveNodeAsync(string account)
+        {
+            using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
+            {
+                var myTransaction = await con.BeginTransactionAsync();
+                await (con.ExecuteAsync(
+                    "DELETE FROM Nodes WHERE Account = @account", new { account }));
+                await myTransaction.CommitAsync();
+            }
+        }
         public async void InsertAsync(Node n)
         {
             using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))

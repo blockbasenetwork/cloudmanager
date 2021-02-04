@@ -32,7 +32,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
         
         private async Task FetchBalance()
         {
-            var jsonString = await Fetch.CallAsync(Resources.RequesterConfig);
+            var jsonString = await Fetch.CallAsync(this.Ip + Resources.RequesterConfig);
             var json = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonString);
             var currencyBalance = JsonConvert.DeserializeObject<Dictionary<string, object>>(json["response"].ToString())["currencyBalance"];
             var balance = ((currencyBalance as JArray).First as JValue).Value.ToString();
@@ -41,7 +41,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 
         private async Task<bool> FetchRequesterState()
         {
-            var jsonString = await Fetch.CallAsync(Resources.SidechainState + this.Account);
+            var jsonString = await Fetch.CallAsync(this.Ip + Resources.SidechainState + this.Account);
             var succeeded = bool.Parse(JsonStringNavigator.GetDeeper(jsonString, "succeeded"));
             if (!succeeded) { 
                 this.State = "No sidechain";
@@ -55,7 +55,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 
         private async Task FetchRequesterStake()
         {
-            var requestResult = await Fetch.CallAsync(Resources.RequesterStake);
+            var requestResult = await Fetch.CallAsync(this.Ip + Resources.RequesterStake);
             var json = JsonConvert.DeserializeObject<Dictionary<string, string>>(requestResult);
             var stake = json["response"];
             this.Stake = stake;

@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BlockBase.Dapps.CloudManager.Services;
+using System;
+
 using System.Threading.Tasks;
 using System.Transactions;
 
@@ -43,6 +43,11 @@ namespace BlockBase.Dapps.CloudManager.Business
             }
         }
 
+        protected ICloudPlugIn _cloudPlugin;
+        public BaseBusinessObject()
+        {
+            _cloudPlugin = new CloudPlugInMock();
+        }
 
     }
 }

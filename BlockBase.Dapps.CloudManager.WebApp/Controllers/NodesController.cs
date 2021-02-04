@@ -48,19 +48,20 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterError(res.Exception.Message);
                 return View();
             }
-            ViewBag.DetailedRequester = true;
+            ViewBag.DetailedRequester = id;
             return View(new RequesterViewModel(res.Result));
         }
 
         public IActionResult RequesterConfigurations(string id)
         {
-            ViewBag.DetailedRequester = true;
+            ViewBag.DetailedRequester = id;
             return View(new RequesterConfigurationViewModel() { Title = "Configurations" });
         }
         [HttpPost]
         public IActionResult RequesterConfigurations(RequesterConfigurationViewModel vm)
         {
             RequesterConfiguration rc = vm.ToData();
+
             return View();
         }
     }

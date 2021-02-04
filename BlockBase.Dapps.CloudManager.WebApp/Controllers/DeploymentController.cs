@@ -38,7 +38,6 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         public async Task<IActionResult> StopNode(String Account)
         {
             var res = await _business.StopNodeAsync(Account);
-            //TODO FAZER ISTO NA CLOUD
             if (!res.HasSucceeded)
             {
                 RegisterError(res.Exception.Message);
@@ -50,26 +49,26 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         public async Task<IActionResult> StartNode(String Account)
         {
             var res = await _business.StartNodeAsync(Account);
-            //TODO FAZER ISTO NA CLOUD
             if (!res.HasSucceeded)
             {
                 RegisterError(res.Exception.Message);
-                return RedirectToAction("Deployment");
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Deployment");
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> RemoveNode(String Account)
         {
             var res = await _business.RemoveNodeAsync(Account);
-            //TODO FAZER ISTO NA CLOUD
             if (!res.HasSucceeded)
             {
                 RegisterError(res.Exception.Message);
-                return RedirectToAction("Deployment");
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Deployment");
+            return RedirectToAction("Index");
         }
+
+     
 
         public IActionResult Error()
         {

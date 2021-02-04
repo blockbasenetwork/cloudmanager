@@ -26,7 +26,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 
         public async Task FetchProducing()
         {
-            var jsonString = await Fetch.CallAsync(Resources.ProducingSideChains);
+            var jsonString = await Fetch.CallAsync(this.Ip + Resources.ProducingSideChains);
             var succeeded = bool.Parse(JsonStringNavigator.GetDeeper(jsonString, "succeeded"));
             if (!succeeded)
             {
@@ -43,7 +43,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 
         public async Task FetchHealth()
         {
-            var jsonString = await Fetch.CallAsync(Resources.ProducingSideChains);
+            var jsonString = await Fetch.CallAsync(this.Ip + Resources.ProducingSideChains);
             var succeeded = bool.Parse(JsonStringNavigator.GetDeeper(jsonString, "succeeded"));
             if (!succeeded)
             {
@@ -54,14 +54,13 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
             if (response.Length == 0) { this.Health = 0; return; }
             foreach (var sc in response)
             {
-                if (isProducing(sc)) {
+               
                     fractionHealth +=sc.blocksProducedInCurrentSettlement / (sc.blocksProducedInCurrentSettlement + sc.blocksFailedInCurrentSettlement);
-                };
+               
             }
 
             this.Health = (fractionHealth / response.Length) * 100; 
         }
-        bool isProducing(ProducingSidechain sc) => sc.sidechainState == "Production" && sc.blocksFailedInCurrentSettlement != 0;
 
         public override bool Equals(object obj)
         {

@@ -1,8 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlockBase.Dapps.CloudManager.DataAccessLayer\BlockBase.Dapps.CloudManager.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\BlockBase.Dapps.CloudManager.Data\BlockBase.Dapps.CloudManager.Data.csproj" />
+  </ItemGroup>
 
 </Project>

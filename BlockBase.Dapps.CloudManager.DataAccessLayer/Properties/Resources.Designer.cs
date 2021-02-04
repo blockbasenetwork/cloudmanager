@@ -70,7 +70,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://localhost:8001/api/Provider/GetProducingSidechains.
+        ///   Looks up a localized string similar to /api/Provider/GetProducingSidechains.
         /// </summary>
         public static string ProducingSideChains {
             get {
@@ -79,7 +79,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://localhost:8000/api/Provider/CheckProducerConfig.
+        ///   Looks up a localized string similar to /api/Provider/CheckProducerConfig.
         /// </summary>
         public static string RequesterConfig {
             get {
@@ -88,7 +88,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://localhost:8000/api/Requester/CheckCurrentStakeInSidechain.
+        ///   Looks up a localized string similar to /api/Requester/CheckCurrentStakeInSidechain.
         /// </summary>
         public static string RequesterStake {
             get {
@@ -97,7 +97,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://localhost:8000/api/Network/GetSidechainConfiguration?sidechainName=.
+        ///   Looks up a localized string similar to /api/Network/GetSidechainConfiguration?sidechainName=.
         /// </summary>
         public static string SidechainConfiguration {
             get {
@@ -106,7 +106,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://localhost:8000/api/Network/GetSidechainState?sidechainName=.
+        ///   Looks up a localized string similar to /api/Network/GetSidechainState?sidechainName=.
         /// </summary>
         public static string SidechainState {
             get {
