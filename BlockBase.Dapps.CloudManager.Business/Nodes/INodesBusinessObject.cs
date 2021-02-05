@@ -15,5 +15,9 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
         Task<Operation> ClaimStake(string node);
 
         Task<Operation> AddStake(string node, double amount);
+
+        Task<OperationResult<RequesterAccessListBusinessModel>> GetRequesterAccess(string node);
+
+
     }
 }

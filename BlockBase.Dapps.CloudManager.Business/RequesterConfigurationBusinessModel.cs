@@ -7,8 +7,8 @@ namespace BlockBase.Dapps.CloudManager.Business
 
     public class RequesterConfigurationBusinessModel
     {
-        private const string blockSize = "BlockSize={0}";
-        private const string timeBetweenBlocks = "TimeBetweenBlocks={0}";
+        private const string BLOCK_SIZE = "BlockSize={0}";
+        private const string TIME_BETWEEN_BLOCKS = "TimeBetweenBlocks={0}";
 
         public bool CheckFields() => MinimumCandidatureStake == null && TimeBetweenBlocks == null && BlockSize == null && Full.MaxPaymentPerBlock == null && Full.MinPaymentPerBlock == null && Full.Required == null
             && Validator.MaxPaymentPerBlock == null && Validator.MinPaymentPerBlock == null && Validator.Required == null && History.MaxPaymentPerBlock == null && History.MinPaymentPerBlock == null && History.Required == null;
@@ -39,8 +39,8 @@ namespace BlockBase.Dapps.CloudManager.Business
         public string QueryString()
         {
             string queryToRet = "?";
-            if (BlockSize != null) queryToRet += "&" + String.Format(blockSize, BlockSize);
-            if (TimeBetweenBlocks != null) queryToRet += "&" + String.Format(timeBetweenBlocks, TimeBetweenBlocks);
+            if (BlockSize != null) queryToRet += "&" + String.Format(BLOCK_SIZE, BlockSize);
+            if (TimeBetweenBlocks != null) queryToRet += "&" + String.Format(TIME_BETWEEN_BLOCKS, TimeBetweenBlocks);
             queryToRet += Full.QueryString("Full") + Validator.QueryString("Validator") + History.QueryString("History");
             return queryToRet.Remove(1, 1);
         }
@@ -48,9 +48,9 @@ namespace BlockBase.Dapps.CloudManager.Business
 
     public class ConfigNode
     {
-        private const string maxPaymentPerBlockProducer = "maxPaymentPerBlock{0}Producer={1}";
-        private const string minPaymentPerBlockProducer = "minPaymentPerBlock{0}Producer={1}";
-        private const string numberOfProducersRequired = "numberOf{0}ProducersRequired={1}";
+        private const string MAX_PAYMENT_PER_BLOCK = "maxPaymentPerBlock{0}Producer={1}";
+        private const string MIN_PAYMENT_PER_BLOCK = "minPaymentPerBlock{0}Producer={1}";
+        private const string NUMBER_PRODUCERS_REQUIRED = "numberOf{0}ProducersRequired={1}";
 
 
         public double? MinPaymentPerBlock { get; set; }
@@ -68,9 +68,9 @@ namespace BlockBase.Dapps.CloudManager.Business
         public string QueryString(string type)
         {
             var query = "";
-            if (MinPaymentPerBlock != null) query += "&" + String.Format(minPaymentPerBlockProducer,type, MinPaymentPerBlock);
-            if (MaxPaymentPerBlock != null) query += "&" + String.Format(maxPaymentPerBlockProducer,type, MaxPaymentPerBlock);
-            if (Required != null) query += "&" + String.Format(numberOfProducersRequired, type, Required);
+            if (MinPaymentPerBlock != null) query += "&" + String.Format(MIN_PAYMENT_PER_BLOCK,type, MinPaymentPerBlock);
+            if (MaxPaymentPerBlock != null) query += "&" + String.Format(MAX_PAYMENT_PER_BLOCK,type, MaxPaymentPerBlock);
+            if (Required != null) query += "&" + String.Format(NUMBER_PRODUCERS_REQUIRED, type, Required);
             return query;
         }
     }

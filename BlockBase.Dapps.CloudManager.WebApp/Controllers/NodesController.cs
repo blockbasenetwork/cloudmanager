@@ -106,5 +106,16 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             }
             return RedirectToAction("RequesterStake", new { id = vm.Account });
         }
+
+        public async Task<IActionResult> RequesterManageAccess(string id)
+        {
+            var operation = await _business.GetRequesterAccess(id);
+            if (!operation.HasSucceeded)
+            {
+                RegisterPostError(operation.Exception.Message);
+                return View("RequesterStake", new {  id });
+            }
+            return View("RequesterStake", new { id  });
+        }
     }
 }

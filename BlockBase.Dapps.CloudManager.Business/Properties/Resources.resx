@@ -132,6 +132,9 @@
   <data name="RequesterStake" xml:space="preserve">
     <value>/api/Requester/CheckCurrentStakeInSidechain</value>
   </data>
+  <data name="ReservedSeats" xml:space="preserve">
+    <value>/api/Requester/CheckSidechainReservedSeats</value>
+  </data>
   <data name="SidechainState" xml:space="preserve">
     <value>/api/Network/GetSidechainState?sidechainName=</value>
   </data>

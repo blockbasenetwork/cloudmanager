@@ -106,6 +106,15 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /api/Requester/CheckSidechainReservedSeats.
+        /// </summary>
+        internal static string ReservedSeats {
+            get {
+                return ResourceManager.GetString("ReservedSeats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /api/Network/GetSidechainState?sidechainName=.
         /// </summary>
         internal static string SidechainState {

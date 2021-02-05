@@ -84,7 +84,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
         {
             return await ExecuteAction(async () =>
             {
-                var ip = await _cloudPlugin.GetNodeIP(node);           
+                var ip = await _cloudPlugin.GetNodeIP(node);
                 await Fetch.CallAsync(ip + Resources.ClaimStake);
             });
 
@@ -98,5 +98,23 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 await Fetch.CallAsync(ip + Resources.AddStake + amount);
             });
         }
+
+
+        public async Task<OperationResult<RequesterAccessListBusinessModel>> GetRequesterAccess(string node)
+        {
+            return await ExecuteFunction<RequesterAccessListBusinessModel>(async () =>
+            {
+                var ip = await _cloudPlugin.GetNodeIP(node);
+                var businessModel = new RequesterAccessListBusinessModel();
+                var reservedJson = await Fetch.CallAsync(ip + Resources.ReservedSeats);
+                var reservedResponseString = JsonStringNavigator.GetDeeper(reservedJson, "response");
+                businessModel.Reserved = JsonStringNavigator.GetValue<List<NodeAccType>>(reservedResponseString);
+                return businessModel;
+
+
+            });
+        }
+
+
     }
 }
