@@ -27,7 +27,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Home
                 list.ForEach(
                     it => {
                         if (it.Type.Equals("Requester")) noRequesters++;
-                        if (it.Type.Equals("Provider")) noProviders++;
+                        if (it.Type.Equals("Producer")) noProviders++;
                         if (it.Type.Equals("Full")) noFull++;
                         total++;
                     }

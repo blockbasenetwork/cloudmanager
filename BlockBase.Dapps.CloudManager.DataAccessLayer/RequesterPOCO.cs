@@ -11,12 +11,14 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 {
     public class RequesterPOCO
     {
-        public String Account { get; set; }
-        public String Ip { get; set; }
-        public String MonthlyCost { get; set; }
-        public String State { get; set; }
-        public String Balance { get; set; }
-        public String Stake { get; set; }
+        public string Account { get; set; }
+        public string Ip { get; set; }
+        public string MonthlyCost { get; set; }
+
+        public string AppSettings { get; set; }
+        public string State { get; set; }
+        public string Balance { get; set; }
+        public string Stake { get; set; }
 
         public async Task FetchValues()
         {
@@ -69,9 +71,8 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 
         private async Task GetAvgMonthlyCost()
         {
-            var nodeDao = new NodeAppSettingsDataAccessObject();
-            var node = await nodeDao.GetNodeSettingsAsync(this.Account);
-            var jsonObject = JsonStringNavigator.GetDeeper(node.AppSettings, "RequesterConfigurations");
+
+            var jsonObject = JsonStringNavigator.GetDeeper(AppSettings, "RequesterConfigurations");
             var rc = JsonConvert.DeserializeObject<RequesterConfigurations>(jsonObject);
             this.MonthlyCost = averageMonthlyCost(rc);
         }

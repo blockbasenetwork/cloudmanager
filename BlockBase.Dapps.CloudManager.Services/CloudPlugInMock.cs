@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlockBase.Dapps.CloudManager.Services
 {
-    public class CloudPlugInMock : BaseDataAccessObject, ICloudPlugIn
+    public class CloudPlugInMock : BaseDataAccessObject/*so para efeitos mock*/, ICloudPlugIn
     {
        
 
@@ -58,7 +58,6 @@ namespace BlockBase.Dapps.CloudManager.Services
             }
 
         }
-
         public async Task<Node> GetNode(string account)
         {
                 using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
@@ -67,5 +66,26 @@ namespace BlockBase.Dapps.CloudManager.Services
                     return output.First();
                 }
         }
+
+        public async Task InsertAppSettingAsync(string node, string appSettings)
+        {
+            using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
+            {
+                await (con.ExecuteAsync(
+                   "UPDATE CloudNodes SET AppSettings = @appSettings WHERE Account = @node", new { node, appSettings }));
+            }
+        }
+
+        public async Task<string> GetNodeSettingsAsync(string node)
+        {
+            using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
+            {
+                var output = await (con.QueryAsync<string>(
+                    "Select AppSettings from CloudNodes where Account=@node", new { node }));
+                return output.First();
+            }
+        }
+
+       
     }
 }

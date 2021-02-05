@@ -13,12 +13,10 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
     public class NodesBusinessObject : BaseBusinessObject, INodesBusinessObject
     {
         private readonly NodesDataAccessObject _nodeDAO;
-        private readonly NodeAppSettingsDataAccessObject _nodeAppSettingsDAO;
 
         public NodesBusinessObject() : base()
         {
             _nodeDAO = new NodesDataAccessObject();
-            _nodeAppSettingsDAO = new NodeAppSettingsDataAccessObject();
         }
 
         public async Task<OperationResult<List<RequesterPOCO>>> GetAllRequestersAsync()
@@ -28,6 +26,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 var nodeList = await _nodeDAO.GetAllRequestersAsync();
                 foreach (var it in nodeList)
                 {
+                    it.AppSettings = await _cloudPlugin.GetNodeSettingsAsync(it.Account);
                     await it.FetchValues();
                 }
                 nodeList.RemoveAll(it => it.State.Equals("No sidechain"));
@@ -63,7 +62,8 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
         {
             return await ExecuteAction(async () =>
             {
-                //var nodeappSettings = _nodeAppSettingsDAO.GetNodeSettingsAsync();
+                var nodeappSettings = await _cloudPlugin.GetNodeSettingsAsync(rc.Title);
+
             });
         }
     }

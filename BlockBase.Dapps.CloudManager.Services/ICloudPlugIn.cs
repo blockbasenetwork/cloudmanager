@@ -20,6 +20,11 @@ namespace BlockBase.Dapps.CloudManager.Services
 
         Task Duplicate(string account);
 
+        Task InsertAppSettingAsync(string node, string appSettings);
+
+        Task<string> GetNodeSettingsAsync(string node);
+
+
 
 
     }
