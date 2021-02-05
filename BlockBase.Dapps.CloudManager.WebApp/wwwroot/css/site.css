@@ -330,10 +330,30 @@ body {
 
 .req-config-card {
     padding-top: 80px;
-
 }
 
 .card-padding {
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.stake-card {
+    display: flex;
+    min-height:200px;
+   
+}
+
+.stake-display {
+    width: 150px;
+    height: 150px;
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stake-display h3{
+     font-size:larger;
+        
+        
 }

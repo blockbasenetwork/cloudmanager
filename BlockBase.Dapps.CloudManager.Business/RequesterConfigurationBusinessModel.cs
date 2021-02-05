@@ -10,7 +10,7 @@ namespace BlockBase.Dapps.CloudManager.Business
         private const string blockSize = "BlockSize={0}";
         private const string timeBetweenBlocks = "TimeBetweenBlocks={0}";
 
-        public bool checkFields() => MinimumCandidatureStake == null && TimeBetweenBlocks == null && BlockSize == null && Full.MaxPaymentPerBlock == null && Full.MinPaymentPerBlock == null && Full.Required == null
+        public bool CheckFields() => MinimumCandidatureStake == null && TimeBetweenBlocks == null && BlockSize == null && Full.MaxPaymentPerBlock == null && Full.MinPaymentPerBlock == null && Full.Required == null
             && Validator.MaxPaymentPerBlock == null && Validator.MinPaymentPerBlock == null && Validator.Required == null && History.MaxPaymentPerBlock == null && History.MinPaymentPerBlock == null && History.Required == null;
 
         public string Account { get; set; }

@@ -61,11 +61,29 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /api/Requester/AddStake?stake=.
+        /// </summary>
+        internal static string AddStake {
+            get {
+                return ResourceManager.GetString("AddStake", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /api/Requester/ChangeSidechainConfigurations.
         /// </summary>
         internal static string ChangeSideChainConfigurations {
             get {
                 return ResourceManager.GetString("ChangeSideChainConfigurations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /api/Requester/ClaimStake.
+        /// </summary>
+        internal static string ClaimStake {
+            get {
+                return ResourceManager.GetString("ClaimStake", resourceCulture);
             }
         }
         

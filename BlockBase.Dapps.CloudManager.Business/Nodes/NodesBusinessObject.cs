@@ -44,7 +44,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             });
         }
 
-      
+
         public async Task<OperationResult<List<ProducerPOCO>>> GetAllProducersAsync()
         {
             return await ExecuteFunction(async () =>
@@ -62,10 +62,40 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
         {
             return await ExecuteAction(async () =>
             {
-                if (rc.checkFields()) throw new Exception(message:"Cannot submit empty form");
+                if (rc.CheckFields()) throw new Exception(message: "Cannot submit empty form");
                 var ip = await _cloudPlugin.GetNodeIP(rc.Account);
                 var queryString = rc.QueryString();
                 await Fetch.CallAsync(ip + Resources.ChangeSideChainConfigurations + queryString);
+            });
+        }
+
+        public async Task<OperationResult<string>> GetRequesterStake(string node)
+        {
+            return await ExecuteFunction(async () =>
+            {
+                var ip = await _cloudPlugin.GetNodeIP(node);
+                var jsonstring = await Fetch.CallAsync(ip + Resources.RequesterStake);
+                var stake = JsonStringNavigator.GetDeeper(jsonstring, "response");
+                return stake;
+            });
+        }
+
+        public async Task<Operation> ClaimStake(string node)
+        {
+            return await ExecuteAction(async () =>
+            {
+                var ip = await _cloudPlugin.GetNodeIP(node);           
+                await Fetch.CallAsync(ip + Resources.ClaimStake);
+            });
+
+        }
+
+        public async Task<Operation> AddStake(string node, double amount)
+        {
+            return await ExecuteAction(async () =>
+            {
+                var ip = await _cloudPlugin.GetNodeIP(node);
+                await Fetch.CallAsync(ip + Resources.AddStake + amount);
             });
         }
     }

@@ -4,6 +4,7 @@ using BlockBase.Dapps.CloudManager.WebApp.Models.Nodes;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -70,6 +71,40 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 return RedirectToAction("RequesterConfigurations", new { id = vm.Account });
              }
             return RedirectToAction("Requester", new { id = vm.Account });
+        }
+
+        public async Task<IActionResult> RequesterStake(string id)
+        {
+            ViewBag.DetailedRequester = true;
+            var operation = await _business.GetRequesterStake(id);
+            if (!operation.HasSucceeded) 
+            {
+                RegisterError(operation.Exception.Message);
+                return View();
+            }
+            return View(new RequesterStakeViewModel() { Account = id, Stake = operation.Result });
+        }
+
+        public async Task<IActionResult> RequesterStakeClaim(string id)
+        {
+            var operation = await _business.ClaimStake(id);
+            if(!operation.HasSucceeded)
+            {
+                RegisterPostError(operation.Exception.Message);
+                return RedirectToAction("RequesterStake", new { id = id });
+            }
+            return RedirectToAction("RequesterStake", new { id = id });
+        }
+
+        public async Task<IActionResult> RequesteAddStake(RequesterStakeViewModel vm)
+        {
+            var operation = await _business.AddStake(vm.Account, Double.Parse(vm.Stake));
+            if (!operation.HasSucceeded)
+            {
+                RegisterPostError(operation.Exception.Message);
+                return RedirectToAction("RequesterStake", new { id = vm.Account });
+            }
+            return RedirectToAction("RequesterStake", new { id = vm.Account });
         }
     }
 }

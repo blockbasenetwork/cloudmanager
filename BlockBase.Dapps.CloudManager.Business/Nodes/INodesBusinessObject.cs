@@ -10,5 +10,10 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
         Task<OperationResult<List<ProducerPOCO>>> GetAllProducersAsync();
         Task<Operation> UpdateAppSettings(RequesterConfigurationBusinessModel rc);
         Task<OperationResult<DetailedRequesterPOCO>> GetRequesterAsync(string node);
+        Task<OperationResult<string>> GetRequesterStake(string node);
+
+        Task<Operation> ClaimStake(string node);
+
+        Task<Operation> AddStake(string node, double amount);
     }
 }
