@@ -58,12 +58,14 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             });
         }
 
-        public async Task<Operation> UpdateAppSettings(RequesterConfiguration rc)
+        public async Task<Operation> UpdateAppSettings(RequesterConfigurationBusinessModel rc)
         {
             return await ExecuteAction(async () =>
             {
-                var nodeappSettings = await _cloudPlugin.GetNodeSettingsAsync(rc.Title);
-
+                if (rc.checkFields()) throw new Exception(message:"Cannot submit empty form");
+                var ip = await _cloudPlugin.GetNodeIP(rc.Account);
+                var queryString = rc.QueryString();
+                await Fetch.CallAsync(ip + Resources.ChangeSideChainConfigurations + queryString);
             });
         }
     }

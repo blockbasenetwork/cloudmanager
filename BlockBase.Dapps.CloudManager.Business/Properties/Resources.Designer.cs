@@ -61,7 +61,16 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://localhost:8000/api/Requester/CheckRequesterConfig.
+        ///   Looks up a localized string similar to /api/Requester/ChangeSidechainConfigurations.
+        /// </summary>
+        internal static string ChangeSideChainConfigurations {
+            get {
+                return ResourceManager.GetString("ChangeSideChainConfigurations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /api/Requester/CheckRequesterConfig.
         /// </summary>
         internal static string RequesterConfig {
             get {
@@ -70,7 +79,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://localhost:8000/api/Requester/CheckCurrentStakeInSidechain.
+        ///   Looks up a localized string similar to /api/Requester/CheckCurrentStakeInSidechain.
         /// </summary>
         internal static string RequesterStake {
             get {
@@ -79,7 +88,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://localhost:8000/api/Network/GetSidechainState?sidechainName=.
+        ///   Looks up a localized string similar to /api/Network/GetSidechainState?sidechainName=.
         /// </summary>
         internal static string SidechainState {
             get {

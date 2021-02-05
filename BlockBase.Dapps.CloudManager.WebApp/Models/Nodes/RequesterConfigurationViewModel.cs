@@ -1,4 +1,5 @@
-﻿using BlockBase.Dapps.CloudManager.Data;
+﻿using BlockBase.Dapps.CloudManager.Business;
+using BlockBase.Dapps.CloudManager.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +11,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
 {
     public class RequesterConfigurationViewModel
     {
-        public string Title { get; set; }
+        public string Account { get; set; }
   
         public ConfigNodeViewModel Full { get; set; }
         public ConfigNodeViewModel Validator { get; set; }
@@ -22,10 +23,10 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
         [Display(Name = "Block size")]
         public int? BlockSize { get; set; }
 
-        public static RequesterConfigurationViewModel Parse(RequesterConfiguration rc)
+        public static RequesterConfigurationViewModel Parse(RequesterConfigurationBusinessModel rc)
         {
             return new RequesterConfigurationViewModel { 
-            Title = rc.Title,
+            Account = rc.Account,
             Full = ConfigNodeViewModel.Parse(rc.Full),
             Validator = ConfigNodeViewModel.Parse(rc.Validator),
             History = ConfigNodeViewModel.Parse(rc.History),
@@ -45,9 +46,9 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
                 return double.Parse(toParse, CultureInfo.InvariantCulture);
             }
         }
-        public RequesterConfiguration ToData()
+        public RequesterConfigurationBusinessModel ToData()
         {
-            return new RequesterConfiguration(Title,Full.ToData(), Validator.ToData(), History.ToData(), ParseNullable(MinimumCandidatureStake),TimeBetweenBlocks,BlockSize);
+            return new RequesterConfigurationBusinessModel(Account,Full.ToData(), Validator.ToData(), History.ToData(), ParseNullable(MinimumCandidatureStake),TimeBetweenBlocks,BlockSize);
         }
     }
     public class ConfigNodeViewModel{

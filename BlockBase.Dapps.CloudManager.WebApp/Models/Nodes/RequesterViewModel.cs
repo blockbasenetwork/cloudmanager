@@ -6,7 +6,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
 {
     public class RequesterViewModel
     {
-        public string Title { get; set; }
+        public string Account { get; set; }
         public string State { get; set; }
         public double AvgBlockReward { get; set; }
         public string CreatedAt { get; set; }
@@ -21,7 +21,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
 
         public RequesterViewModel(DetailedRequesterPOCO dr)
         {
-            this.Title = dr.Account;
+            this.Account = dr.Account;
             this.State = dr.State;
             this.AvgBlockReward = dr.AvgBlockReward;
             this.NeededWorkers = dr.NeededWorkers;

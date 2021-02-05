@@ -117,13 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChangeSideChainConfigurations" xml:space="preserve">
+    <value>/api/Requester/ChangeSidechainConfigurations</value>
+  </data>
   <data name="RequesterConfig" xml:space="preserve">
-    <value>http://localhost:8000/api/Requester/CheckRequesterConfig</value>
+    <value>/api/Requester/CheckRequesterConfig</value>
   </data>
   <data name="RequesterStake" xml:space="preserve">
-    <value>http://localhost:8000/api/Requester/CheckCurrentStakeInSidechain</value>
+    <value>/api/Requester/CheckCurrentStakeInSidechain</value>
   </data>
   <data name="SidechainState" xml:space="preserve">
-    <value>http://localhost:8000/api/Network/GetSidechainState?sidechainName=</value>
+    <value>/api/Network/GetSidechainState?sidechainName=</value>
   </data>
 </root>

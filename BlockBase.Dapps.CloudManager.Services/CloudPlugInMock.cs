@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlockBase.Dapps.CloudManager.Services
 {
-    public class CloudPlugInMock : BaseDataAccessObject/*so para efeitos mock*/, ICloudPlugIn
+    public class CloudPlugInMock : BaseDataAccessObject/*so para efeitos mock depois tirar a referencia para DAL*/, ICloudPlugIn
     {
        
 
@@ -86,6 +86,14 @@ namespace BlockBase.Dapps.CloudManager.Services
             }
         }
 
-       
+        public async Task<string> GetNodeIP(string node)
+        {
+            using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
+            {
+                var output = await(con.QueryAsync<string>(
+                    "Select IP from CloudNodes where Account=@node", new { node }));
+                return output.First();
+            }
+        }
     }
 }

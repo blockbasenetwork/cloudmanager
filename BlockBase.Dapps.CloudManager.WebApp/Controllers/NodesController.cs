@@ -1,10 +1,11 @@
-﻿using BlockBase.Dapps.CloudManager.Business.Nodes;
-using BlockBase.Dapps.CloudManager.Data;
+﻿using BlockBase.Dapps.CloudManager.Business;
+using BlockBase.Dapps.CloudManager.Business.Nodes;
 using BlockBase.Dapps.CloudManager.WebApp.Models.Nodes;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
@@ -55,14 +56,20 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         public IActionResult RequesterConfigurations(string id)
         {
             ViewBag.DetailedRequester = true;
-            return View(new RequesterConfigurationViewModel() { Title = id });
+            CheckPostError();
+            return View(new RequesterConfigurationViewModel() { Account = id });
         }
         [HttpPost]
-        public IActionResult RequesterConfigurations(RequesterConfigurationViewModel vm)
+        public async Task<IActionResult> RequesterConfigurations(RequesterConfigurationViewModel vm)
         {
-            RequesterConfiguration rc = vm.ToData();
-            _business.UpdateAppSettings(rc);
-            return View();
+            RequesterConfigurationBusinessModel rc = vm.ToData();
+            var operation = await _business.UpdateAppSettings(rc);
+            if (!operation.HasSucceeded)
+            {
+                RegisterPostError(operation.Exception.Message);
+                return RedirectToAction("RequesterConfigurations", new { id = vm.Account });
+             }
+            return RedirectToAction("Requester", new { id = vm.Account });
         }
     }
 }

@@ -65,7 +65,7 @@
         {
             <div class="detailed-requester">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light req-nav">
-                    <a class="navbar-brand" href="#">@Model.Title</a>
+                    <a class="navbar-brand" href="#">@Model.Account</a>
                     @if (@Model is BlockBase.Dapps.CloudManager.WebApp.Models.Nodes.RequesterViewModel)
                     {
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,7 +109,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterConfigurations" asp-route-id=@Model.Title>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterConfigurations" asp-route-id=@Model.Account>
                                         <i class="fas fa-bars"></i> Configurations<span class="sr-only">(current)</span>
                                     </a>
                                 </li>
