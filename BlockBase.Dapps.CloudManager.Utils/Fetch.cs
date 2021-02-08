@@ -1,6 +1,7 @@
 ﻿
 
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace BlockBase.Dapps.CloudManager.Utils
     public static class Fetch
     {
 
-        public static async Task<string> CallAsync(string uri)
+        public static async Task<string> GetAsync(string uri)
         {
                 using (HttpClient client = new HttpClient())
                 {
@@ -22,6 +23,23 @@ namespace BlockBase.Dapps.CloudManager.Utils
                         }
                     }
                 }   
+        }
+
+        public static async Task<string> PostAsync(string uri, Dictionary<string, string> body = null)
+        {
+            if (body == null) body = new Dictionary<string, string>();
+            var content = new FormUrlEncodedContent(body);
+            using (HttpClient client = new HttpClient())
+            {
+                using (HttpResponseMessage res = await client.PostAsync(uri, content))
+                {
+                    using (HttpContent resp = res.Content)
+                    {
+                        return await resp.ReadAsStringAsync();
+
+                    }
+                }
+            }
         }
     }
 }

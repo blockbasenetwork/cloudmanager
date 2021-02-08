@@ -65,7 +65,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 if (rc.CheckFields()) throw new Exception(message: "Cannot submit empty form");
                 var ip = await _cloudPlugin.GetNodeIP(rc.Account);
                 var queryString = rc.QueryString();
-                await Fetch.CallAsync(ip + Resources.ChangeSideChainConfigurations + queryString);
+                await Fetch.PostAsync(ip + Resources.ChangeSideChainConfigurations + queryString);
             });
         }
 
@@ -74,7 +74,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             return await ExecuteFunction(async () =>
             {
                 var ip = await _cloudPlugin.GetNodeIP(node);
-                var jsonstring = await Fetch.CallAsync(ip + Resources.RequesterStake);
+                var jsonstring = await Fetch.GetAsync(ip + Resources.RequesterStake);
                 var stake = JsonStringNavigator.GetDeeper(jsonstring, "response");
                 return stake;
             });
@@ -85,7 +85,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             return await ExecuteAction(async () =>
             {
                 var ip = await _cloudPlugin.GetNodeIP(node);
-                await Fetch.CallAsync(ip + Resources.ClaimStake);
+                await Fetch.GetAsync(ip + Resources.ClaimStake);
             });
 
         }
@@ -95,7 +95,9 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             return await ExecuteAction(async () =>
             {
                 var ip = await _cloudPlugin.GetNodeIP(node);
-                await Fetch.CallAsync(ip + Resources.AddStake + amount);
+                var result = await Fetch.PostAsync(ip + Resources.AddStake + amount);
+                var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
+                if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
             });
         }
 
@@ -106,7 +108,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             {
                 var ip = await _cloudPlugin.GetNodeIP(node);
                 var businessModel = new RequesterAccessListBusinessModel();
-                var reservedJson = await Fetch.CallAsync(ip + Resources.ReservedSeats);
+                var reservedJson = await Fetch.GetAsync(ip + Resources.ReservedSeats);
                 var reservedResponseString = JsonStringNavigator.GetDeeper(reservedJson, "response");
                 businessModel.Reserved = JsonStringNavigator.GetValue<List<NodeAccType>>(reservedResponseString);
                 return businessModel;

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -98,7 +99,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
 
         public async Task<IActionResult> RequesteAddStake(RequesterStakeViewModel vm)
         {
-            var operation = await _business.AddStake(vm.Account, Double.Parse(vm.Stake));
+            var operation = await _business.AddStake(vm.Account, Double.Parse(vm.Stake, CultureInfo.InvariantCulture));
             if (!operation.HasSucceeded)
             {
                 RegisterPostError(operation.Exception.Message);

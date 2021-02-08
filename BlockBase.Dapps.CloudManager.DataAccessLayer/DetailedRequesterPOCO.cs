@@ -26,7 +26,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
         }
         private async Task<bool> FetchSidechainState()
         {
-            var jsonString = await Fetch.CallAsync(this.IP + Resources.SidechainState + this.Account);
+            var jsonString = await Fetch.GetAsync(this.IP + Resources.SidechainState + this.Account);
             var succeeded = bool.Parse(JsonStringNavigator.GetDeeper(jsonString, "succeeded"));
             if (!succeeded)
             {
@@ -44,7 +44,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 
         private async Task FetchSidechainConfiguration()
         {
-            var jsonString = await Fetch.CallAsync(this.IP + Resources.SidechainConfiguration + this.Account);
+            var jsonString = await Fetch.GetAsync(this.IP + Resources.SidechainConfiguration + this.Account);
             var response = JsonStringNavigator.GetDeeper(jsonString, "response");
             this.CreatedAt = JsonStringNavigator.GetDeeper(response, "candidature-phase-end-date");
             CalculateAverageBlock(response);

@@ -12,5 +12,6 @@ namespace BlockBase.Dapps.CloudManager.Data
         public int blocksFailedInCurrentSettlement { get; set; }
         //public Object[] warnings { get; set; }
 
+        public int TotalBlocksPerSettlement() => blocksProducedInCurrentSettlement + blocksFailedInCurrentSettlement;
     }
 }

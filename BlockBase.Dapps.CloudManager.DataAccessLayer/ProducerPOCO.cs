@@ -16,7 +16,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
         public string Type { get; set; }
         public String Producing { get; set; }
         public string Events { get; set; }
-        public int Health { get; set; }
+        public double Health { get; set; }
 
         public async Task FetchValues()
         {
@@ -26,7 +26,7 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 
         public async Task FetchProducing()
         {
-            var jsonString = await Fetch.CallAsync(this.Ip + Resources.ProducingSideChains);
+            var jsonString = await Fetch.GetAsync(this.Ip + Resources.ProducingSideChains);
             var succeeded = bool.Parse(JsonStringNavigator.GetDeeper(jsonString, "succeeded"));
             if (!succeeded)
             {
@@ -43,24 +43,26 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 
         public async Task FetchHealth()
         {
-            var jsonString = await Fetch.CallAsync(this.Ip + Resources.ProducingSideChains);
+            var jsonString = await Fetch.GetAsync(this.Ip + Resources.ProducingSideChains);
             var succeeded = bool.Parse(JsonStringNavigator.GetDeeper(jsonString, "succeeded"));
             if (!succeeded)
             {
                 this.Producing = "Unconfigured";
             }
             var response = JsonStringNavigator.GetDeeper<ProducingSidechain[]>(jsonString, "response");
-            var fractionHealth = 0;
+            double fractionHealth = 0;
             if (response.Length == 0) { this.Health = 0; return; }
             foreach (var sc in response)
             {
-               
-                    fractionHealth +=sc.blocksProducedInCurrentSettlement / (sc.blocksProducedInCurrentSettlement + sc.blocksFailedInCurrentSettlement);
+
+                    if(sc.TotalBlocksPerSettlement() == 0) { fractionHealth += 1; continue; }
+                    fractionHealth +=sc.blocksProducedInCurrentSettlement / (sc.TotalBlocksPerSettlement());
                
             }
 
             this.Health = (fractionHealth / response.Length) * 100; 
         }
+
 
         public override bool Equals(object obj)
         {
