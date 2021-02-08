@@ -26,7 +26,6 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 var nodeList = await _nodeDAO.GetAllRequestersAsync();
                 foreach (var it in nodeList)
                 {
-                    it.AppSettings = await _cloudPlugin.GetNodeSettingsAsync(it.Account);
                     await it.FetchValues();
                 }
                 nodeList.RemoveAll(it => it.State.Equals("No sidechain"));
