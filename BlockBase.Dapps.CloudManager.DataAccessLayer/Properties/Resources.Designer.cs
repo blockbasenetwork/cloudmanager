@@ -106,6 +106,15 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /api/Network/GetSidechainConfiguration?sidechainName=.
+        /// </summary>
+        public static string SidechainConfigurations {
+            get {
+                return ResourceManager.GetString("SidechainConfigurations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /api/Network/GetSidechainState?sidechainName=.
         /// </summary>
         public static string SidechainState {

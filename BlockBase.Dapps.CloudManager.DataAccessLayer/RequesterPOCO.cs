@@ -15,7 +15,6 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
         public string Ip { get; set; }
         public string MonthlyCost { get; set; }
 
-        public string AppSettings { get; set; }
         public string State { get; set; }
         public string Balance { get; set; }
         public string Stake { get; set; }
@@ -71,20 +70,25 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 
         private async Task GetAvgMonthlyCost()
         {
-
-            var jsonObject = JsonStringNavigator.GetDeeper(AppSettings, "RequesterConfigurations");
-            var rc = JsonConvert.DeserializeObject<RequesterConfigurations>(jsonObject);
+            var jsonResp = await Fetch.GetAsync(Ip + Resources.SidechainConfiguration + Account);
+            var succeded = bool.Parse(JsonStringNavigator.GetDeeper(jsonResp, "succeeded"));
+            if (!succeded) throw new Exception(JsonStringNavigator.GetDeeper(jsonResp, "exception"));
+            var response = JsonStringNavigator.GetDeeper(jsonResp, "response");
+            var rc = JsonConvert.DeserializeObject<NetworkSidechainConfigurations>(response);
             this.MonthlyCost = averageMonthlyCost(rc);
         }
-        string averageMonthlyCost(RequesterConfigurations rc)
+        string averageMonthlyCost(NetworkSidechainConfigurations rc)
         {
-            var FullNodes = rc.fullNodes;
-            var ValidatorNodes = rc.validatorNodes;
-            var HistoryNodes = rc.historyNodes;
-            double avgPayment = (FullNodes.AveragePaymentPerBlock + HistoryNodes.AveragePaymentPerBlock + ValidatorNodes.AveragePaymentPerBlock) / 3;
-            double blocksPerMonth = (60 * 60 * 24) / rc.BlockTimeInSeconds;
-            return blocksPerMonth * avgPayment + " BBT";
+            double historyAvgPayment, fullAvgPayment, validatorAvgPayment = 0;
+            historyAvgPayment = calcAverage(rc.min_payment_per_block_history_producers , rc.max_payment_per_block_history_producers, rc.number_of_history_producers_required);
+            validatorAvgPayment = calcAverage(rc.min_payment_per_block_validator_producers, rc.max_payment_per_block_validator_producers, rc.number_of_validator_producers_required);
+            fullAvgPayment = calcAverage(rc.min_payment_per_block_full_producers, rc.max_payment_per_block_full_producers, rc.number_of_full_producers_required);
+            double avgPaymentPerBlock = (historyAvgPayment + validatorAvgPayment + fullAvgPayment) / 3;
+            double blocksPerMonth = (60 * 60 * 24) / rc.block_time_in_seconds;
+            return blocksPerMonth * avgPaymentPerBlock + " BBT";
         }
+
+        double calcAverage(double a, double b, int c) => ((a + b) / 2) *c;
 
 
     }
