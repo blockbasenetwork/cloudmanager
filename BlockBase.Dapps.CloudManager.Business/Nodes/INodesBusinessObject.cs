@@ -18,6 +18,8 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
 
         Task<OperationResult<RequesterAccessListBusinessModel>> GetRequesterAccess(string node);
 
+        Task<Operation> AddReservedSeat(RequesterAccessListBusinessModel vm);
+
 
     }
 }

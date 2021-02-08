@@ -106,16 +106,28 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             return await ExecuteFunction<RequesterAccessListBusinessModel>(async () =>
             {
                 var ip = await _cloudPlugin.GetNodeIP(node);
-                var businessModel = new RequesterAccessListBusinessModel();
+                var businessModel = new RequesterAccessListBusinessModel() { Account = node };
                 var reservedJson = await Fetch.GetAsync(ip + Resources.ReservedSeats);
                 var reservedResponseString = JsonStringNavigator.GetDeeper(reservedJson, "response");
                 businessModel.Reserved = JsonStringNavigator.GetValue<List<NodeAccType>>(reservedResponseString);
                 return businessModel;
-
-
             });
         }
 
-
+        public async Task<Operation> AddReservedSeat(RequesterAccessListBusinessModel vm)
+        {
+            return await ExecuteAction(async () =>
+            {
+            var ip = await _cloudPlugin.GetNodeIP(vm.Account);
+                var json = new List<NodeAccType>()
+                {
+                    vm.toAdd 
+                };
+                var body = JsonConvert.SerializeObject(json);
+                var result = await Fetch.PostAsync(ip + Resources.AddReservedSeat, body);
+                var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
+                if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
+            });
+        }
     }
 }

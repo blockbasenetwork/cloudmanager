@@ -110,10 +110,18 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             var operation = await _business.GetRequesterAccess(id);
             if (!operation.HasSucceeded)
             {
-                RegisterPostError(operation.Exception.Message);
-                return View("RequesterStake", new {  id });
+                RegisterError(operation.Exception.Message);
+                return View();
             }
-            return View("RequesterStake", new { id  });
+            return View(new RequesterAccessViewModel(operation.Result));
         }
+
+        public async Task<IActionResult> AddReservedSeat(RequesterAccessViewModel vm)
+        {
+            var operation = await _business.AddReservedSeat(vm.ToBusinessModel());
+            return View();
+        }
+
+
     }
 }

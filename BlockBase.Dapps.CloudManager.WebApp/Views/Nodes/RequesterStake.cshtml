@@ -12,12 +12,14 @@
                         </h5>
                     </div>
                     <div class="card-body stake-card">
-                        <div class="stake-display d-flex justify-content-center">
+                        <div class="stake-display justify-content-center">
                             @if (@Model.Stake != null)
                             {<h3>@Model.Stake</h3>}
+                       
                             <a asp-area="" asp-controller="Nodes" asp-action="RequesterStakeClaim" asp-route-id=@Model.Account>
-                                <button class="btn btn-dark" type="button">Claim</button> 
+                                <button class="btn btn-dark" type="button">Claim</button>
                             </a>
+                        
                         </div>
                         <div class="form-group col-lg-3 col-md-6 col-sm-12">
                             <form asp-controller="Nodes" asp-action="RequesteAddStake">
@@ -25,8 +27,8 @@
                                 <input asp-for="Account" type="hidden" value="@Model.Account"/>
                                 <input asp-for="Stake" type="number" step=any min=0 class="form-control ml-2" />
                                 <span asp-validation-for="Stake" class="text-danger"></span>
-                                <div class="form-group ml-4 form-end">
-                                    <input type="submit" value="Submit" class="btn btn-primary" />
+                                <div class="form-group ml-4 form-end sub-button">
+                                    <input type="submit" value="Submit" class="btn btn btn-dark" />
                                 </div>
                             </form>
                         </div>

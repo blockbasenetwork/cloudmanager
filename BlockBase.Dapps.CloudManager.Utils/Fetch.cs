@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BlockBase.Dapps.CloudManager.Utils
@@ -25,10 +26,10 @@ namespace BlockBase.Dapps.CloudManager.Utils
                 }   
         }
 
-        public static async Task<string> PostAsync(string uri, Dictionary<string, string> body = null)
+        public static async Task<string> PostAsync(string uri, string body = null)
         {
-            if (body == null) body = new Dictionary<string, string>();
-            var content = new FormUrlEncodedContent(body);
+            var content = new StringContent(body, Encoding.UTF8, "application/json");
+
             using (HttpClient client = new HttpClient())
             {
                 using (HttpResponseMessage res = await client.PostAsync(uri, content))

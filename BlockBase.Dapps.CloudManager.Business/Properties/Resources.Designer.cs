@@ -61,6 +61,15 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /api/Requester/AddReservedSeat.
+        /// </summary>
+        internal static string AddReservedSeat {
+            get {
+                return ResourceManager.GetString("AddReservedSeat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /api/Requester/AddStake?stake=.
         /// </summary>
         internal static string AddStake {

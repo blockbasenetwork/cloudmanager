@@ -1,0 +1,185 @@
+﻿@using BlockBase.Dapps.CloudManager.WebApp.Models.Nodes;
+@model RequesterAccessViewModel
+
+<div class="AcessPage">
+
+    <div id="add-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="modal-title" class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div><form id="modal-form" asp-controller="Nodes" asp-action="AddReservedSeat">
+                    <div class="modal-body">
+                        <input asp-for="Account" type="hidden" value="@Model.Account" />
+                        <label asp-for="ToAdd.key" class="control-label"></label>
+                        <input asp-for="ToAdd.key" class="form-control ml-2" />
+                        <span asp-validation-for="ToAdd.key" class="text-danger"></span>
+                        <label asp-for="ToAdd.Type" class="control-label"></label>
+                        <select id="type-to-add" asp-for="ToAdd.Type" class="form-control" Width="230px">
+                            <option Value="0">Select Type</option>
+                            <option Value="1">Validator</option>
+                            <option Value="2">History</option>
+                            <option Value="3">Full</option>
+                            <span asp-validation-for="ToAdd.Type" class="text-danger"></span>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group ml-4 form-end sub-button">
+                            <input type="submit" value="Submit" class="btn btn btn-dark" />
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="nodes-table">
+        <p class="table-title">Reserved Seats</p>
+        <table id="reserved-seats" class="table" style="width:100%">
+            <thead class="thead-light">
+                <tr>
+                    <th>Account</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            @if (Model != null)
+            {
+                <tbody>
+                    @foreach (var item in Model.Reserved)
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink((string)item.key, actionName: "Provider",
+                                    controllerName: "Nodes",
+                                    routeValues: new { id = item.key },
+                                    htmlAttributes: null)
+                            </td>
+                            <td>
+                                @item.Type
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            }
+        </table>
+    </div>
+
+    <div class="nodes-table">
+        <p class="table-title">Permitted</p>
+        <table id="permitted" class="table" style="width:100%">
+            <thead class="thead-light">
+                <tr>
+                    <th>Account</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            @if (Model != null)
+            {
+                <tbody>
+                    @foreach (var item in Model.Permitted)
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink((string)item.key, actionName: "Provider",
+                                    controllerName: "Nodes",
+                                    routeValues: new { id = item.key },
+                                    htmlAttributes: null)
+                            </td>
+                            <td>
+                                @item.Type
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            }
+        </table>
+    </div>
+
+    <div class="nodes-table">
+        <p class="table-title">Blacklist</p>
+        <table id="blacklisted" class="table" style="width:100%">
+            <thead class="thead-light">
+                <tr>
+                    <th>Account</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            @if (Model != null)
+            {
+                <tbody>
+                    @foreach (var item in Model.BlackListed)
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink((string)item.key, actionName: "Provider",
+                                    controllerName: "Nodes",
+                                    routeValues: new { id = item.key },
+                                    htmlAttributes: null)
+                            </td>
+                            <td>
+                                @item.Type
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            }
+        </table>
+    </div>
+
+
+</div>
+<script>
+    $(document).ready(function () {
+        $('#reserved-seats').DataTable({
+            dom: 'Bfrtip',
+            buttons: {
+                buttons: [
+                    {
+                        className: "Add-btn",
+                        action: function (e, dt, node, config) {
+                            $('#add-modal').modal('show')
+                            $('#modal-title').html('Add to Reserved Seats')
+                            $('#add-input').attr("value,/api/Requester/AddReservedSeat");
+                        }
+                    }
+                ],
+                dom: {
+                    button: {
+                        tag: "button",
+                        className: "btn btn-light"
+                    }
+                }
+            }
+        });
+        $('.close-add-form').click(() => { $('#add-modal').modal('hide'); });
+        $('#permitted').DataTable({
+            dom: 'Bfrtip',
+            buttons: {
+                buttons: [
+                    {
+                        className: "Add-btn",
+                        action: function (e, dt, node, config) {
+                            $('#add-modal').modal('show')
+                            $('#modal-title').html('Add to Permitted')
+                            $('#add-input').attr("value,/api/Requester/AddReservedSeat");
+
+                        }
+                    }
+                ],
+                dom: {
+                    button: {
+                        tag: "button",
+                        className: "btn btn-light"
+                    }
+                }
+            }
+        });
+        $('#blacklisted').DataTable();
+        $('.Add-btn').html('<i class="fas fa-plus"></i> Add');
+
+    });
+</script>

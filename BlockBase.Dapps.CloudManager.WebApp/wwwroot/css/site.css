@@ -347,13 +347,14 @@ body {
     width: 150px;
     height: 150px;
     background-color: lightgray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
 }
-
-.stake-display h3{
-     font-size:larger;
-        
-        
+.stake-display h3 {
+    padding-top: 43px;
+}
+.sub-button{
+    padding-top:5px !important;
+}
+.stake-display h3 {
+    font-size: large;
 }
