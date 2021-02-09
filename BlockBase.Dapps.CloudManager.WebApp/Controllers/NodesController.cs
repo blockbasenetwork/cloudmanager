@@ -174,5 +174,10 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             }
             return RedirectToAction("RequesterManageAccess", new { id });
         }
+
+        public  IActionResult RequesterDatabase()
+        {
+            return View();
+        }
     }
 }
