@@ -22,5 +22,9 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
 
         Task<Operation> AddPermitted(RequesterAccessListBusinessModel vm);
         Task<Operation> DeleteReserved(string id, string toRemove);
+
+        Task<Operation> DeletePermitted(string id, string toRemove);
+
+        Task<Operation> DeleteBlackListed(string id, string toRemove);
     }
 }

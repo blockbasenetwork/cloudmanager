@@ -151,7 +151,10 @@
                                 @item.Type
                             </td>
                             <td>
-                                <a href="@Model.Ip/api/Requester/RemoveAccountPermission?accountToRemove=@item.key"><i class="fas fa-trash"></i> Remove</a>
+                                @Html.ActionLink("Remove", actionName: "DeletePermitted",
+                                   controllerName: "Nodes",
+                                   routeValues: new { id = @Model.Account, toRemove = item.key },
+                                   htmlAttributes: null)
                             </td>
 
                         </tr>
@@ -187,7 +190,10 @@
                                 @item.Type
                             </td>
                             <td>
-                                <a href="@Model.Ip/api/Requester/RemoveAccountFromBlacklist?account=@item.key"><i class="fas fa-trash"></i> Remove</a>
+                                @Html.ActionLink("Remove", actionName: "DeleteBlackListed",
+                                  controllerName: "Nodes",
+                                  routeValues: new { id = @Model.Account, toRemove = item.key },
+                                  htmlAttributes: null)
                             </td>
                         </tr>
                     }

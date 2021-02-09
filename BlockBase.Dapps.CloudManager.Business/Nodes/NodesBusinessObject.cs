@@ -154,7 +154,29 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             {
                 var ip = await _cloudPlugin.GetNodeIP(node);
                 var body = JsonConvert.SerializeObject(new string[] { toRemove });
-                var result = await Fetch.PostAsync(ip + Resources.RemoveReservedSeat);
+                var result = await Fetch.PostAsync(ip + Resources.RemoveReservedSeat,body);
+                var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
+                if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
+            });
+        }
+
+        public async Task<Operation> DeletePermitted(string node, string toRemove)
+        {
+            return await ExecuteAction(async () =>
+            {
+                var ip = await _cloudPlugin.GetNodeIP(node);
+                var result = await Fetch.PostAsync(ip + Resources.RemoveReservedSeat + toRemove);
+                var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
+                if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
+            });
+        }
+
+        public async Task<Operation> DeleteBlackListed(string node, string toRemove)
+        {
+            return await ExecuteAction(async () =>
+            {
+                var ip = await _cloudPlugin.GetNodeIP(node);
+                var result = await Fetch.PostAsync(ip + Resources.RemoveReservedSeat + toRemove);
                 var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
                 if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
             });

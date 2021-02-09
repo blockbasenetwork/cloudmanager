@@ -132,6 +132,12 @@
   <data name="ClaimStake" xml:space="preserve">
     <value>/api/Requester/ClaimStake</value>
   </data>
+  <data name="RemoveBlackList" xml:space="preserve">
+    <value>/api/Requester/RemoveAccountFromBlacklist?account=</value>
+  </data>
+  <data name="RemovePermitted" xml:space="preserve">
+    <value>/api/Requester/RemoveAccountPermission?accountToRemove=</value>
+  </data>
   <data name="RemoveReservedSeat" xml:space="preserve">
     <value>/api/Requester/RemoveReservedSeats</value>
   </data>

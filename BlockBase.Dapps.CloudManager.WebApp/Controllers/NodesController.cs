@@ -142,7 +142,6 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             return RedirectToAction("RequesterManageAccess", new { id = vm.Account });
         }
 
-        [HttpPost]
         public async Task<IActionResult> DeleteReservedSeat(string id, [FromQuery(Name = "toRemove")] string toRemove)
         {
             var operation = await _business.DeleteReserved(id, toRemove);
@@ -150,6 +149,28 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             {
                 RegisterError(operation.Exception.Message);
                 return RedirectToAction("RequesterManageAccess", new {  id });
+            }
+            return RedirectToAction("RequesterManageAccess", new { id });
+        }
+
+        public async Task<IActionResult> DeletePermitted(string id, [FromQuery(Name = "toRemove")] string toRemove)
+        {
+            var operation = await _business.DeletePermitted(id, toRemove);
+            if (!operation.HasSucceeded)
+            {
+                RegisterError(operation.Exception.Message);
+                return RedirectToAction("RequesterManageAccess", new { id });
+            }
+            return RedirectToAction("RequesterManageAccess", new { id });
+        }
+
+        public async Task<IActionResult> DeleteBlackListed(string id, [FromQuery(Name = "toRemove")] string toRemove)
+        {
+            var operation = await _business.DeleteBlackListed(id, toRemove);
+            if (!operation.HasSucceeded)
+            {
+                RegisterError(operation.Exception.Message);
+                return RedirectToAction("RequesterManageAccess", new { id });
             }
             return RedirectToAction("RequesterManageAccess", new { id });
         }

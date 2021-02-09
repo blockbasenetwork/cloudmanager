@@ -106,6 +106,24 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /api/Requester/RemoveAccountFromBlacklist?account=.
+        /// </summary>
+        internal static string RemoveBlackList {
+            get {
+                return ResourceManager.GetString("RemoveBlackList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /api/Requester/RemoveAccountPermission?accountToRemove=.
+        /// </summary>
+        internal static string RemovePermitted {
+            get {
+                return ResourceManager.GetString("RemovePermitted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /api/Requester/RemoveReservedSeats.
         /// </summary>
         internal static string RemoveReservedSeat {
