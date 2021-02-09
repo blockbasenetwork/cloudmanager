@@ -132,6 +132,9 @@
   <data name="ClaimStake" xml:space="preserve">
     <value>/api/Requester/ClaimStake</value>
   </data>
+  <data name="RemoveReservedSeat" xml:space="preserve">
+    <value>/api/Requester/RemoveReservedSeats</value>
+  </data>
   <data name="RequesterConfig" xml:space="preserve">
     <value>/api/Requester/CheckRequesterConfig</value>
   </data>

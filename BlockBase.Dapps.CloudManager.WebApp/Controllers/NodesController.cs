@@ -78,7 +78,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             var operation = await _business.GetRequesterStake(id);
             if (!operation.HasSucceeded) 
             {
-                RegisterError(operation.Exception.Message);
+                RegisterPostError(operation.Exception.Message);
                 return View();
             }
             return View(new RequesterStakeViewModel() { Account = id, Stake = operation.Result });
@@ -89,7 +89,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             var operation = await _business.ClaimStake(id);
             if(!operation.HasSucceeded)
             {
-                RegisterPostError(operation.Exception.Message);
+                RegisterError(operation.Exception.Message);
                 return RedirectToAction("RequesterStake", new { id = id });
             }
             return RedirectToAction("RequesterStake", new { id = id });
@@ -141,8 +141,17 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             }
             return RedirectToAction("RequesterManageAccess", new { id = vm.Account });
         }
-        
 
-
+        [HttpPost]
+        public async Task<IActionResult> DeleteReservedSeat(string id, [FromQuery(Name = "toRemove")] string toRemove)
+        {
+            var operation = await _business.DeleteReserved(id, toRemove);
+            if (!operation.HasSucceeded)
+            {
+                RegisterError(operation.Exception.Message);
+                return RedirectToAction("RequesterManageAccess", new {  id });
+            }
+            return RedirectToAction("RequesterManageAccess", new { id });
+        }
     }
 }

@@ -11,6 +11,8 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
     {
         public NodeAccType toAdd;
 
+        public string Ip { get; set; }
+
         public List<NodeAccType> Reserved { get; set; }
         public List<NodeAccType> Permitted { get; set; }
         public List<NodeAccType> BlackListed { get; set; }

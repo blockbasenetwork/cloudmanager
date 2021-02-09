@@ -14,12 +14,15 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models
             Service = node.Service;
             Status = node.Status;
             Type = node.Type;
+            Ip = node.Ip;
         }
 
         public string Account { get; set; }
         public string Service { get; set; }
         public string Status { get; set; }
-        public string Type { get; set; }       
+        public string Type { get; set; }  
+        
+        public string Ip { get; set; }
     }
 
     

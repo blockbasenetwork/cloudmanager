@@ -106,6 +106,15 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /api/Requester/RemoveReservedSeats.
+        /// </summary>
+        internal static string RemoveReservedSeat {
+            get {
+                return ResourceManager.GetString("RemoveReservedSeat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /api/Requester/CheckRequesterConfig.
         /// </summary>
         internal static string RequesterConfig {

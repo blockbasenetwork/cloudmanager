@@ -112,6 +112,12 @@
                             <td>
                                 @item.Type
                             </td>
+                            <td>
+                                @Html.ActionLink("Remove", actionName: "DeleteReservedSeat",
+                                    controllerName: "Nodes",
+                                    routeValues: new { id = @Model.Account, toRemove = item.key },
+                                    htmlAttributes: null)
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -134,21 +140,21 @@
                 <tbody>
                     @foreach (var item in Model.Permitted)
                     {
-                    <tr>
-                        <td>
-                            @Html.ActionLink((string)item.key, actionName: "Provider",
-                                controllerName: "Nodes",
-                                routeValues: new { id = item.key },
-                                htmlAttributes: null)
-                        </td>
-                        <td>
-                            @item.Type
-                        </td>
-                        <td>
-                            <a href="/Deployment/RemoveNode?Account=@item.account"><i class="fas fa-trash"></i> Remove</a>
-                        </td>
-                        
-                    </tr>
+                        <tr>
+                            <td>
+                                @Html.ActionLink((string)item.key, actionName: "Provider",
+                                    controllerName: "Nodes",
+                                    routeValues: new { id = item.key },
+                                    htmlAttributes: null)
+                            </td>
+                            <td>
+                                @item.Type
+                            </td>
+                            <td>
+                                <a href="@Model.Ip/api/Requester/RemoveAccountPermission?accountToRemove=@item.key"><i class="fas fa-trash"></i> Remove</a>
+                            </td>
+
+                        </tr>
                     }
                 </tbody>
             }
@@ -180,6 +186,9 @@
                             <td>
                                 @item.Type
                             </td>
+                            <td>
+                                <a href="@Model.Ip/api/Requester/RemoveAccountFromBlacklist?account=@item.key"><i class="fas fa-trash"></i> Remove</a>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -199,7 +208,8 @@
                         className: "Add-btn",
                         action: function (e, dt, node, config) {
                             $('#add-modal-reserved').modal('show')
-                            $('.modal-title').html('Add to Reserved Seats')                        }
+                            $('.modal-title').html('Add to Reserved Seats')
+                        }
                     }
                 ],
                 dom: {

@@ -21,8 +21,6 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
         Task<Operation> AddReservedSeat(RequesterAccessListBusinessModel vm);
 
         Task<Operation> AddPermitted(RequesterAccessListBusinessModel vm);
-
-
-
+        Task<Operation> DeleteReserved(string id, string toRemove);
     }
 }

@@ -14,8 +14,8 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
     public class NodesBusinessObject : BaseBusinessObject, INodesBusinessObject
     {
         private readonly NodesDataAccessObject _nodeDAO;
-        private readonly RequesterService _reqService;
         private readonly ProducerService _reqProducer;
+        private readonly RequesterService _reqService;
 
 
         public NodesBusinessObject() : base()
@@ -34,7 +34,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 {
                     await _reqService.FetchValues(it);
                 }
-                nodeList.RemoveAll(it => it.State =="No sidechain");
+                nodeList.RemoveAll(it => it.State == "No sidechain");
                 return nodeList;
             });
         }
@@ -112,7 +112,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             return await ExecuteFunction<RequesterAccessListBusinessModel>(async () =>
             {
                 var ip = await _cloudPlugin.GetNodeIP(node);
-                var businessModel = new RequesterAccessListBusinessModel() { Account = node };
+                var businessModel = new RequesterAccessListBusinessModel() { Account = node, Ip = ip };
                 var reservedJson = await Fetch.GetAsync(ip + Resources.ReservedSeats);
                 var reservedResponseString = JsonStringNavigator.GetDeeper(reservedJson, "response");
                 businessModel.Reserved = JsonStringNavigator.GetValue<List<NodeAccType>>(reservedResponseString);
@@ -124,10 +124,10 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
         {
             return await ExecuteAction(async () =>
             {
-            var ip = await _cloudPlugin.GetNodeIP(vm.Account);
+                var ip = await _cloudPlugin.GetNodeIP(vm.Account);
                 var json = new List<NodeAccType>()
                 {
-                    vm.toAdd 
+                    vm.toAdd
                 };
                 var body = JsonConvert.SerializeObject(json);
                 var result = await Fetch.PostAsync(ip + Resources.AddReservedSeat, body);
@@ -141,8 +141,20 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             return await ExecuteAction(async () =>
             {
                 var ip = await _cloudPlugin.GetNodeIP(vm.Account);
-               
+
                 var result = await Fetch.PostAsync(String.Format(ip + Resources.AddPermitted, vm.toAdd.account, vm.toAdd.PublicKey));
+                var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
+                if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
+            });
+        }
+
+        public async Task<Operation> DeleteReserved(string node, string toRemove)
+        {
+            return await ExecuteAction(async () =>
+            {
+                var ip = await _cloudPlugin.GetNodeIP(node);
+                var body = JsonConvert.SerializeObject(new string[] { toRemove });
+                var result = await Fetch.PostAsync(ip + Resources.RemoveReservedSeat);
                 var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
                 if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
             });

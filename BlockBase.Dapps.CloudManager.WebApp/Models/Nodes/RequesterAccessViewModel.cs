@@ -9,6 +9,8 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
     public class RequesterAccessViewModel
     {
         public string Account { get; set; }
+        public string Ip { get; set; }
+
         public NodeAccType ToAdd { get; set; }
         public List<NodeAccType> Reserved { get; set; }
         public List<NodeAccType> Permitted { get; set; }
@@ -27,6 +29,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
         public RequesterAccessViewModel(RequesterAccessListBusinessModel bo)
         {
             Account = bo.Account;
+            Ip = bo.Ip;
             Reserved = bo.Reserved ?? new List<NodeAccType>();
             Permitted = bo.Permitted ?? new List<NodeAccType>();
             BlackListed = bo.BlackListed ?? new List<NodeAccType>();
