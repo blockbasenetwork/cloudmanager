@@ -58,6 +58,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             CheckPostError();
             return View(new RequesterConfigurationViewModel() { Account = id });
         }
+        
         [HttpPost]
         public async Task<IActionResult> RequesterConfigurations(RequesterConfigurationViewModel vm)
         {
@@ -94,6 +95,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             return RedirectToAction("RequesterStake", new { id = id });
         }
 
+        [HttpPost]
         public async Task<IActionResult> RequesteAddStake(RequesterStakeViewModel vm)
         {
             var operation = await _business.AddStake(vm.Account, Double.Parse(vm.Stake, CultureInfo.InvariantCulture));
@@ -116,10 +118,16 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             return View(new RequesterAccessViewModel(operation.Result));
         }
 
+        [HttpPost]
         public async Task<IActionResult> AddReservedSeat(RequesterAccessViewModel vm)
         {
             var operation = await _business.AddReservedSeat(vm.ToBusinessModel());
-            return View();
+            if (!operation.HasSucceeded)
+            {
+                RegisterPostError(operation.Exception.Message);
+                return RedirectToAction("RequesterManageAccess", new { id = vm.Account });
+            }
+            return RedirectToAction("RequesterManageAccess", new { id = vm.Account });
         }
 
 

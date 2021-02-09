@@ -20,28 +20,37 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
     public class NodeAccType
     {
         [Display(Name = "Account")]
-        [JsonProperty("account")]
-        public string key { get; set; }
-
-
-        private string account { get => key; set { key = value; } }
-
-        [Display(Name = "Type")]
-        [JsonProperty("producerType")]
-
-        public ValidatorTypeEnum Type { get; set; }
-        private ValidatorTypeEnum producerType { get => Type; set { Type = value; } }
-
+  
+        public string key { 
+            get => _key;
+            set { 
+                _key = value;
+                account = value;
+            } 
+        }
         
+        private string _key;
 
+        public string account { get; set; }
+
+
+        public int producerType { get; set; }
         public int producer_type
         {
-           
+
             set
             {
                 Type = (ValidatorTypeEnum)value;
+                producerType = value;
             }
         }
+        [Display(Name = "Type")]
+        public ValidatorTypeEnum Type { get; set; }
+    }
+
+        
+
+
     }
 
         
