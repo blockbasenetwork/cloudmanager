@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BlockBase.Dapps.CloudManager.Business.Properties {
+namespace BlockBase.Dapps.CloudManager.Services.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BlockBase.Dapps.CloudManager.Business.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BlockBase.Dapps.CloudManager.Services.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,52 +61,25 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /api/Requester/AddAccountPermission?accountToAdd={0}&amp;accountPublicKey={1}.
+        ///   Looks up a localized string similar to \\..\\BlockBase.Dapps.CloudManager.Data\\DB.db.
         /// </summary>
-        internal static string AddPermitted {
+        internal static string DBLocation {
             get {
-                return ResourceManager.GetString("AddPermitted", resourceCulture);
+                return ResourceManager.GetString("DBLocation", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /api/Requester/AddReservedSeat.
+        ///   Looks up a localized string similar to /api/Provider/GetProducingSidechains.
         /// </summary>
-        internal static string AddReservedSeat {
+        internal static string ProducingSideChains {
             get {
-                return ResourceManager.GetString("AddReservedSeat", resourceCulture);
+                return ResourceManager.GetString("ProducingSideChains", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /api/Requester/AddStake?stake=.
-        /// </summary>
-        internal static string AddStake {
-            get {
-                return ResourceManager.GetString("AddStake", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to /api/Requester/ChangeSidechainConfigurations.
-        /// </summary>
-        internal static string ChangeSideChainConfigurations {
-            get {
-                return ResourceManager.GetString("ChangeSideChainConfigurations", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to /api/Requester/ClaimStake.
-        /// </summary>
-        internal static string ClaimStake {
-            get {
-                return ResourceManager.GetString("ClaimStake", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to /api/Requester/CheckRequesterConfig.
+        ///   Looks up a localized string similar to /api/Provider/CheckProducerConfig.
         /// </summary>
         internal static string RequesterConfig {
             get {
@@ -124,11 +97,20 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /api/Requester/CheckSidechainReservedSeats.
+        ///   Looks up a localized string similar to /api/Network/GetSidechainConfiguration?sidechainName=.
         /// </summary>
-        internal static string ReservedSeats {
+        internal static string SidechainConfiguration {
             get {
-                return ResourceManager.GetString("ReservedSeats", resourceCulture);
+                return ResourceManager.GetString("SidechainConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /api/Network/GetSidechainConfiguration?sidechainName=.
+        /// </summary>
+        internal static string SidechainConfigurations {
+            get {
+                return ResourceManager.GetString("SidechainConfigurations", resourceCulture);
             }
         }
         

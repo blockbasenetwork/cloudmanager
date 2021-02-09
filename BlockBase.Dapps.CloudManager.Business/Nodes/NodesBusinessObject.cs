@@ -7,16 +7,21 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BlockBase.Dapps.CloudManager.Services;
 
 namespace BlockBase.Dapps.CloudManager.Business.Nodes
 {
     public class NodesBusinessObject : BaseBusinessObject, INodesBusinessObject
     {
         private readonly NodesDataAccessObject _nodeDAO;
+        private readonly RequesterService _reqService;
+        private readonly ProducerService _reqProducer;
+
 
         public NodesBusinessObject() : base()
         {
             _nodeDAO = new NodesDataAccessObject();
+            _reqService = new RequesterService();
         }
 
         public async Task<OperationResult<List<RequesterPOCO>>> GetAllRequestersAsync()
@@ -26,19 +31,19 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 var nodeList = await _nodeDAO.GetAllRequestersAsync();
                 foreach (var it in nodeList)
                 {
-                    await it.FetchValues();
+                    await _reqService.FetchValues(it);
                 }
-                nodeList.RemoveAll(it => it.State.Equals("No sidechain"));
+                nodeList.RemoveAll(it => it.State =="No sidechain");
                 return nodeList;
             });
         }
 
         public async Task<OperationResult<DetailedRequesterPOCO>> GetRequesterAsync(string node)
         {
-            return await ExecuteFunction<DetailedRequesterPOCO>(async () =>
+            return await ExecuteFunction(async () =>
             {
                 var res = await _nodeDAO.GetRequesterAsync(node);
-                await res.FetchValues();
+                await _reqService.FetchDetailedValues(res);
                 return res;
             });
         }
@@ -51,7 +56,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 var nodeList = await _nodeDAO.GetAllProducersAsync();
                 foreach (var it in nodeList)
                 {
-                    await it.FetchValues();
+                    await _reqProducer.FetchValues(it);
                 }
                 return nodeList;
             });
@@ -125,6 +130,18 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 };
                 var body = JsonConvert.SerializeObject(json);
                 var result = await Fetch.PostAsync(ip + Resources.AddReservedSeat, body);
+                var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
+                if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
+            });
+        }
+
+        public async Task<Operation> AddPermitted(RequesterAccessListBusinessModel vm)
+        {
+            return await ExecuteAction(async () =>
+            {
+                var ip = await _cloudPlugin.GetNodeIP(vm.Account);
+               
+                var result = await Fetch.PostAsync(String.Format(ip + Resources.AddPermitted, vm.toAdd.account, vm.toAdd.PublicKey));
                 var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
                 if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
             });

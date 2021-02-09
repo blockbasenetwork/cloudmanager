@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BlockBase.Dapps.CloudManager.DataAccessLayer
 {
-    class NetworkSidechainConfigurations
+    public class NetworkSidechainConfigurations
     {
         public int number_of_validator_producers_required { get; set; }
         public int number_of_history_producers_required { get; set; }

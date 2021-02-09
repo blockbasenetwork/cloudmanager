@@ -130,6 +130,19 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             return RedirectToAction("RequesterManageAccess", new { id = vm.Account });
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddPermitted(RequesterAccessViewModel vm)
+        {
+            var operation = await _business.AddPermitted(vm.ToBusinessModel());
+            if (!operation.HasSucceeded)
+            {
+                RegisterPostError(operation.Exception.Message);
+                return RedirectToAction("RequesterManageAccess", new { id = vm.Account });
+            }
+            return RedirectToAction("RequesterManageAccess", new { id = vm.Account });
+        }
+        
+
 
     }
 }

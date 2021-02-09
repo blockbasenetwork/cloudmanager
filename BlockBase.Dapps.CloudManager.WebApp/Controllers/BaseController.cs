@@ -9,12 +9,12 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
     public abstract class BaseController : Controller
     {
         const string ERROR = "ErrorMsg";
-        public void RegisterError(String error = "Something went wrong")
+        public void RegisterError(string error = "Something went wrong")
         {
             ViewBag.ErrorMsg = error;
         }
 
-        public void RegisterPostError(String error = "Something went wrong")
+        public void RegisterPostError(string error = "Something went wrong")
         {
             TempData[ERROR] = error;
         }

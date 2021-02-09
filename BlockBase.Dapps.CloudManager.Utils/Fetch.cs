@@ -26,7 +26,7 @@ namespace BlockBase.Dapps.CloudManager.Utils
                 }   
         }
 
-        public static async Task<string> PostAsync(string uri, string body = null)
+        public static async Task<string> PostAsync(string uri, string body = "")
         {
             var content = new StringContent(body, Encoding.UTF8, "application/json");
 

@@ -117,29 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddPermitted" xml:space="preserve">
-    <value>/api/Requester/AddAccountPermission?accountToAdd={0}&amp;accountPublicKey={1}</value>
+  <data name="DBLocation" xml:space="preserve">
+    <value>\\..\\BlockBase.Dapps.CloudManager.Data\\DB.db</value>
   </data>
-  <data name="AddReservedSeat" xml:space="preserve">
-    <value>/api/Requester/AddReservedSeat</value>
-  </data>
-  <data name="AddStake" xml:space="preserve">
-    <value>/api/Requester/AddStake?stake=</value>
-  </data>
-  <data name="ChangeSideChainConfigurations" xml:space="preserve">
-    <value>/api/Requester/ChangeSidechainConfigurations</value>
-  </data>
-  <data name="ClaimStake" xml:space="preserve">
-    <value>/api/Requester/ClaimStake</value>
+  <data name="ProducingSideChains" xml:space="preserve">
+    <value>/api/Provider/GetProducingSidechains</value>
   </data>
   <data name="RequesterConfig" xml:space="preserve">
-    <value>/api/Requester/CheckRequesterConfig</value>
+    <value>/api/Provider/CheckProducerConfig</value>
   </data>
   <data name="RequesterStake" xml:space="preserve">
     <value>/api/Requester/CheckCurrentStakeInSidechain</value>
   </data>
-  <data name="ReservedSeats" xml:space="preserve">
-    <value>/api/Requester/CheckSidechainReservedSeats</value>
+  <data name="SidechainConfiguration" xml:space="preserve">
+    <value>/api/Network/GetSidechainConfiguration?sidechainName=</value>
+  </data>
+  <data name="SidechainConfigurations" xml:space="preserve">
+    <value>/api/Network/GetSidechainConfiguration?sidechainName=</value>
   </data>
   <data name="SidechainState" xml:space="preserve">
     <value>/api/Network/GetSidechainState?sidechainName=</value>
