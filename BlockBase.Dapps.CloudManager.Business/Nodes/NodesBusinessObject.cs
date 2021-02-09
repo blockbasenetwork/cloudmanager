@@ -22,6 +22,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
         {
             _nodeDAO = new NodesDataAccessObject();
             _reqService = new RequesterService();
+            _reqProducer = new ProducerService();
         }
 
         public async Task<OperationResult<List<RequesterPOCO>>> GetAllRequestersAsync()
