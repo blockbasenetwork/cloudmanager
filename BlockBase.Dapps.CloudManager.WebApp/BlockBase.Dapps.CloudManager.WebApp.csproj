@@ -51,4 +51,8 @@
     <ProjectReference Include="..\BlockBase.Dapps.CloudManager.Data\BlockBase.Dapps.CloudManager.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\NewFolder\" />
+  </ItemGroup>
+
 </Project>

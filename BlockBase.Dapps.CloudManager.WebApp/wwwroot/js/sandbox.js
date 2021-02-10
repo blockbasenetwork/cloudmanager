@@ -341,7 +341,7 @@ $("#run").click(function (e) {
                 error: function (result) {
                     $("#run-button-loader").removeClass("loader-ring");
                     console.log(result);
-                    alert('cant handle request now');
+                    alert('cant handle request now (requesterEndpoint)');
                 }
             });
         } else {
@@ -440,7 +440,7 @@ var lastId = '';
 var storeCodeEditorText = [, , ,];
 var codeEditor = CodeMirror(document.getElementById("codeeditor"));
 function changeCodeEditor(id) {
-
+    console.log(editor);
     var doc = editor.getDoc();
     var queryString = "";
     doc.eachLine(
