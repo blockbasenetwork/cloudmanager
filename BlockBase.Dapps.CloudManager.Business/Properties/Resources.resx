@@ -132,6 +132,9 @@
   <data name="ClaimStake" xml:space="preserve">
     <value>/api/Requester/ClaimStake</value>
   </data>
+  <data name="ExecQuery" xml:space="preserve">
+    <value>/api/Requester/ExecuteQuery</value>
+  </data>
   <data name="RemoveBlackList" xml:space="preserve">
     <value>/api/Requester/RemoveAccountFromBlacklist?account=</value>
   </data>
@@ -152,5 +155,8 @@
   </data>
   <data name="SidechainState" xml:space="preserve">
     <value>/api/Network/GetSidechainState?sidechainName=</value>
+  </data>
+  <data name="SignQuery" xml:space="preserve">
+    <value>/api/Requester/SignQuery</value>
   </data>
 </root>

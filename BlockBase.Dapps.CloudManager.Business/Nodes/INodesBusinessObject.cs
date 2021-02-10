@@ -26,5 +26,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
         Task<Operation> DeletePermitted(string id, string toRemove);
 
         Task<Operation> DeleteBlackListed(string id, string toRemove);
+
+        Task<OperationResult<RequesterDatabaseBusinessModel>> getDatabaseBO(string node);
     }
 }

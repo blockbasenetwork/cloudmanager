@@ -181,5 +181,12 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
             });
         }
+
+        public async Task<OperationResult<RequesterDatabaseBusinessModel>> getDatabaseBO(string node)
+        {
+            return await ExecuteFunction<RequesterDatabaseBusinessModel>(async () =>
+             new RequesterDatabaseBusinessModel { Account = node, Ip = await _cloudPlugin.GetNodeIP(node) }
+            );
+        }
     }
 }

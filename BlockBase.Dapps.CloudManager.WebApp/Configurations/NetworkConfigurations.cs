@@ -19,4 +19,4 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Configurations
         public Dictionary<string, string> HistoryNodeEndPoints { get; set; }
     }
 }
-}
+

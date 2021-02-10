@@ -106,6 +106,15 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /api/Requester/ExecuteQuery.
+        /// </summary>
+        internal static string ExecQuery {
+            get {
+                return ResourceManager.GetString("ExecQuery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /api/Requester/RemoveAccountFromBlacklist?account=.
         /// </summary>
         internal static string RemoveBlackList {
@@ -165,6 +174,15 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         internal static string SidechainState {
             get {
                 return ResourceManager.GetString("SidechainState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /api/Requester/SignQuery.
+        /// </summary>
+        internal static string SignQuery {
+            get {
+                return ResourceManager.GetString("SignQuery", resourceCulture);
             }
         }
     }

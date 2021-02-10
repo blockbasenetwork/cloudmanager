@@ -1,5 +1,6 @@
 ﻿using BlockBase.Dapps.CloudManager.Business;
 using BlockBase.Dapps.CloudManager.Business.Nodes;
+using BlockBase.Dapps.CloudManager.WebApp.Models;
 using BlockBase.Dapps.CloudManager.WebApp.Models.Nodes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -175,9 +176,14 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             return RedirectToAction("RequesterManageAccess", new { id });
         }
 
-        public  IActionResult RequesterDatabase()
+        public async Task<IActionResult> RequesterDatabase(string id)
         {
-            return View();
+            var operation = await _business.getDatabaseBO(id);
+            if (!operation.HasSucceeded) {
+                RegisterError(operation.Exception.Message);
+                return View();
+            }
+            return View(new SandboxViewModel(operation.Result));
         }
     }
 }

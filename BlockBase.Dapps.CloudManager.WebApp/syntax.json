@@ -1,0 +1,72 @@
+{
+    "CREATE TABLE": {
+        "Schema": "CREATE TABLE {table_name} ( {column_definition}* ); \n-- table_name = complex_name ",
+        "Description": "Used to create tables. See column_definition to learn more about column specification.",
+        "Example": "CREATE TABLE invoice ( invoice_id int PRIMARY KEY, customer_id ENCRYPTED 5 RANGE(1, 1000) );"
+    },
+    "complex_name": {
+        "Schema": "[!] {name}",
+        "Description": " \nThe exclamation point is used to indicate if the name is or not encrypted.",
+        "Example": "!product_name -- not encrypted \nprice -- encrypted"
+    },
+    "column_definition": {
+        "Schema": "{column_name} {type} [{constraint}*] \n-- column_name = complex_name",
+        "Description": "Supported Types: BOOL, DATETIME, DURATION, INT, DECIMAL, DOUBLE, TEXT and ENCRYPTED. <br> The type ENCRYPTED can be a little tricky because it might need additional values. <br> If you want to do >, <, >=, <= comparisons with the encrypted column you need to specify range bucket values: ENCRYPTED (X, Y, Z). <br> Where X is the number of buckets, Y is the minimum value of the column and Z the maximum. <br> So if you have a column that can vary between 0 and 1000, Y will be 0 and Z 1000. <br> X will be the number of buckets where you want to spread the values, if you pick 20 it means that the first bucket will have values between 0 and 50. <br> The more buckets you have the less information you give, but more decoy values will be returned. <br> If the column is not unique or primary key and you only need to do equal and different comparisons you only need to specify one number, the number of buckets.",
+        "Example": "invoice_id int PRIMARY KEY \ncustomer_id ENCRYPTED PRIMARY KEY \nname ENCRYPTED 100 \nbalance ENCRYPTED RANGE(5000, 0, 1000000)"
+    },
+    "CREATE DATABASE": {
+        "Schema": "CREATE DATABASE {database_name}; \n-- database_name = complex_name",
+        "Description": "Used to create the database with a custom name.",
+        "Example": "CREATE DATABASE store;"
+    },
+    "DROP DATABASE": {
+        "Schema": "DROP DATABASE {database_name}; \n-- database_name = complex_name",
+        "Description": "Used to drop a previously created database.",
+        "Example": "DROP DATABASE store; "
+    },
+    "USE DATABASE": {
+        "Schema": "USE {database_name}; \n-- database_name = complex_name",
+        "Description": "Use to specify the database you want to query. <br> At the beginning of each script you must have an USE or CREATE DATABASE statement to specify the database you want to query.",
+        "Example": "USE store;"
+    },
+    "DROP TABLE": {
+        "Schema": "DROP TABLE {table_name}; \n-- table_name = complex_name",
+        "Description": "Drops specified table.",
+        "Example": "DROP TABLE invoice;"
+    },
+    "ALTER TABLE": {
+        "Schema": "ALTER TABLE {table_name} RENAME TO {table_name}; \nALTER TABLE {table_name} RENAME COLUMN {column_name} TO {column_name}; \nALTER TABLE {table_name} ADD COLUMN {column_definition}; \nALTER TABLE {table_name} DROP COLUMN {column_name}; \n-- table_name = complex_name, column_name = complex_name",
+        "Description": "Use this if you want to: rename a table, rename a column, add a column or drop a column. <br> Tip: You can change a encrypted name to unencrypted using this command.",
+        "Example": "ALTER TABLE invoice RENAME TO invoice; \nALTER TABLE invoice RENAME COLUMN id TO !id; \nALTER TABLE product ADD COLUMN name TEXT; \nALTER TABLE product DROP COLUMN name;"
+    },
+    "INSERT RECORD": {
+        "Schema": "INSERT INTO {table_name} ( {column_name}* ) VALUES ( {literal_value}* ); \n-- table_name = complex_name, column_name = complex_name",
+        "Description": "Inserts one or multiple rows of values to table.",
+        "Example": "INSERT INTO product (id, name, price) VALUES (1, 'sponge', 5.00);"
+    },
+    "UPDATE RECORD": {
+        "Schema": "UPDATE {table_name} SET ( {column_name} = {literal_value} )* [WHERE {expression}]; \n-- table_name = complex_name, column_name = complex_name",
+        "Description": "Updates value in rows where the condition is fulfilled.",
+        "Example": "UPDATE product SET price = 6.00 WHERE product.name = 'sponge' "
+    },
+  "DELETE RECORD": {
+    "Schema": "DELETE FROM {table_name} [WHERE {expression}]; \n-- table_name = complex_name",
+    "Description": "Deletes rows where the condition is fulfilled.",
+    "Example": "DELETE FROM product WHERE product.name = 'sponge'; "
+  },
+    "SELECT RECORD":{
+        "Schema": "SELECT ({table_name}.{column_name})* FROM {table_name}* [ JOIN {table_name} ON {expression} ]* [ WHERE {expression} ] [ ENCRYPTED ] [ LIMIT {value} [ OFFSET {value} ] ]; \n-- table_name = complex_name, column_name = complex_name",
+        "Description": "Retrieves results where condition is fulfilled. <br> Joins can only be used between unencrypted data columns. <br> Note: You always need to specify the table name.",
+        "Example": "SELECT product.* FROM product WHERE product.price < 10.00; \nSELECT patients.name, patients.dateOfAdmission, visitors.name, visitors.dateOfVisit FROM patients JOIN visitors ON patients.id = visitors.patientVisited WHERE patients.id = 2; \nSELECT patients.* FROM  patients ENCRYPTED;"
+    },
+    "IF STATEMENT":{
+        "Schema": "IF {SELECT RECORD} EXECUTE { {STATEMENT;}* };",
+        "Description": "Use when you need to make sure that a condition is fulfilled before executing other queries. <br> If the first statement returns any results the subsequent queries will be executed.",
+        "Example": "IF SELECT account.balance FROM accounts WHERE account.balance <= 10 AND account.id = 1 EXECUTE { UPDATE account SET account.balance = 5 WHERE account.id = 1; UPDATE account SET account.balance = 25 WHERE account.id = 2; };"
+    },
+    "expression":{
+        "Schema": "{table_name}.{column_name} operator {table_name}.{column_name} \n{table_name}.{column_name} operator {literal_value} \n{expression} [AND|OR] {expression}  \n-- table_name = complex_name, column_name = complex_name \n-- operator = != | = | <= | < | > | >= ",
+        "Description": "Used as a condition in other statements. Caution: It's not possible to compare a column with encrypted data with another column.",
+        "Example": "invoice.price < 10.00 AND customer.id = invoice.customer_id"
+    }   
+}

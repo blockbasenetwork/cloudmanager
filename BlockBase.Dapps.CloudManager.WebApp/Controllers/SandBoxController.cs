@@ -7,6 +7,8 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using BlockBase.Dapps.CloudManager.Business.SandBox;
+using BlockBase.Dapps.CloudManager.Utils;
 using BlockBase.Dapps.CloudManager.WebApp.Configurations;
 using BlockBase.Dapps.CloudManager.WebApp.Helpers;
 using BlockBase.Dapps.CloudManager.WebApp.POCOS;
@@ -19,15 +21,15 @@ namespace Blockbase.Web.Controllers
 {
     public class SandBoxController : Controller
     {
-        private string _requestEndPoint;
+        private string _requestEndPoint = "http://40.121.160.216/nodedb1";
         // private ExpandoObject _syntax; 
 
         private const string SANDBOX_PERMISSION_KEY = "5HzL18MQEMChpGsaEok364FdsQnjWHMS8yK76X7NvpPHLdZTsao";
         private const string SANDBOX_PERMISSION_ACCOUNT = "sandbox";
-
-        public SandBoxController(IOptions<NetworkConfigurations> networkConfigurations)
+        private readonly ISandBoxBusinessObject _business;
+        public SandBoxController(ISandBoxBusinessObject business)
         {
-            _requestEndPoint = networkConfigurations.Value.RequestEndPoint;
+            _business = business;
         }
 
 
@@ -68,19 +70,16 @@ namespace Blockbase.Web.Controllers
         }
 
 
-        public async Task<IActionResult> ExecuteQueryToRequester([FromBody]RequesterEndpointObject requesterEndpoint)
+        public async Task<IActionResult> ExecuteQueryToRequester(string id, [FromQuery] string ip, [FromBody]string query)
         {
-            
 
-            if (!requesterEndpoint.EndPoint.Contains("/api/Requester/ExecuteQuery"))
-            {
-                requesterEndpoint.EndPoint += "/api/Requester/ExecuteQuery";
-            }
+            var businessModel = new SandBoxBusinessModel(id, ip, query);
+            var operation = await _business.ExecuteQuery(businessModel);
+            if (!operation.HasSucceeded) { throw operation.Exception; }
             
-            var request = HttpHelper.ComposeWebRequestPost(requesterEndpoint.EndPoint);
-            var json = await HttpHelper.CallWebRequestNoSSLVerification(request, requesterEndpoint.Query);
-            var items = JsonConvert.DeserializeObject<ExpandoObject>(json);
-            return Ok(items);
+          
+            
+            return Ok();
         }
         public async Task<IActionResult> ExecuteQuery([FromBody]string query)
         {
@@ -97,6 +96,8 @@ namespace Blockbase.Web.Controllers
             return Ok(items);
         }
 
+
+
         public async Task<IActionResult> ExecuteQueryJungle([FromBody]string query)
         {
             var signature = SignatureHelper.SignHash("5KJzJWPWx8dFXAhaD8vywJdB1UsLEafFEdxGgK6Jsx3biKtb74q", Encoding.UTF8.GetBytes(query));
@@ -112,12 +113,12 @@ namespace Blockbase.Web.Controllers
             return Ok(items);
         }
 
-        public async Task<IActionResult> PopulateSideBar()
+        public async Task<IActionResult> PopulateSideBar(string id, [FromQuery] string ip)
         {
             var dbList = new List<DBPoco>();
 
-            var request = HttpHelper.ComposeWebRequestGet($"{_requestEndPoint}/api/Requester/GetStructure");
-            var json = await HttpHelper.CallWebRequestNoSSLVerification(request);
+            
+            var json = await Fetch.GetAsync($"{ip}/api/Requester/GetStructure");
 
             var items = JsonConvert.DeserializeObject<ExpandoObject>(json);
             var converToDictionaryTeste = items as IDictionary<string, object>;

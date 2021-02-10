@@ -2,6 +2,7 @@ using BlockBase.Dapps.CloudManager.Business;
 using BlockBase.Dapps.CloudManager.Business.Deployment;
 using BlockBase.Dapps.CloudManager.Business.Home;
 using BlockBase.Dapps.CloudManager.Business.Nodes;
+using BlockBase.Dapps.CloudManager.Business.SandBox;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -31,7 +32,8 @@ namespace BlockBase.Dapps.CloudManager.WebApp
                            .AllowAnyHeader();
                 }));
            
-                services.AddSingleton<IHomeBusinessObject, HomeBusinessObject>();
+            services.AddSingleton<IHomeBusinessObject, HomeBusinessObject>();
+            services.AddSingleton<ISandBoxBusinessObject, SandBoxBusinessObject>();
             services.AddSingleton<IDeploymentBusinessObject, DeploymentBusinessObject>();
             services.AddSingleton<INodesBusinessObject, NodesBusinessObject>();
             services.AddControllersWithViews();

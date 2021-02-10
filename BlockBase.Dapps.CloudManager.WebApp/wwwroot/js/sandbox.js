@@ -135,8 +135,9 @@ function populateSyntax() {
 function getSyntaxData(title) {
     $.ajax({
         type: "GET",
-        url: "/sandbox/Syntax",
+        url: `/sandbox/Syntax`,
         success: function (result) {
+            console.log(result)
             if (result == null) {
                 alert('Error loading syntax.');
             } else {
@@ -226,12 +227,12 @@ function sidebarQuery(encrypted, tableName, databaseName) {
         }
     });
 }
-function PopulateSideBar() {
+function PopulateSideBar(account, ip) {
     $("#insertAfter").empty();
     populateSideBarStatic();
     $.ajax({
         type: "POST",
-        url: "/sandbox/PopulateSideBar",
+        url: `/sandbox/PopulateSideBar/${account}?ip=${ip}`,
         success: function (result) {
             for (var i = 0; i < result.length; i++) {
                 populateDatabase(i, result[i].name);
@@ -250,7 +251,7 @@ function PopulateSideBar() {
         },
         error: function (result) {
             console.log(result);
-            alert('cant handle request now');
+            alert('cant Populate SideBar now');
         }
     });
 }
@@ -305,80 +306,8 @@ function PopulateDataTables(result) {
 }
 
 //Edit data table when run query
-$("#run").click(function (e) {
-    var databaseClone = $('#databasesLi').clone();
-    var syntaxClone = $('#syntaxID').clone();
-    $("#run-button-loader").addClass("loader-ring");
-    e.preventDefault();
-    var doc = editor.getDoc();
-    var stringWithoutComments = "";
-    doc.eachLine(
-        function (line) {
-            if (!line.text.startsWith("--"))
-                stringWithoutComments += line.text;
-        }
-    );
-    if ($('#requesterEndpoint').val() != "") {
-        if (stringWithoutComments.length > 0) {
-            var requesterEnpoint = {
-                EndPoint: $('#requesterEndpoint').val(), Query: stringWithoutComments
-            };
-            $.ajax({
-                type: "POST",
-                url: "/sandbox/ExecuteQueryToRequester",
-                dataType: "json",
-                data: JSON.stringify(requesterEnpoint),
-                contentType: "application/json; charset=utf-8",
-                success: function (result) {
-                    $("#run-button-loader").removeClass("loader-ring");
-                    PopulateDataTables(result);
-                    $('#databasesLi').empty();
-                    $('#databasesLi').append(databaseClone);
-                    $('#syntaxID').empty();
-                    $('#syntaxID').append(syntaxClone);
 
-                },
-                error: function (result) {
-                    $("#run-button-loader").removeClass("loader-ring");
-                    console.log(result);
-                    alert('cant handle request now (requesterEndpoint)');
-                }
-            });
-        } else {
-            $("#run-button-loader").removeClass("loader-ring");
-            alert('no text');
-        }
-    }
-    else {
-        if (stringWithoutComments.length > 0) {
-            $.ajax({
-                type: "POST",
-                url: "/sandbox/ExecuteQuery",
-                dataType: "json",
-                data: JSON.stringify(stringWithoutComments),
-                contentType: "application/json; charset=utf-8",
-                success: function (result) {
-                    $("#run-button-loader").removeClass("loader-ring");
-                    PopulateDataTables(result);
-                    $('#databasesLi').empty();
-                    $('#databasesLi').append(databaseClone);
-                    $('#syntaxID').empty();
-                    $('#syntaxID').append(syntaxClone);
-                },
-                error: function (result) {
-                    $("#run-button-loader").removeClass("loader-ring");
-                    console.log(result);
-                    alert('cant handle request now');
-                }
-            });
-        } else {
-            $("#run-button-loader").removeClass("loader-ring");
-            alert('no text');
-        }
-    }
-});
-//Populate Side Bar And Datatable
-$(document).ready(PopulateSideBar());
+
 //Query for sidebar
 $(function () {
     $('#sidebar').contextMenu({
