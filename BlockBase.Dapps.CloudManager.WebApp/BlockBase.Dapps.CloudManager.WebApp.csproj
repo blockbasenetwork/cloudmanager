@@ -42,8 +42,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Cryptography.ECDSA.Secp256K1" Version="1.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.11" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.8.9" />
   </ItemGroup>
 
   <ItemGroup>
