@@ -196,6 +196,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 var ip = await _cloudPlugin.GetNodeIP(node);
                 var result = await Fetch.PostAsync(ip + Resources.EndSideChain + node);
                 await _cloudPlugin.StopNodeAsync(node);
+                await _nodeDAO.DeleteAsync(node);
                 var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
                 if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
             });

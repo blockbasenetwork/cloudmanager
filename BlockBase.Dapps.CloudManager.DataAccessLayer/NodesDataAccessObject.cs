@@ -82,11 +82,19 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
                 await myTransaction.CommitAsync();
             }
         }
-        public async void InsertAsync(Node n)
+        public async Task InsertAsync(Node n)
         {
             using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
             {
                 await con.ExecuteAsync("insert into Nodes (Account, Status, Type, Service) values (@Account, @Status, @Type, @Service)", n);
+            }
+        }
+
+        public async Task DeleteAsync(string account)
+        {
+            using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
+            {
+                await con.ExecuteAsync("DELETE FROM Nodes WHERE Account= @account", account);
             }
         }
 
