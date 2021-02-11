@@ -124,6 +124,9 @@
                 <div class="col-md-2 col-sm-12">
                     <a class="nav-link nav-item sandHeadLink" id="cp" onclick="changeCodeEditor('cp')" href="#">Railway System Example</a>
                 </div>
+                <div class="col-md-4 col-sm-12">
+                    <input class="nav-item" id="requesterEndpoint" type="hidden" value="http://127.0.0.1:8000" style="float:right; width: 100%; padding: 4px;" />
+                </div>
             </div>
         </div>
     </div>
@@ -148,12 +151,14 @@
             }
         );
         if (stringWithoutComments.length > 0) {
-          
+            var requesterEnpoint = {
+                EndPoint: $('#requesterEndpoint').val(), Query: stringWithoutComments
+            };
             $.ajax({
                 type: "POST",
-                url: "/sandbox/ExecuteQueryToRequester/@Model.Account?ip=@Model.Ip",
+                url: "/sandbox/ExecuteQueryToRequester",
                 dataType: "json",
-                data: JSON.stringify(stringWithoutComments),
+                data: JSON.stringify(requesterEnpoint),
                 contentType: "application/json; charset=utf-8",
                 success: function (result) {
                     $("#run-button-loader").removeClass("loader-ring");
@@ -167,13 +172,12 @@
                 error: function (result) {
                     $("#run-button-loader").removeClass("loader-ring");
                     console.log(result);
-                    alert('cant handle request now (requesterEndpoint)');
+                    alert('cant handle request now');
                 }
             });
         } else {
             $("#run-button-loader").removeClass("loader-ring");
             alert('no text');
         }
-
-    });
+});
 </script>

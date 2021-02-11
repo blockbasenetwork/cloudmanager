@@ -64,24 +64,33 @@ namespace Blockbase.Web.Controllers
                 else query.Append(",");
             }
             var endpoint = "http://40.117.152.157/nodedb1";
-            var endPointObj = new RequesterEndpointObject { Query = query.ToString(), EndPoint = endpoint};
+            var endPointObj = new RequesterEndpointObject { Query = query.ToString(), EndPoint = endpoint };
             //return ExecuteQueryToRequester(endPointObj).Result;
             return ExecuteQuery(query.ToString()).Result;
         }
 
 
-        public async Task<IActionResult> ExecuteQueryToRequester(string id, [FromQuery] string ip, [FromBody]string query)
+        public async Task<IActionResult> ExecuteQueryToRequester([FromBody] RequesterEndpointObject requesterEndpoint)
         {
+            var signatureEndpoint = requesterEndpoint.EndPoint + "/api/Requester/SignQuery";
+            var executionEndpoint = requesterEndpoint.EndPoint + "/api/Requester/ExecuteQuery";
+            try
+            {
+                var signatureRequest = HttpHelper.ComposeWebRequestPost(signatureEndpoint);
+                var signatureResponse = await HttpHelper.CallWebRequestNoSSLVerification(signatureRequest, requesterEndpoint.Query);
+                var response = JsonStringNavigator.GetDeeper(signatureResponse, "response");
+                var executionRequest = HttpHelper.ComposeWebRequestPost(executionEndpoint);
+                var executionJson = await Fetch.PostAsync(executionEndpoint, response);
+                var items = JsonConvert.DeserializeObject<ExpandoObject>(executionJson);
+                return Ok(items);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
 
-            var businessModel = new SandBoxBusinessModel(id, ip, query);
-            var operation = await _business.ExecuteQuery(businessModel);
-            if (!operation.HasSucceeded) { throw operation.Exception; }
-            
-          
-            
-            return Ok();
         }
-        public async Task<IActionResult> ExecuteQuery([FromBody]string query)
+        public async Task<IActionResult> ExecuteQuery([FromBody] string query)
         {
             var signature = SignatureHelper.SignHash(SANDBOX_PERMISSION_KEY, Encoding.UTF8.GetBytes(query));
 
@@ -91,14 +100,14 @@ namespace Blockbase.Web.Controllers
             queryRequest.Add("Signature", signature);
 
             var request = HttpHelper.ComposeWebRequestPost($"{_requestEndPoint}/api/Requester/ExecuteQuery");
-            var json = await HttpHelper.CallWebRequestNoSSLVerification(request,queryRequest);
+            var json = await HttpHelper.CallWebRequestNoSSLVerification(request, queryRequest);
             var items = JsonConvert.DeserializeObject<ExpandoObject>(json);
             return Ok(items);
         }
 
 
 
-        public async Task<IActionResult> ExecuteQueryJungle([FromBody]string query)
+        public async Task<IActionResult> ExecuteQueryJungle([FromBody] string query)
         {
             var signature = SignatureHelper.SignHash("5KJzJWPWx8dFXAhaD8vywJdB1UsLEafFEdxGgK6Jsx3biKtb74q", Encoding.UTF8.GetBytes(query));
 
@@ -108,7 +117,7 @@ namespace Blockbase.Web.Controllers
             queryRequest.Add("Signature", signature);
 
             var request = HttpHelper.ComposeWebRequestPost($"http://40.117.152.157/api/Requester/ExecuteQuery");
-            var json = await HttpHelper.CallWebRequestNoSSLVerification(request,queryRequest);
+            var json = await HttpHelper.CallWebRequestNoSSLVerification(request, queryRequest);
             var items = JsonConvert.DeserializeObject<ExpandoObject>(json);
             return Ok(items);
         }
@@ -117,7 +126,7 @@ namespace Blockbase.Web.Controllers
         {
             var dbList = new List<DBPoco>();
 
-            
+
             var json = await Fetch.GetAsync($"{ip}/api/Requester/GetStructure");
 
             var items = JsonConvert.DeserializeObject<ExpandoObject>(json);
@@ -272,14 +281,14 @@ namespace Blockbase.Web.Controllers
         }
 
         #endregion
-    
-    
-    public class SidebarQueryInfo
-    {
-        public bool Encrypted {get; set;}
-        public string DatabaseName {get; set;}
-        public string TableName {get; set;}
-    }
+
+
+        public class SidebarQueryInfo
+        {
+            public bool Encrypted { get; set; }
+            public string DatabaseName { get; set; }
+            public string TableName { get; set; }
+        }
     }
 
     public class RequesterEndpointObject
