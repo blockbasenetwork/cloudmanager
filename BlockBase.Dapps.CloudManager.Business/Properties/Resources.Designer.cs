@@ -106,11 +106,29 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /api/Requester/EndSidechain?endSidechain=true&amp;sidechain=.
+        /// </summary>
+        internal static string EndSideChain {
+            get {
+                return ResourceManager.GetString("EndSideChain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /api/Requester/ExecuteQuery.
         /// </summary>
         internal static string ExecQuery {
             get {
                 return ResourceManager.GetString("ExecQuery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /api/Requester/PauseSidechain.
+        /// </summary>
+        internal static string PauseSideChain {
+            get {
+                return ResourceManager.GetString("PauseSideChain", resourceCulture);
             }
         }
         
@@ -165,6 +183,15 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         internal static string ReservedSeats {
             get {
                 return ResourceManager.GetString("ReservedSeats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /api/Requester/RunSidechainMaintenance.
+        /// </summary>
+        internal static string ResumeSideChain {
+            get {
+                return ResourceManager.GetString("ResumeSideChain", resourceCulture);
             }
         }
         

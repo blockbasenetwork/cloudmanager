@@ -182,11 +182,49 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             });
         }
 
-        public async Task<OperationResult<RequesterDatabaseBusinessModel>> getDatabaseBO(string node)
+        public async Task<OperationResult<RequesterDatabaseBusinessModel>> RequestDatabase(string node)
         {
             return await ExecuteFunction<RequesterDatabaseBusinessModel>(async () =>
              new RequesterDatabaseBusinessModel { Account = node, Ip = await _cloudPlugin.GetNodeIP(node) }
             );
+        }
+
+        public async Task<Operation> TerminateSidechain(string node)
+        {
+            return await ExecuteAction(async () =>
+            {
+                var ip = await _cloudPlugin.GetNodeIP(node);
+                var result = await Fetch.PostAsync(ip + Resources.EndSideChain + node);
+                await _cloudPlugin.StopNodeAsync(node);
+                var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
+                if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
+            });
+        }
+
+        public async Task<Operation> ResumeSidechain(string node)
+        {
+            return await ExecuteAction(async () =>
+            {
+                var ip = await _cloudPlugin.GetNodeIP(node);
+                var result = await Fetch.PostAsync(ip + Resources.ResumeSideChain);
+                _cloudPlugin.ResumeNode(node);
+                await _nodeDAO.StartNodeAsync(node);
+                var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
+                if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
+            });
+        }
+
+        public async Task<Operation> PauseSidechain(string node)
+        {
+            return await ExecuteAction(async () =>
+            {
+                var ip = await _cloudPlugin.GetNodeIP(node);
+                var result = await Fetch.PostAsync(ip + Resources.PauseSideChain);
+                await _cloudPlugin.StopNodeAsync(node);
+                await _nodeDAO.StopNodeAsync(node);
+                var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
+                if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
+            });
         }
     }
 }

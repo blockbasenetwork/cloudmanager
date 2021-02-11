@@ -78,17 +78,21 @@
                                 @if (Model.InProduction)
                                 {
                                     <li>
-                                        <a href="news.asp"><i class="fas fa-pause"></i> Pause</a>
+                                        <a asp-area="" asp-controller="Nodes" asp-action="RequesterPause" asp-route-id=@Model.Account>
+                                            <i class="fas fa-pause"></i> Pause
+                                        </a>
                                     </li>
                                 }
                                 else
                                 {
                                     <li>
-                                        <a href="news.asp"><i class="fas fa-play text-success"></i> Resume</a>
+                                        <a asp-area="" asp-controller="Nodes" asp-action="RequesterResume" asp-route-id=@Model.Account>
+                                            <i class="fas fa-play text-success"></i> Resume
+                                        </a>
                                     </li>
                                 }
                                 <li>
-                                    <a href="#">
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterTerminate" asp-route-id=@Model.Account>
                                         <i class="fas fa-times text-danger">
                                         </i> Terminate<span class="sr-only">(current)</span>
                                     </a>
@@ -120,17 +124,17 @@
             </div>
         }
         <!-- Breadcrumb begin -->
-    <div>
-        
-        @if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
-        {
-            @:> @Html.ActionLink(ViewContext.RouteData.Values["controller"].ToString(), "Index", ViewContext.RouteData.Values["controller"].ToString())
-        }
-        @if (ViewContext.RouteData.Values["action"].ToString() != "Index")
-        {
-            @:> @Html.ActionLink(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())
-        }
-    </div>
+        <div>
+
+            @if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
+            {
+                @:> @Html.ActionLink(ViewContext.RouteData.Values["controller"].ToString(), "Index", ViewContext.RouteData.Values["controller"].ToString())
+            }
+            @if (ViewContext.RouteData.Values["action"].ToString() != "Index")
+            {
+                @:> @Html.ActionLink(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())
+            }
+        </div>
         <!-- Breadcrumb end -->
 
     </header>

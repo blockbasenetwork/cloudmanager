@@ -178,12 +178,46 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
 
         public async Task<IActionResult> RequesterDatabase(string id)
         {
-            var operation = await _business.getDatabaseBO(id);
+            var operation = await _business.RequestDatabase(id);
             if (!operation.HasSucceeded) {
                 RegisterError(operation.Exception.Message);
                 return View();
             }
             return View(new SandboxViewModel(operation.Result));
+        }
+
+        public async Task<IActionResult> RequesterTerminate(string id)
+        {
+            var operation = await _business.TerminateSidechain(id);
+            if (!operation.HasSucceeded)
+            {
+                RegisterError(operation.Exception.Message);
+                RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> RequesterResume(string id)
+        {
+            var operation = await _business.ResumeSidechain(id);
+            if (!operation.HasSucceeded)
+            {
+                RegisterError(operation.Exception.Message);
+                return RedirectToAction("Requester", new { id });
+            }
+            return RedirectToAction("Requester", new { id });
+        }
+
+        public async Task<IActionResult> RequesterPause(string id)
+        {
+            var operation = await _business.PauseSidechain(id);
+            if (!operation.HasSucceeded)
+            {
+                RegisterError(operation.Exception.Message);
+                return RedirectToAction("Requester", new { id });
+            }
+            return RedirectToAction("Requester", new { id });
+
         }
     }
 }

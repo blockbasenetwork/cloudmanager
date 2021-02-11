@@ -95,5 +95,15 @@ namespace BlockBase.Dapps.CloudManager.Services
                 return output.First();
             }
         }
+
+        public void TerminateNode(string node)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ResumeNode(string node)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

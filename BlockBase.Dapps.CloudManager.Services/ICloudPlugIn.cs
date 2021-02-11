@@ -25,9 +25,7 @@ namespace BlockBase.Dapps.CloudManager.Services
         Task<string> GetNodeSettingsAsync(string node);
 
         Task<string> GetNodeIP(string node);
-
-
-
-
+        void TerminateNode(string node);
+        void ResumeNode(string node);
     }
 }
