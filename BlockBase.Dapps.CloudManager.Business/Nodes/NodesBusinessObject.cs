@@ -227,5 +227,15 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
             });
         }
+
+        public async Task<OperationResult<DetailedProducerPOCO>> GetProducerAsync(string node)
+        {
+            return await ExecuteFunction<DetailedProducerPOCO>(async () =>
+            {
+                var res = await _nodeDAO.GetProducerAsync(node);
+                //await _reqService.FetchDetailedValues(res);
+                return res;
+            });
+        }
     }
 }

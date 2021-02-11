@@ -219,5 +219,18 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             return RedirectToAction("Requester", new { id });
 
         }
+
+        public async Task<IActionResult> Producer(string id)
+        {
+
+            var operation = await _business.GetProducerAsync(id);
+            if (!operation.HasSucceeded)
+            {
+                RegisterError(operation.Exception.Message);
+                return View();
+            }
+            ViewBag.DetailedProducer = true;
+            return View(new ProducerViewModel(operation.Result));
+        }
     }
 }

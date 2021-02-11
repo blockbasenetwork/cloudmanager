@@ -61,6 +61,15 @@ namespace BlockBase.Dapps.CloudManager.Services.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to api/Network/GetAllBlockbaseSidechains?network=0.
+        /// </summary>
+        internal static string AllSideChains {
+            get {
+                return ResourceManager.GetString("AllSideChains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to \\..\\BlockBase.Dapps.CloudManager.Data\\DB.db.
         /// </summary>
         internal static string DBLocation {

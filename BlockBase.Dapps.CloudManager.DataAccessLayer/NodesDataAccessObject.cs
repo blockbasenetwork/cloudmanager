@@ -59,10 +59,20 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
         {
             using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
             {
-                var output = await (con.QueryAsync<DetailedRequesterPOCO>("Select Account, IP from Nodes where (Type = 'Full' or Type = 'Requester') and Account =@node ", new { node}));
+                var output = await (con.QueryAsync<DetailedRequesterPOCO>("Select Account, IP from Nodes where Account =@node ", new { node}));
                 return output.First();
             }
         }
+
+        public async Task<DetailedProducerPOCO> GetProducerAsync(string node)
+        {
+            using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))
+            {
+                var output = await (con.QueryAsync<DetailedProducerPOCO>("Select Account, IP from Nodes where  Account = @node ", new { node }));
+                return output.First();
+            }
+        }
+
         public async Task<List<ProducerPOCO>> GetAllProducersAsync()
         {
             using (var con = new SqliteConnection(GetConnectionStringBuilder().ConnectionString))

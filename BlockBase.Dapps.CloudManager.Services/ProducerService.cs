@@ -60,6 +60,11 @@ namespace BlockBase.Dapps.CloudManager.Services
             pro.Health = (fractionHealth / response.Length) * 100;
         }
 
+        public async Task GetAllSidechains(DetailedProducerPOCO pro)
+        {
+            var result = await Fetch.GetAsync(pro.IP + Resources.AllSideChains);
+            var response = JsonStringNavigator.GetDeeper(result, "response");
+        }
 
         
     }

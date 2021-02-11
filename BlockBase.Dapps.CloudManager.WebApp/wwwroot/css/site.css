@@ -288,11 +288,25 @@ body {
         color: #162e49;
     }
 
+.detailed-producer li > a {
+    color: #162e49;
+    padding: 15px;
+    font-weight: 500;
+}
+
+    .detailed-producer li > a > i {
+        color: #162e49;
+    }
+
 .navbar-brand {
     padding-right: 50px;
 }
 
 .detailed-requester {
+    border-bottom: 1px solid black
+}
+
+.detailed-producer {
     border-bottom: 1px solid black
 }
 

@@ -60,7 +60,7 @@
             </div>
         </div>
         <!-- Errorpopup Menu end -->
-        <!-- Menu Oper -->
+        <!-- Menu Oper Requester -->
         @if (ViewBag.DetailedRequester != null)
         {
             <div class="detailed-requester">
@@ -115,6 +115,50 @@
                                 <li>
                                     <a asp-area="" asp-controller="Nodes" asp-action="RequesterConfigurations" asp-route-id=@Model.Account>
                                         <i class="fas fa-bars"></i> Configurations<span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                </nav>
+            </div>
+        }
+        <!-- Menu Oper Provider -->
+        @if (ViewBag.DetailedProducer != null)
+        {
+            <div class="detailed-producer">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light req-nav">
+                    <a class="navbar-brand" href="#">@Model.Account</a>
+                    @if (@Model is BlockBase.Dapps.CloudManager.WebApp.Models.Nodes.ProducerViewModel)
+                    {
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerClaimSrake" asp-route-id=@Model.Account>
+                                        <i class="fas fa-gift"></i> Claim Rewards
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerSidechains" asp-route-id=@Model.Account>
+                                        <i class="far fa-list-alt"></i> Sidechains
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerWarnings" asp-route-id=@Model.Account>
+                                        <i class="fas fa-exclamation"></i> Warnings
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerDatabse" asp-route-id=@Model.Account>
+                                        <i class="fas fa-database"></i> Database
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerConfigurations" asp-route-id=@Model.Account>
+                                        <i class="fas fa-bars"></i> Configurations
                                     </a>
                                 </li>
                             </ul>
