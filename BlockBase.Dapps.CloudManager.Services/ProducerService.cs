@@ -34,6 +34,7 @@ namespace BlockBase.Dapps.CloudManager.Services
             foreach (var sc in response)
             {
                 if (sc.sidechainState == "Production") working++;
+                pro.Warnings = +sc.warnings.Length;
             }
             pro.Producing = working + "/" + response.Length;
         }

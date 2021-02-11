@@ -10,7 +10,7 @@ namespace BlockBase.Dapps.CloudManager.Data
         public string sidechainState { get; set; }
         public int blocksProducedInCurrentSettlement { get; set; }
         public int blocksFailedInCurrentSettlement { get; set; }
-        //public Object[] warnings { get; set; }
+        public Object[] warnings { get; set; }
 
         public int TotalBlocksPerSettlement() => blocksProducedInCurrentSettlement + blocksFailedInCurrentSettlement;
     }

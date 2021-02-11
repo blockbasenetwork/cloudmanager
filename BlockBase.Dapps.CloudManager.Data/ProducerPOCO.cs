@@ -13,6 +13,8 @@ namespace BlockBase.Dapps.CloudManager.DataAccessLayer
         public string Ip { get; set; }
         public string Type { get; set; }
         public string Producing { get; set; }
+
+        public int Warnings { get; set; }
         public string Events { get; set; }
         public double Health { get; set; }
         public override bool Equals(object obj)
