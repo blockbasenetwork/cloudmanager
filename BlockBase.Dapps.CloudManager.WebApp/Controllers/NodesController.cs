@@ -68,7 +68,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             return View(new RequesterConfigurationViewModel() { Account = id });
         }
 
-        [HttpPost]
+        [HttpPost("Nodes/Requester/{id}/Configurations")]
         public async Task<IActionResult> RequesterConfigurations(RequesterConfigurationViewModel vm)
         {
             RequesterConfigurationBusinessModel rc = vm.ToData();
@@ -268,6 +268,21 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             }
             return RedirectToAction("Requester", new { vm.Account });
 
+        }
+
+
+        [HttpGet("Nodes/Producer/{id}/Stake")]
+        public async Task<IActionResult> ProducerStake(string id)
+        {
+            ViewBag.DetailedProducer = true;
+            var operation = await _business.GetProducerStake(id);
+            if (!operation.HasSucceeded)
+            {
+                RegisterPostError(operation.Exception.Message);
+                return View();
+            }
+            setProducerBreadCrumb(id, "Stake");
+            return View(new RequesterStakeViewModel() { Account = id});
         }
     }
 }

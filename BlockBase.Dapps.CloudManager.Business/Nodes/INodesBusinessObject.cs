@@ -36,5 +36,6 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
         Task<Operation> ResumeSidechain(string id);
         Task<Operation> PauseSidechain(string id);
         Task<Operation> DeleteProducerDatabase(ProducerDatabaseBusinessObject producerDatabaseBusinessObject);
+        Task<OperationResult<ProducerStakeBusinessModel>> GetProducerStake(string id);
     }
 }

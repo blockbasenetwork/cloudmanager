@@ -246,5 +246,15 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 await Fetch.PostAsync(String.Format(ip + Resources.ProducerDeleteDatabase,bo.ToDelete,bo.Forced));
             });
         }
+
+        public async Task<OperationResult<ProducerStakeBusinessModel>> GetProducerStake(string id)
+        {
+            return await ExecuteFunction(async () =>
+            {
+                var ip = await _cloudPlugin.GetNodeIP(id);
+                //await _reqService.FetchDetailedValues(res);
+                return new ProducerStakeBusinessModel();
+            });
+        }
     }
 }
