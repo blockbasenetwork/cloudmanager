@@ -52,7 +52,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             ViewBag.DetailedRequester = true;
             return View(new RequesterViewModel(res.Result));
         }
-
+        [HttpGet("Nodes/Requester/{id}/Configurations")]
         public IActionResult RequesterConfigurations(string id)
         {
             ViewBag.DetailedRequester = true;
@@ -72,7 +72,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
              }
             return RedirectToAction("Requester", new { id = vm.Account });
         }
-
+        [HttpGet("Nodes/Requester/{id}/Stake")]
         public async Task<IActionResult> RequesterStake(string id)
         {
             ViewBag.DetailedRequester = true;
@@ -107,7 +107,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             }
             return RedirectToAction("RequesterStake", new { id = vm.Account });
         }
-
+        [HttpGet("Nodes/Requester/{id}/ManageAccess")]
         public async Task<IActionResult> RequesterManageAccess(string id)
         {
             var operation = await _business.GetRequesterAccess(id);
@@ -176,6 +176,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             return RedirectToAction("RequesterManageAccess", new { id });
         }
 
+        [HttpGet("Nodes/Requester/{id}/Database")]
         public async Task<IActionResult> RequesterDatabase(string id)
         {
             var operation = await _business.RequestDatabase(id);
