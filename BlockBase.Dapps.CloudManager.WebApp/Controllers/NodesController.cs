@@ -44,11 +44,11 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
 
         public async Task<IActionResult> Requester(string id)
         {
-
             var res = await _business.GetRequesterAsync(id);
-            if (!res.HasSucceeded)
+            var postError = CheckPostError();
+            if (!res.HasSucceeded || postError)
             {
-                RegisterError(res.Exception.Message);
+                if(!postError)RegisterError(res.Exception.Message);
                 return View();
             }
             ViewBag.DetailedRequester = true;
@@ -204,7 +204,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             var operation = await _business.TerminateSidechain(id);
             if (!operation.HasSucceeded)
             {
-                RegisterError(operation.Exception.Message);
+                RegisterPostError(operation.Exception.Message);
                 RedirectToAction("Index");
             }
             return RedirectToAction("Index");
@@ -215,7 +215,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             var operation = await _business.ResumeSidechain(id);
             if (!operation.HasSucceeded)
             {
-                RegisterError(operation.Exception.Message);
+                RegisterPostError(operation.Exception.Message);
                 return RedirectToAction("Requester", new { id });
             }
             return RedirectToAction("Requester", new { id });
@@ -226,7 +226,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             var operation = await _business.PauseSidechain(id);
             if (!operation.HasSucceeded)
             {
-                RegisterError(operation.Exception.Message);
+                RegisterPostError(operation.Exception.Message);
                 return RedirectToAction("Requester", new { id });
             }
             return RedirectToAction("Requester", new { id });
