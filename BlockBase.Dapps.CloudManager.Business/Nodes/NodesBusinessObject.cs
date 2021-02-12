@@ -237,5 +237,10 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 return res;
             });
         }
+
+        public Task<Operation> DeleteProducerDatabase(ProducerDatabaseBusinessObject producerDatabaseBusinessObject)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

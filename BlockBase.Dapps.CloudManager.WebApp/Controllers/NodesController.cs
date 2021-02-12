@@ -250,5 +250,24 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             SetBreadCrumb(breadcrumbItems);
             return View(new ProducerViewModel(operation.Result));
         }
+        
+        [HttpGet("Nodes/Producer/{id}/Database")]
+        public IActionResult ProducerDatabase(string id) {
+            ViewBag.DetailedProducer = true;
+            setProducerBreadCrumb(id, "Database");
+            return View(new ProducerDatabaseViewModel() { Account = id});
+        }
+
+        public async Task<IActionResult> ProducerDeleteDatabase(ProducerDatabaseViewModel vm)
+        {
+            var operation = await _business.DeleteProducerDatabase(vm.toBusinessModel());
+            if (!operation.HasSucceeded)
+            {
+                RegisterError(operation.Exception.Message);
+                return View();
+            }
+            return RedirectToAction("Requester", new { vm.Account });
+
+        }
     }
 }

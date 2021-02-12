@@ -1,0 +1,34 @@
+﻿@using BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
+@model ProducerDatabaseViewModel
+
+<div class="producer-database-card" style="max-width: 600px">
+    <div class="card-padding">
+        <div class="card-padding">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="float-left">
+                        Delete sidechain from database
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="form-group" style="padding-left:100px;">
+                        <form asp-controller="Nodes" asp-action="ProducerDeleteDatabase">
+                            <input asp-for="Account" type="hidden" value="@Model.Account" />
+                            <label asp-for="ToDelete" class="control-label"></label>
+                            <br />
+                            <input asp-for="ToDelete" type="text" />
+                            <span asp-validation-for="ToDelete" class="text-danger"></span>
+                            <br />
+                            <label asp-for="Forced" class="control-label"></label>
+                            <input asp-for="Forced" type="checkbox" />
+                            <div class="form-group form-end sub-button">
+                                <input type="submit" value="Submit" class="btn btn btn-dark" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

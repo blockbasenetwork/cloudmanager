@@ -133,6 +133,15 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /api/Provider/DeleteSidechainFromDatabase.
+        /// </summary>
+        internal static string ProducerDatabase {
+            get {
+                return ResourceManager.GetString("ProducerDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /api/Requester/RemoveAccountFromBlacklist?account=.
         /// </summary>
         internal static string RemoveBlackList {

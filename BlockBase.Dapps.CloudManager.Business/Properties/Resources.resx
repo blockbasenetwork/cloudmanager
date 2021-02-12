@@ -141,6 +141,9 @@
   <data name="PauseSideChain" xml:space="preserve">
     <value>/api/Requester/PauseSidechain</value>
   </data>
+  <data name="ProducerDatabase" xml:space="preserve">
+    <value>/api/Provider/DeleteSidechainFromDatabase</value>
+  </data>
   <data name="RemoveBlackList" xml:space="preserve">
     <value>/api/Requester/RemoveAccountFromBlacklist?account=</value>
   </data>
