@@ -238,9 +238,13 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             });
         }
 
-        public Task<Operation> DeleteProducerDatabase(ProducerDatabaseBusinessObject producerDatabaseBusinessObject)
+        public async Task<Operation> DeleteProducerDatabase(ProducerDatabaseBusinessObject bo)
         {
-            throw new NotImplementedException();
+            return await ExecuteAction(async () =>
+            {
+                var ip = _cloudPlugin.GetNodeIP(bo.Account);
+                await Fetch.PostAsync(String.Format(ip + Resources.ProducerDeleteDatabase,bo.ToDelete,bo.Forced));
+            });
         }
     }
 }

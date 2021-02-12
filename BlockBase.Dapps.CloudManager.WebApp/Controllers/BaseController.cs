@@ -39,7 +39,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         {
             var breadcrumbItems = new List<BreadcrumbItem>(){
                 new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes"},
-                new BreadcrumbItem{Display = $"{nodeType}({id})" , URL = $"Nodes/{nodeType}/{id}" },
+                new BreadcrumbItem{Display = $"{nodeType}({id})" , URL = $"/Nodes/{nodeType}/{id}" },
                 new BreadcrumbItem{Display = $"{action}" , URL = null }
             };
             SetBreadCrumb(breadcrumbItems);
