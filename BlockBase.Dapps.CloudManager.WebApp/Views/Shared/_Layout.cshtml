@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using BlockBase.Dapps.CloudManager.WebApp.Models.HtmlComponents
+<!DOCTYPE html>
 <html lang="en">
 <head>
 
@@ -168,17 +169,32 @@
             </div>
         }
         <!-- Breadcrumb begin -->
-        <div>
-
-            @if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
-            {
-                @:> @Html.ActionLink(ViewContext.RouteData.Values["controller"].ToString(), "Index", ViewContext.RouteData.Values["controller"].ToString())
-            }
-            @if (ViewContext.RouteData.Values["action"].ToString() != "Index")
-            {
-                @:> @Html.ActionLink(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString())
-            }
-        </div>
+        @if (ViewBag.BreadCrumb != null)
+        {
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent">
+                    @foreach (var item in (ViewBag.BreadCrumb as BreadcrumbViewModel).elements)
+                    {
+                        if (item.URL == null)
+                        {
+                            <li class="breadcrumb-item active" style="bottom:0" aria-current="page">
+                                @item.Display
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="breadcrumb-item">
+                                <a href="@item.URL">
+                                    @item.Display
+                                </a>
+                            </li>
+                        }
+                    }
+                    <li class="ml-auto font-weight-bold"><h4>@ViewData["Header"]</h4></li>
+                </ol>
+            </nav>
+        }
+   
         <!-- Breadcrumb end -->
 
     </header>

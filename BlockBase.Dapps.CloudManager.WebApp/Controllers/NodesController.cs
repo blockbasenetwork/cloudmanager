@@ -1,10 +1,12 @@
 ﻿using BlockBase.Dapps.CloudManager.Business;
 using BlockBase.Dapps.CloudManager.Business.Nodes;
 using BlockBase.Dapps.CloudManager.WebApp.Models;
+using BlockBase.Dapps.CloudManager.WebApp.Models.HtmlComponents;
 using BlockBase.Dapps.CloudManager.WebApp.Models.Nodes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
 
@@ -50,6 +52,11 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 return View();
             }
             ViewBag.DetailedRequester = true;
+            var breadcrumbItems = new List<BreadcrumbItem>(){
+                new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes" },
+                new BreadcrumbItem{Display = $"Requester/{id}" , URL = null }
+            };
+            SetBreadCrumb(breadcrumbItems);
             return View(new RequesterViewModel(res.Result));
         }
         [HttpGet("Nodes/Requester/{id}/Configurations")]
@@ -57,9 +64,10 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         {
             ViewBag.DetailedRequester = true;
             CheckPostError();
+            SetRequesterBreadCrumb(id, "Configurations");
             return View(new RequesterConfigurationViewModel() { Account = id });
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> RequesterConfigurations(RequesterConfigurationViewModel vm)
         {
@@ -69,7 +77,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             {
                 RegisterPostError(operation.Exception.Message);
                 return RedirectToAction("RequesterConfigurations", new { id = vm.Account });
-             }
+            }
             return RedirectToAction("Requester", new { id = vm.Account });
         }
         [HttpGet("Nodes/Requester/{id}/Stake")]
@@ -77,18 +85,19 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         {
             ViewBag.DetailedRequester = true;
             var operation = await _business.GetRequesterStake(id);
-            if (!operation.HasSucceeded) 
+            if (!operation.HasSucceeded)
             {
                 RegisterPostError(operation.Exception.Message);
                 return View();
             }
+            SetRequesterBreadCrumb(id, "Stake");
             return View(new RequesterStakeViewModel() { Account = id, Stake = operation.Result });
         }
 
         public async Task<IActionResult> RequesterStakeClaim(string id)
         {
             var operation = await _business.ClaimStake(id);
-            if(!operation.HasSucceeded)
+            if (!operation.HasSucceeded)
             {
                 RegisterError(operation.Exception.Message);
                 return RedirectToAction("RequesterStake", new { id = id });
@@ -116,6 +125,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterError(operation.Exception.Message);
                 return View();
             }
+            SetRequesterBreadCrumb(id, "ManageAccess");
             return View(new RequesterAccessViewModel(operation.Result));
         }
 
@@ -149,7 +159,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             if (!operation.HasSucceeded)
             {
                 RegisterError(operation.Exception.Message);
-                return RedirectToAction("RequesterManageAccess", new {  id });
+                return RedirectToAction("RequesterManageAccess", new { id });
             }
             return RedirectToAction("RequesterManageAccess", new { id });
         }
@@ -180,10 +190,12 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         public async Task<IActionResult> RequesterDatabase(string id)
         {
             var operation = await _business.RequestDatabase(id);
-            if (!operation.HasSucceeded) {
+            if (!operation.HasSucceeded)
+            {
                 RegisterError(operation.Exception.Message);
                 return View();
             }
+            SetRequesterBreadCrumb(id,"Database");
             return View(new SandboxViewModel(operation.Result));
         }
 
@@ -231,6 +243,11 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 return View();
             }
             ViewBag.DetailedProducer = true;
+            var breadcrumbItems = new List<BreadcrumbItem>(){
+                new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes" },
+                new BreadcrumbItem{Display = $"Producer/{id}" , URL = null }
+            };
+            SetBreadCrumb(breadcrumbItems);
             return View(new ProducerViewModel(operation.Result));
         }
     }

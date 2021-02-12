@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BlockBase.Dapps.CloudManager.WebApp.Models.HtmlComponents;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,30 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             TempData[ERROR] = error;
         }
 
+        public void SetBreadCrumb(List<BreadcrumbItem> breadcrumbItems)
+        {
+            ViewBag.BreadCrumb = new BreadcrumbViewModel(breadcrumbItems);
+        }
+
+        public void SetRequesterBreadCrumb(string id, string action)
+        {
+            setNodeBreadCrumb(id, action, "Requester");
+
+        }
+        public void setProducerBreadCrumb(string id, string action)
+        {
+            setNodeBreadCrumb(id, action, "Producer");
+        }
+
+        private void setNodeBreadCrumb(string id, string action, string nodeType)
+        {
+            var breadcrumbItems = new List<BreadcrumbItem>(){
+                new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes"},
+                new BreadcrumbItem{Display = $"{nodeType}({id})" , URL = "" },
+                new BreadcrumbItem{Display = $"{action}" , URL = null }
+            };
+            SetBreadCrumb(breadcrumbItems);
+        }
         public bool CheckPostError()
         {
             if (TempData.ContainsKey(ERROR))
