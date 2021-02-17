@@ -372,3 +372,150 @@ body {
 .stake-display h3 {
     font-size: large;
 }
+
+.outter-Stake {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    border-radius: 6px;
+    background-color: white;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.display-stake img {
+    width: 100%;
+    height: auto;
+}
+
+.stake-text {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.display-stake {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.stake-value {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 600;
+}
+
+.stake-underlying {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    font-size: 16px;
+    line-height: 24px;
+    color: #707A8A;
+}
+
+.stake-buttons {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    display: flex;
+}
+
+.btn-stake {
+    margin: 0px 8px 0px 0px;
+    appearance: none;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    box-sizing: border-box;
+    font-family: inherit;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    font-weight: 500;
+    line-height: 20px;
+    word-break: keep-all;
+    color: white;
+    border-radius: 4px;
+    padding: 6px 12px;
+    min-height: 24px;
+    border: none;
+    background-color: #162e49;
+    min-width: 52px;
+    flex: 1 1 0%;
+    height: 40px;
+    font-size: 14px;
+}
+
+.btn-claim {
+    margin: 0px;
+    appearance: none;
+    user-select: none;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    box-sizing: border-box;
+    font-family: inherit;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    font-weight: 500;
+    line-height: 20px;
+    word-break: keep-all;
+    color: rgb(30, 35, 41);
+    border-radius: 4px;
+    padding: 5px 11px;
+    min-height: 24px;
+    border: 1px solid rgb(234, 236, 239);
+    box-shadow: none;
+    min-width: 52px;
+    flex: 1 1 0%;
+    height: 40px;
+    font-size: 14px;
+    background-color: white;
+}
+
+.most-outer {
+    box-sizing: border-box;
+    min-width: 0;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 28px;
+}
+
+.outer-outer {
+    box-sizing: border-box;
+    margin: 0;
+    min-width: 0;
+    display: flex;
+    margin-top: 12px;
+    flex-direction: column;
+}
