@@ -28,5 +28,9 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
             this.Working = dr.Working;
             this.InProduction = dr.InProduction;
         }
+
+        public RequesterViewModel()
+        {
+        }
     }
 }

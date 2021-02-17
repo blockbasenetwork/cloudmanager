@@ -45,13 +45,13 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         public async Task<IActionResult> Requester(string id)
         {
             var res = await _business.GetRequesterAsync(id);
-            var postError = CheckPostError();
+            var postError = CheckPostError(); ViewBag.DetailedRequester = true;
             if (!res.HasSucceeded || postError)
             {
                 if(!postError)RegisterError(res.Exception.Message);
-                return View();
+                return View(new RequesterViewModel() { Account = id});
             }
-            ViewBag.DetailedRequester = true;
+           
             var breadcrumbItems = new List<BreadcrumbItem>(){
                 new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes" },
                 new BreadcrumbItem{Display = $"Requester/{id}" , URL = null }

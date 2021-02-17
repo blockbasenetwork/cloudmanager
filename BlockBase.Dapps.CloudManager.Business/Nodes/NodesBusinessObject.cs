@@ -208,7 +208,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             {
                 var ip = await _cloudPlugin.GetNodeIP(node);
                 var result = await Fetch.PostAsync(ip + Resources.ResumeSideChain);
-                _cloudPlugin.ResumeNode(node);
+                //_cloudPlugin.ResumeNode(node);
                 await _nodeDAO.StartNodeAsync(node);
                 var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
                 if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
@@ -224,7 +224,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 await _cloudPlugin.StopNodeAsync(node);
                 await _nodeDAO.StopNodeAsync(node);
                 var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
-                if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
+                if (!bool.Parse(ResponseString)) throw new Exception("Fetch Failed");
             });
         }
 
