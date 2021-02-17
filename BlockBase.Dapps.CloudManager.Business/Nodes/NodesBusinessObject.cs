@@ -252,7 +252,8 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             return await ExecuteFunction(async () =>
             {
                 var ip = await _cloudPlugin.GetNodeIP(id);
-                return new ProducerStakeBusinessModel() { Stake = 0.0};
+                
+                return new ProducerStakeBusinessModel() { Stake = 0.0, ProducingIn = await _reqProducer.FetchProducingChains(ip)};
             });
         }
 
@@ -281,9 +282,13 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             });
         }
 
-        public Task<Operation> AddProducerStake(string account, double v)
+        public async Task<Operation> AddProducerStake(string account, double v, string accountToAdd)
         {
-            throw new NotImplementedException();
+            return await ExecuteAction(async () =>
+            {
+                var ip = _cloudPlugin.GetNodeIP(account);
+                await Fetch.PostAsync(String.Format(ip + Resources.ProducerAddStake,accountToAdd,v));
+            });
         }
     }
 }

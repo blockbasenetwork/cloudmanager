@@ -313,7 +313,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> ProducerAddStake(ProducerStakeViewModel vm)
         {
-            var operation = await _business.AddProducerStake(vm.Account, vm.Stake);
+            var operation = await _business.AddProducerStake(vm.Account, vm.Stake, vm.AccountToAdd);
             if (!operation.HasSucceeded)
             {
                 RegisterPostError(operation.Exception.Message);

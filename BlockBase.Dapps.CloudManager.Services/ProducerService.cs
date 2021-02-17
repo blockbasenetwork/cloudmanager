@@ -39,6 +39,23 @@ namespace BlockBase.Dapps.CloudManager.Services
             pro.Producing = working + "/" + response.Length;
         }
 
+        public async Task<List<string>> FetchProducingChains(String ip)
+        {
+            var jsonString = await Fetch.GetAsync(ip + Resources.ProducingSideChains);
+            var succeeded = bool.Parse(JsonStringNavigator.GetDeeper(jsonString, "succeeded"));
+            if (!succeeded)
+            {
+                return null;
+            }
+            var response = JsonStringNavigator.GetDeeper<ProducingSidechain[]>(jsonString, "response");
+            List<string> producing = new List<string>();
+            foreach (var sc in response)
+            {
+                producing.Add(sc.name);
+            }
+            return producing;
+        }
+
         public async Task FetchHealth(ProducerPOCO pro)
         {
             var jsonString = await Fetch.GetAsync(pro.Ip + Resources.ProducingSideChains);
