@@ -252,8 +252,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             return await ExecuteFunction(async () =>
             {
                 var ip = await _cloudPlugin.GetNodeIP(id);
-                //await _reqService.FetchDetailedValues(res);
-                return new ProducerStakeBusinessModel();
+                return new ProducerStakeBusinessModel() { Stake = 0.0};
             });
         }
 

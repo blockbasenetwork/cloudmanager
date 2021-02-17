@@ -282,7 +282,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 return View();
             }
             setProducerBreadCrumb(id, "Stake");
-            return View(new RequesterStakeViewModel() { Account = id});
+            return View(new ProducerStakeViewModel() { Stake = operation.Result.Stake ,Account = id});
         }
 
         [HttpGet("Nodes/Producer/{id}/Sidechains")]
@@ -309,5 +309,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             }
             return RedirectToAction("ProducerSidechains", new { id });
         }
+
+
     }
 }
