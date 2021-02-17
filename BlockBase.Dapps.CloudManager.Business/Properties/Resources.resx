@@ -138,6 +138,9 @@
   <data name="ExecQuery" xml:space="preserve">
     <value>/api/Requester/ExecuteQuery</value>
   </data>
+  <data name="NetworkSidechains" xml:space="preserve">
+    <value>/api/Network/GetAllBlockbaseSidechains?network=0</value>
+  </data>
   <data name="PauseSideChain" xml:space="preserve">
     <value>/api/Requester/PauseSidechain</value>
   </data>

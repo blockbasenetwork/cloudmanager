@@ -124,6 +124,15 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /api/Network/GetAllBlockbaseSidechains?network=0.
+        /// </summary>
+        internal static string NetworkSidechains {
+            get {
+                return ResourceManager.GetString("NetworkSidechains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /api/Requester/PauseSidechain.
         /// </summary>
         internal static string PauseSideChain {

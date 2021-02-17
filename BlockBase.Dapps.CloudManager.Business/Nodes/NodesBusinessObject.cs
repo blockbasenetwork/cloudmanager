@@ -256,5 +256,21 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 return new ProducerStakeBusinessModel();
             });
         }
+
+        public async Task<OperationResult<List<NetworkSidechain>>> GetNetworkSidechains(string id)
+        {
+            return await ExecuteFunction(async () =>
+            {
+                var ip = await _cloudPlugin.GetNodeIP(id);
+                var sidechains = await Fetch.GetAsync(ip + Resources.NetworkSidechains);// NetworkSidechainsstring has a network value of 0
+                var jsonString = JsonStringNavigator.GetDeeper(sidechains, "response");
+                return JsonConvert.DeserializeObject<List<NetworkSidechain>>(jsonString);
+            });
+        }
+
+        public Task<Operation> Candidate(string id, string account)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

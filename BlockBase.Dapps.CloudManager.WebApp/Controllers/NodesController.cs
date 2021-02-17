@@ -284,5 +284,30 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             setProducerBreadCrumb(id, "Stake");
             return View(new RequesterStakeViewModel() { Account = id});
         }
+
+        [HttpGet("Nodes/Producer/{id}/Sidechains")]
+        public async Task<IActionResult> ProducerSidechains(string id)
+        {
+            ViewBag.DetailedProducer = true;
+            var operation = await _business.GetNetworkSidechains(id);
+            if (!operation.HasSucceeded)
+            {
+                RegisterPostError(operation.Exception.Message);
+                return View();
+            }
+            setProducerBreadCrumb(id, "Sidechains");
+            return View(new ProducerOtherSidechainViewModel() { Account = id, OtherSidechains = operation.Result });
+        }
+
+        public async Task<IActionResult> Candidate(string id, [FromQuery(Name = "Account")] string account)
+        {
+            var operation = await _business.Candidate(id, account);
+            if (!operation.HasSucceeded)
+            {
+                RegisterPostError(operation.Exception.Message);
+                return View();
+            }
+            return RedirectToAction("ProducerSidechains", new { id });
+        }
     }
 }

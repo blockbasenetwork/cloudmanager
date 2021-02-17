@@ -137,6 +137,8 @@ namespace BlockBase.Dapps.CloudManager.Services
             Array.ForEach(input, it => total += it);
             return total / input.Length;
         }
+
+  
     }
 
 }

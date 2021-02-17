@@ -1,0 +1,53 @@
+﻿@using BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
+@model  ProducerOtherSidechainViewModel
+
+
+<div class="nodes-table">
+    <p class="table-title">Other Sidechains</p>
+    <table id="producer-other-sidechains" class="table" style="width:100%">
+        <thead class="thead-light">
+            <tr>
+                <th>Node </th>
+                <th>Status</th>
+                <th>Average Monthly Cost</th>
+                <th>Stake</th>
+                <th>Balance</th>
+                <th>Health</th>
+            </tr>
+        </thead>
+        @if (Model != null)
+        {
+            <tbody>
+                @foreach (var item in Model.OtherSidechains)
+                {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.State
+                    </td>
+                    <td>
+                        todo
+                    </td>
+                    <td>
+                        todo
+                    </td>
+                    <td>
+                        todo
+                    </td>
+                    <td>
+                        todo
+                    </td>
+                </tr>
+                }
+            </tbody>
+        }
+    </table>
+</div>
+
+    <script>
+    $(document).ready(function () {
+        $('#producer-other-sidechains').DataTable();
+    });
+    </script>
