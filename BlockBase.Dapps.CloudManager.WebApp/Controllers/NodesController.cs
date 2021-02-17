@@ -299,6 +299,29 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             return View(new ProducerOtherSidechainViewModel() { Account = id, OtherSidechains = operation.Result });
         }
 
+        public async Task<IActionResult> ProducerClaimRewards(string id)
+        {
+            var operation = await _business.ClaimRewards(id);
+            if (!operation.HasSucceeded)
+            {
+                RegisterPostError(operation.Exception.Message);
+                return RedirectToAction("RequesterStake", new { id });
+            }
+            return RedirectToAction("ProducerStake", new { id });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ProducerAddStake(ProducerStakeViewModel vm)
+        {
+            var operation = await _business.AddProducerStake(vm.Account, vm.Stake);
+            if (!operation.HasSucceeded)
+            {
+                RegisterPostError(operation.Exception.Message);
+                return RedirectToAction("RequesterStake", new { id = vm.Account });
+            }
+            return RedirectToAction("RequesterStake", new { id = vm.Account });
+        }
+
         public async Task<IActionResult> Candidate(string id, [FromQuery(Name = "Account")] string account)
         {
             var operation = await _business.Candidate(id, account);

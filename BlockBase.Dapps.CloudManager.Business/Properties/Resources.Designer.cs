@@ -142,6 +142,24 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /api/Provider/AddStake?sidechainName={0}&amp;stake={1}.
+        /// </summary>
+        internal static string ProducerAddStake {
+            get {
+                return ResourceManager.GetString("ProducerAddStake", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /api/Provider/ClaimAllRewards.
+        /// </summary>
+        internal static string ProducerClaimRewards {
+            get {
+                return ResourceManager.GetString("ProducerClaimRewards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /api/Provider/DeleteSidechainFromDatabase?sidechainName={0}&amp;force={1}.
         /// </summary>
         internal static string ProducerDeleteDatabase {

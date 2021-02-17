@@ -144,6 +144,13 @@
   <data name="PauseSideChain" xml:space="preserve">
     <value>/api/Requester/PauseSidechain</value>
   </data>
+  <data name="ProducerAddStake" xml:space="preserve">
+    <value>/api/Provider/AddStake?sidechainName={0}&amp;stake={1}</value>
+    <comment>0-sidechain, 1- amount</comment>
+  </data>
+  <data name="ProducerClaimRewards" xml:space="preserve">
+    <value>/api/Provider/ClaimAllRewards</value>
+  </data>
   <data name="ProducerDeleteDatabase" xml:space="preserve">
     <value>/api/Provider/DeleteSidechainFromDatabase?sidechainName={0}&amp;force={1}</value>
   </data>

@@ -267,7 +267,21 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             });
         }
 
-        public Task<Operation> Candidate(string id, string account)
+        public async Task<Operation> Candidate(string id, string account)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Operation> ClaimRewards(string id)
+        {
+            return await ExecuteAction(async () =>
+            {
+                var ip = _cloudPlugin.GetNodeIP(id);
+                await Fetch.PostAsync(String.Format(ip + Resources.ProducerClaimRewards));
+            });
+        }
+
+        public Task<Operation> AddProducerStake(string account, double v)
         {
             throw new NotImplementedException();
         }

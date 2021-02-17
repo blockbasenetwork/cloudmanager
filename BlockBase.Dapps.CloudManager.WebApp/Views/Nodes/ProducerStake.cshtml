@@ -1,41 +1,49 @@
 ﻿@using BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
 @model ProducerStakeViewModel
 
-<div class="req-config-card" style="max-width: 600px">
-    <div class="card-padding">
-        <div class="card-padding">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="float-left">
-                        Stake
-                    </h5>
+<div id="add-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> Add Stake</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-controller="Nodes" asp-action="ProducerAddStake">
+                <label asp-for="Stake" class="control-label"></label>
+                <input asp-for="Account" type="hidden" value="@Model.Account" />
+                <input asp-for="Stake" type="number" step=any min=0 class="form-control ml-2" />
+                <span asp-validation-for="Stake" class="text-danger"></span>
+                <div class="form-group form-end sub-button">
+                    <input type="submit" value="Submit" class="btn btn btn-dark" />
                 </div>
-                <div class="card-body stake-card">
-                    <div class="stake-display justify-content-center">
-                        @if (@Model.Stake != null)
-                        {<h3>@Model.Stake BBT</h3>}
+            </form>
+        </div>
+    </div>
+</div>
 
-                        <a asp-area="" asp-controller="Nodes" asp-action="RequesterStakeClaim" asp-route-id=@Model.Account>
-                            <button class="btn btn-dark" type="button">Claim</button>
-                        </a>
+<div class="most-outer">
+    <div class="outer-outer">
+        <div class="outter-Stake">
+            <div class="stake-text">Stake</div>
+            <div class="display-stake">
+                <img class="" src="~/img/blockbase-token.png" height="64" alt="BlockBase Logo">
+                <div class="stake-value"> @Model.Stake</div>
+                <div class="stake-underlying"> Staked BBT</div>
+            </div>
 
-                    </div>
-                    <div class="form-group d-flex flex-row-reverse" style="padding-left:100px;">
-                        <div class="bd-highlight">
-                            <form asp-controller="Nodes" asp-action="RequesteAddStake">
-                                <label asp-for="Stake" class="control-label"></label>
-                                <input asp-for="Account" type="hidden" value="@Model.Account" />
-                                <input asp-for="Stake" type="number" step=any min=0 class="form-control ml-2" />
-                                <span asp-validation-for="Stake" class="text-danger"></span>
-                                <div class="form-group form-end sub-button">
-                                    <input type="submit" value="Submit" class="btn btn btn-dark" />
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+            <div class="stake-buttons">
+                <button class="btn-stake">Stake</button>
+                <button class="btn-claim" onclick="window.location.href='/Nodes/ProducerClaimRewards/@Model.Account'">Claim</button>
             </div>
         </div>
     </div>
-
 </div>
+
+<script>
+    $('.btn-stake').click(() =>
+    {
+        $('#add-modal').modal('show')
+    });
+</script>
