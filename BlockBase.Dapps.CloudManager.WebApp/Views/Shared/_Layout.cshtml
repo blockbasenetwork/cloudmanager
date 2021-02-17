@@ -69,11 +69,11 @@
                     <a class="navbar-brand" href="#">@Model.Account</a>
                     @if (@Model is BlockBase.Dapps.CloudManager.WebApp.Models.Nodes.RequesterViewModel)
                     {
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-requesterMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
 
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-requesterMenu">
 
                             <ul class="navbar-nav mr-auto">
                                 @if (Model.InProduction)
@@ -132,10 +132,10 @@
                     <a class="navbar-brand" href="#">@Model.Account</a>
                     @if (@Model is BlockBase.Dapps.CloudManager.WebApp.Models.Nodes.ProducerViewModel)
                     {
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-producerMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-producerMenu">
                             <ul class="navbar-nav mr-auto">
                                 <li>
                                     <a asp-area="" asp-controller="Nodes" asp-action="ProducerStake" asp-route-id=@Model.Account>
@@ -194,7 +194,6 @@
                 </ol>
             </nav>
         }
-   
         <!-- Breadcrumb end -->
 
     </header>
