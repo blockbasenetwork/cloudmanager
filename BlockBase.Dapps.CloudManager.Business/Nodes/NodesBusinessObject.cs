@@ -253,7 +253,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             {
                 var ip = await _cloudPlugin.GetNodeIP(id);
 
-                return new ProducerStakeBusinessModel() { Stake = 0.0, ProducingIn = await _reqProducer.FetchProducingChains(ip) };
+                return new ProducerStakeBusinessModel() {Account=id, Stake = 0.0, ProducingIn = await _reqProducer.FetchProducingChains(ip) };
             });
         }
 

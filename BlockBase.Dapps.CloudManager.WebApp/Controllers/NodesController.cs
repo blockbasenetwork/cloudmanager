@@ -289,7 +289,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 return View();
             }
             setProducerBreadCrumb(id, "Stake");
-            return View(new ProducerStakeViewModel() { Stake = operation.Result.Stake, Account = id });
+            return View(new ProducerStakeViewModel() { Stake = operation.Result.Stake, Account = id , ProducingSidechains = operation.Result.ProducingIn});
         }
 
         [HttpGet("Nodes/Producer/{id}/Sidechains")]

@@ -15,6 +15,7 @@
                         <form asp-controller="Nodes" asp-action="ProducerDeleteDatabase">
                             <input asp-for="Account" type="hidden" value="@Model.Account" />
                             <label asp-for="ToDelete" class="control-label"></label>
+                            <br>
                             <select id="type-to-add" asp-for="ToDelete" class="form-control" Width="230px">
                                 <option Value="0"> Select Account</option>
                                 @foreach (var item in Model.ProducingSidechains)
