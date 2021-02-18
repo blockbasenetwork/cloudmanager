@@ -15,6 +15,9 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
         [Display(Name = "Force")]
         public bool Forced { get; set; }
 
+        public List<string> ProducingSidechains { get; set; }
+           
+
         public ProducerDatabaseBusinessObject toBusinessModel()
         {
             return new ProducerDatabaseBusinessObject

@@ -41,5 +41,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
         Task<Operation> Candidate(string id, string account);
         Task<Operation> ClaimRewards(string id);
         Task<Operation> AddProducerStake(string account, double v, string accountToAdd);
+
+        Task<OperationResult<List<string>>> ProducerDatabase(string id);
     }
 }

@@ -48,10 +48,10 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             var postError = CheckPostError(); ViewBag.DetailedRequester = true;
             if (!res.HasSucceeded || postError)
             {
-                if(!postError)RegisterError(res.Exception.Message);
-                return View(new RequesterViewModel() { Account = id});
+                if (!postError) RegisterError(res.Exception.Message);
+                return View(new RequesterViewModel() { Account = id });
             }
-           
+
             var breadcrumbItems = new List<BreadcrumbItem>(){
                 new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes" },
                 new BreadcrumbItem{Display = $"Requester/{id}" , URL = null }
@@ -195,7 +195,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterError(operation.Exception.Message);
                 return View();
             }
-            SetRequesterBreadCrumb(id,"Database");
+            SetRequesterBreadCrumb(id, "Database");
             return View(new SandboxViewModel(operation.Result));
         }
 
@@ -250,12 +250,19 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             SetBreadCrumb(breadcrumbItems);
             return View(new ProducerViewModel(operation.Result));
         }
-        
+
         [HttpGet("Nodes/Producer/{id}/Database")]
-        public IActionResult ProducerDatabase(string id) {
+        public async Task<IActionResult> ProducerDatabase(string id)
+        {
             ViewBag.DetailedProducer = true;
+            var operation = await _business.ProducerDatabase(id);
+            if (!operation.HasSucceeded)
+            {
+                RegisterError(operation.Exception.Message);
+                return View();
+            }
             setProducerBreadCrumb(id, "Database");
-            return View(new ProducerDatabaseViewModel() { Account = id});
+            return View(new ProducerDatabaseViewModel() { Account = id, ProducingSidechains = operation.Result });
         }
 
         public async Task<IActionResult> ProducerDeleteDatabase(ProducerDatabaseViewModel vm)
@@ -282,7 +289,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 return View();
             }
             setProducerBreadCrumb(id, "Stake");
-            return View(new ProducerStakeViewModel() { Stake = operation.Result.Stake ,Account = id});
+            return View(new ProducerStakeViewModel() { Stake = operation.Result.Stake, Account = id });
         }
 
         [HttpGet("Nodes/Producer/{id}/Sidechains")]

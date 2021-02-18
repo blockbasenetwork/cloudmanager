@@ -154,7 +154,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             {
                 var ip = await _cloudPlugin.GetNodeIP(node);
                 var body = JsonConvert.SerializeObject(new string[] { toRemove });
-                var result = await Fetch.PostAsync(ip + Resources.RemoveReservedSeat,body);
+                var result = await Fetch.PostAsync(ip + Resources.RemoveReservedSeat, body);
                 var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
                 if (!(ResponseString == "true")) throw new Exception("Fetch Failed");
             });
@@ -243,7 +243,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             return await ExecuteAction(async () =>
             {
                 var ip = _cloudPlugin.GetNodeIP(bo.Account);
-                await Fetch.PostAsync(String.Format(ip + Resources.ProducerDeleteDatabase,bo.ToDelete,bo.Forced));
+                await Fetch.PostAsync(String.Format(ip + Resources.ProducerDeleteDatabase, bo.ToDelete, bo.Forced));
             });
         }
 
@@ -252,8 +252,8 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             return await ExecuteFunction(async () =>
             {
                 var ip = await _cloudPlugin.GetNodeIP(id);
-                
-                return new ProducerStakeBusinessModel() { Stake = 0.0, ProducingIn = await _reqProducer.FetchProducingChains(ip)};
+
+                return new ProducerStakeBusinessModel() { Stake = 0.0, ProducingIn = await _reqProducer.FetchProducingChains(ip) };
             });
         }
 
@@ -287,7 +287,16 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             return await ExecuteAction(async () =>
             {
                 var ip = _cloudPlugin.GetNodeIP(account);
-                await Fetch.PostAsync(String.Format(ip + Resources.ProducerAddStake,accountToAdd,v));
+                await Fetch.PostAsync(String.Format(ip + Resources.ProducerAddStake, accountToAdd, v));
+            });
+        }
+
+        public async Task<OperationResult<List<string>>> ProducerDatabase(string id)
+        {
+            return await ExecuteFunction(async () =>
+            {
+                var ip = await _cloudPlugin.GetNodeIP(id);
+                return await _reqProducer.FetchProducingChains(ip);
             });
         }
     }

@@ -9,5 +9,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
         public string Account { get; set; }
         public string ToDelete { get; set; }
         public bool Forced { get; set; }
+
+        public List<string> ProducingSidechains { get; set; }
     }
 }
