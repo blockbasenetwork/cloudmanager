@@ -5,12 +5,36 @@
 @if (@Model != null)
 {
     <div class="text-center">
-        <div class="NodeCount">
-            <p>You have @Model.Total nodes</p>
-            Requester      @Model.Requesters<br>
-            Provider      @Model.Providers<br>
-            Full           @Model.Full
-        </div>
+      
+            <div id="chart_div"></div>
+        
     </div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      google.charts.load('current', {'packages':['corechart']});
+
+      google.charts.setOnLoadCallback(drawChart);
+
+
+      function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['Requester', @Model.Requesters],
+          ['Producers', @Model.Providers],
+          ['Full', @Model.Full]
+        ]);
+
+        var options = {'title':'You have @Model.Total nodes',
+                       'width':400,
+                       'height':300};
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
 }
-  
+
