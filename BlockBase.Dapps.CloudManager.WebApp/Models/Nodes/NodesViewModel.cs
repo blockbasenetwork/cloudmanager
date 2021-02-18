@@ -13,6 +13,11 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
             this.Producers = producers;
             this.Requesters = requesters;
         }
+
+        public NodesViewModel()
+        {
+        }
+
         public List<RequesterPOCO> Requesters { get; set; }
         public List<ProducerPOCO> Producers { get; set; }
 

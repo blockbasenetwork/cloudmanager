@@ -26,19 +26,21 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var viewModel = new NodesViewModel();
             var requesters = await _business.GetAllRequestersAsync();
+            var producers = await _business.GetAllProducersAsync();
+            if (producers.HasSucceeded) viewModel.Requesters = requesters.Result;
+            if (requesters.HasSucceeded) viewModel.Producers = producers.Result;
+            if (!producers.HasSucceeded )
+            {
+                RegisterError(producers.Exception.Message);
+                return View(viewModel);
+            }
             if (!requesters.HasSucceeded)
             {
                 RegisterError(requesters.Exception.Message);
-                return View();
+                return View(viewModel);
             }
-            var producers = await _business.GetAllProducersAsync();
-            if (!producers.HasSucceeded)
-            {
-                RegisterError(producers.Exception.Message);
-                return View();
-            }
-            var viewModel = new NodesViewModel(requesters.Result, producers.Result);
             return View(viewModel);
         }
 
