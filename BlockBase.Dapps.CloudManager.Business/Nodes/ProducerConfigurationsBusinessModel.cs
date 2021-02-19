@@ -6,6 +6,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
 {
     public class ProducerConfigurationsBusinessModel
     {
+        public string Account { get; set; }
         public double MaxRatioToStake { get; set; }
         public double MinBBTPerMbRatio { get; set; }
         public double MaxGrowthPerMonth { get; set; }

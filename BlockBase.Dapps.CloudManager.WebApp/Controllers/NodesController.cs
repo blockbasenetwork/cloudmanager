@@ -31,7 +31,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             var producers = await _business.GetAllProducersAsync();
             if (producers.HasSucceeded) viewModel.Requesters = requesters.Result;
             if (requesters.HasSucceeded) viewModel.Producers = producers.Result;
-            if (!producers.HasSucceeded )
+            if (!producers.HasSucceeded)
             {
                 RegisterError(producers.Exception.Message);
                 return View(viewModel);
@@ -291,7 +291,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 return View();
             }
             setProducerBreadCrumb(id, "Stake");
-            return View(new ProducerStakeViewModel() { Stake = operation.Result.Stake, Account = id , ProducingSidechains = operation.Result.ProducingIn});
+            return View(new ProducerStakeViewModel() { Stake = operation.Result.Stake, Account = id, ProducingSidechains = operation.Result.ProducingIn });
         }
 
         [HttpGet("Nodes/Producer/{id}/Sidechains")]
@@ -342,7 +342,9 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             return RedirectToAction("ProducerSidechains", new { id });
         }
 
-        public async Task<IActionResult> ProducerConfigurations(string id) {
+        [HttpGet("Nodes/Producer/{id}/Configurations")]
+        public async Task<IActionResult> ProducerConfigurations(string id)
+        {
 
             var operation = await _business.GetProducerConfigurations(id);
             if (!operation.HasSucceeded)
@@ -350,7 +352,25 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterPostError(operation.Exception.Message);
                 return View();
             }
-            return View(new ProducerConfigurationViewModel(operation.Result) { Account = id});
+            setProducerBreadCrumb(id, "Configurations");
+            return View(new ProducerConfigurationViewModel(operation.Result) { Account = id });
         }
+
+
+        public async Task<IActionResult> ProducerSetConfigurations(ProducerConfigurationViewModel vm)
+        {
+
+            var model = vm.ToModel();
+            var operation = await _business.SetProducerConfigurations(model);
+            if (!operation.HasSucceeded)
+            {
+                RegisterPostError(operation.Exception.Message);
+                return View();
+            }
+            return View(new ProducerConfigurationViewModel(operation.Result) { Account = id });
+        }
+
+
+
+
     }
-}

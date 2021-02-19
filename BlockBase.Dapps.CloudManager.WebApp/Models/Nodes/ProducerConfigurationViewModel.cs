@@ -13,16 +13,16 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
 
         [Display(Name = "Max Ratio To Stake")]
         public double MaxRatioToStake { get; set; }
-        
+
         [Display(Name = "Min BBT Per Mb Ratio")]
         public double MinBBTPerMbRatio { get; set; }
-        
+
         [Display(Name = "Max Growth Per Month")]
         public double MaxGrowthPerMonth { get; set; }
 
         [Display(Name = "Max Sidechains")]
         public double MaxSidechains { get; set; }
-        
+
         [Display(Name = "Max BBT Per Empty Block")]
         public double MaxBBTPerEmptyBlock { get; set; }
 
@@ -34,6 +34,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
 
         public ProducerConfigurationViewModel(ProducerConfigurationsBusinessModel bm)
         {
+            Account = bm.Account;
             MaxRatioToStake = bm.MaxRatioToStake;
             MinBBTPerMbRatio = bm.MinBBTPerMbRatio;
             MaxGrowthPerMonth = bm.MaxGrowthPerMonth;
@@ -42,5 +43,20 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
             MaxSidechainGrowthPerMonth = bm.MaxSidechainGrowthPerMonth;
             MaxStakeToMonthlyIncomeRatio = bm.MaxStakeToMonthlyIncomeRatio;
         }
+
+        public ProducerConfigurationsBusinessModel ToModel()
+        {
+            return new ProducerConfigurationsBusinessModel()
+            {
+                Account = this.Account,
+                MaxRatioToStake = this.MaxRatioToStake,
+                MinBBTPerMbRatio = this.MinBBTPerMbRatio,
+                MaxGrowthPerMonth = this.MaxGrowthPerMonth,
+                MaxSidechains = this.MaxSidechains,
+                MaxBBTPerEmptyBlock = this.MaxBBTPerEmptyBlock,
+                MaxSidechainGrowthPerMonth = this.MaxSidechainGrowthPerMonth,
+                MaxStakeToMonthlyIncomeRatio = this.MaxStakeToMonthlyIncomeRatio,
+            };
+    }
     }
 }

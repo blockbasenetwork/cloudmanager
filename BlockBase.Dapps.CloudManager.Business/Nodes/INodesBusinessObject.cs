@@ -44,5 +44,6 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
 
         Task<OperationResult<List<string>>> ProducerDatabase(string id);
         Task<OperationResult<ProducerConfigurationsBusinessModel>> GetProducerConfigurations(string id);
+        Task<Operation> SetProducerConfigurations(ProducerConfigurationsBusinessModel model);
     }
 }

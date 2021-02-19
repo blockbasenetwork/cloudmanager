@@ -319,5 +319,10 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             MaxStakeToMonthlyIncomeRatio = 0,
             MinBBTPerMbRatio = 0
         };
+
+        public Task<Operation> SetProducerConfigurations(ProducerConfigurationsBusinessModel model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
