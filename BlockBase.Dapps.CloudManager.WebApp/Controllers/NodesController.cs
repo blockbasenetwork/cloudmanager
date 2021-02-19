@@ -326,9 +326,9 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             if (!operation.HasSucceeded)
             {
                 RegisterPostError(operation.Exception.Message);
-                return RedirectToAction("RequesterStake", new { id = vm.Account });
+                return RedirectToAction("ProducerStake", new { id = vm.Account });
             }
-            return RedirectToAction("RequesterStake", new { id = vm.Account });
+            return RedirectToAction("ProducerStake", new { id = vm.Account });
         }
 
         public async Task<IActionResult> Candidate(string id, [FromQuery(Name = "Account")] string account)
