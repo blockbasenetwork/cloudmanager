@@ -299,5 +299,25 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 return await _reqProducer.FetchProducingChains(ip);
             });
         }
+
+        public async Task<OperationResult<ProducerConfigurationsBusinessModel>> GetProducerConfigurations(string id)
+        {
+            return await ExecuteFunction(async () =>
+            {
+                var ip = await _cloudPlugin.GetNodeIP(id);
+                var config = mockFetch(id);
+                return config;
+            });
+        }
+        private ProducerConfigurationsBusinessModel mockFetch(string id) => new ProducerConfigurationsBusinessModel()
+        {
+            MaxBBTPerEmptyBlock = 0,
+            MaxGrowthPerMonth = 0,
+            MaxRatioToStake = 0,
+            MaxSidechainGrowthPerMonth = 0,
+            MaxSidechains = 0,
+            MaxStakeToMonthlyIncomeRatio = 0,
+            MinBBTPerMbRatio = 0
+        };
     }
 }

@@ -1,0 +1,161 @@
+﻿@using BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
+@model ProducerConfigurationViewModel
+
+<div class="d-flex flex-row bd-highlight mb-2">
+    <div class="most-outer">
+        <div class="outer-outer">
+            <div class="outter-Stake">
+                <div class="stake-text">Max Ratio to Stake</div>
+                <div class="display-stake">
+                    <div class="arrows p-2 bd-highlight">
+                        <div class="up-arrow"><i class="fas fa-caret-up fa-3x"></i></div>
+                        <div class="down-arrow"> <i class="fas fa-caret-down fa-3x"></i></div>
+                    </div>
+                    <div class="stake-value">@Model.MaxRatioToStake</div>
+                </div>
+                <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
+                    <input asp-for="Account" type="hidden" value="@Model.Account" />
+                    <input asp-for="MaxRatioToStake" value="@Model.Account" />
+                    <span asp-validation-for="MaxRatioToStake" class="text-danger"></span>
+                    <input type="submit" value="Set" class="btn btn btn-dark" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="most-outer">
+        <div class="outer-outer">
+            <div class="outter-Stake">
+                <div class="stake-text">Min BBT per MB ratio</div>
+                <div class="display-stake">
+                    <div class="arrows p-2 bd-highlight">
+                        <div class="up-arrow"><i class="fas fa-caret-up fa-3x"></i></div>
+                        <div class="down-arrow"> <i class="fas fa-caret-down fa-3x"></i></div>
+                    </div>
+                    <div class="stake-value"> @Model.MinBBTPerMbRatio</div>
+                </div>
+                <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
+                    <input asp-for="Account" type="hidden" value="@Model.Account" />
+                    <input asp-for="MinBBTPerMbRatio" value="@Model.Account" />
+                    <span asp-validation-for="MinBBTPerMbRatio" class="text-danger"></span>
+                    <input type="submit" value="Set" class="btn btn btn-dark" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="d-flex flex-row bd-highlight mb-2">
+    <div class="most-outer">
+        <div class="outer-outer">
+            <div class="outter-Stake">
+                <div class="stake-text">Max growth per month</div>
+                <div class="display-stake">
+                    <div class="arrows p-2 bd-highlight">
+                        <div class="up-arrow"><i class="fas fa-caret-up fa-3x"></i></div>
+                        <div class="down-arrow"> <i class="fas fa-caret-down fa-3x"></i></div>
+                    </div>
+                    <div class="stake-value">@Model.MaxGrowthPerMonth</div>
+                </div>
+                <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
+                    <input asp-for="Account" type="hidden" value="@Model.Account" />
+                    <input asp-for="MaxGrowthPerMonth" value="@Model.Account" />
+                    <span asp-validation-for="MaxGrowthPerMonth" class="text-danger"></span>
+                    <input type="submit" value="Set" class="btn btn btn-dark" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="most-outer">
+        <div class="outer-outer">
+            <div class="outter-Stake">
+                <div class="stake-text">Max sidechains</div>
+                <div class="display-stake">
+                    <div class="arrows p-2 bd-highlight">
+                        <div class="up-arrow"><i class="fas fa-caret-up fa-3x"></i></div>
+                        <div class="down-arrow"> <i class="fas fa-caret-down fa-3x"></i></div>
+                    </div>
+                    <div class="stake-value">@Model.MaxSidechains</div>
+                </div>
+                <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
+                    <input asp-for="Account" type="hidden" value="@Model.Account" />
+                    <input asp-for="MaxSidechains" value="@Model.Account" />
+                    <span asp-validation-for="MaxSidechains" class="text-danger"></span>
+                    <input type="submit" value="Set" class="btn btn btn-dark" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="d-flex flex-row bd-highlight mb-2">
+    <div class="most-outer">
+        <div class="outer-outer">
+            <div class="outter-Stake">
+                <div class="stake-text">Max BBT per empty block</div>
+                <div class="display-stake">
+                    <div class="arrows p-2 bd-highlight">
+                        <div class="up-arrow"><i class="fas fa-caret-up fa-3x"></i></div>
+                        <div class="down-arrow"> <i class="fas fa-caret-down fa-3x"></i></div>
+                    </div>
+                    <div class="stake-value">@Model.MaxBBTPerEmptyBlock</div>
+                </div>
+                <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
+                    <input asp-for="Account" type="hidden" value="@Model.Account" />
+                    <input asp-for="MaxBBTPerEmptyBlock" value="@Model.Account" />
+                    <span asp-validation-for="MaxBBTPerEmptyBlock" class="text-danger"></span>
+                    <input type="submit" value="Set" class="btn btn btn-dark" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="most-outer">
+        <div class="outer-outer">
+            <div class="outter-Stake">
+                <div class="stake-text">Max sidechain growth per month(MB)</div>
+                <div class="display-stake">
+                    <div class="arrows p-2 bd-highlight">
+                        <div class="up-arrow"><i class="fas fa-caret-up fa-3x"></i></div>
+                        <div class="down-arrow"> <i class="fas fa-caret-down fa-3x"></i></div>
+                    </div>
+                    <div class="stake-value">@Model.MaxSidechainGrowthPerMonth</div>
+                </div>
+                <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
+                    <input asp-for="Account" type="hidden" value="@Model.Account" />
+                    <input asp-for="MaxSidechainGrowthPerMonth" value="@Model.Account" />
+                    <span asp-validation-for="MaxSidechainGrowthPerMonth" class="text-danger"></span>
+                    <input type="submit" value="Set" class="btn btn btn-dark" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex flex-row bd-highlight mb-2">
+    <div class="most-outer">
+        <div class="outer-outer">
+            <div class="outter-Stake">
+                <div class="stake-text">Max stake to monthly income ratio</div>
+                <div class="display-stake">
+                    <div class="arrows p-2 bd-highlight">
+                        <div class="up-arrow"><i class="fas fa-caret-up fa-3x"></i></div>
+                        <div class="down-arrow"> <i class="fas fa-caret-down fa-3x"></i></div>
+                    </div>
+                    <div class="stake-value">@Model.MaxStakeToMonthlyIncomeRatio</div>
+                </div>
+                <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
+                    <input asp-for="Account" type="hidden" value="@Model.Account" />
+                    <input asp-for="MaxStakeToMonthlyIncomeRatio" value="@Model.Account" />
+                    <span asp-validation-for="MaxStakeToMonthlyIncomeRatio" class="text-danger"></span>
+                    <input type="submit" value="Set" class="btn btn btn-dark" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

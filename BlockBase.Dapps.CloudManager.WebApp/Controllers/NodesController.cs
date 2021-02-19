@@ -342,6 +342,15 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             return RedirectToAction("ProducerSidechains", new { id });
         }
 
+        public async Task<IActionResult> ProducerConfigurations(string id) {
 
+            var operation = await _business.GetProducerConfigurations(id);
+            if (!operation.HasSucceeded)
+            {
+                RegisterPostError(operation.Exception.Message);
+                return View();
+            }
+            return View(new ProducerConfigurationViewModel(operation.Result) { Account = id});
+        }
     }
 }
