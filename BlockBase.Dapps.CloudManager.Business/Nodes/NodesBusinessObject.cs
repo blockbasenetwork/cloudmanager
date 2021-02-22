@@ -324,5 +324,17 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
         {
             throw new NotImplementedException();
         }
+
+        public async Task<Operation> ProducerSetIncrementDecrementConfiguration(ProducerConfigurationsBusinessModel model, bool isIncrement)
+        {
+            return await ExecuteAction(async () =>
+            {
+                var ip = _cloudPlugin.GetNodeIP(model.Account);
+                if(isIncrement) model.IncrementNonNull(); else model.DecrementNonNull();
+                //Query e chamada
+
+
+            });
+        }
     }
 }

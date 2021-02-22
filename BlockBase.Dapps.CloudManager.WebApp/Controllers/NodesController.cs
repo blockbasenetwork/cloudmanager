@@ -369,5 +369,19 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             }
             return RedirectToAction("Configurations", new { id = vm.Account });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ProducerSetIncrementDecrementConfiguration([FromQuery(Name = "isIncrement")] bool isIncrement, ProducerConfigurationViewModel vm)
+        {
+
+            var model = vm.ToModel();
+            var operation = await _business.ProducerSetIncrementDecrementConfiguration(model, isIncrement);
+            if (!operation.HasSucceeded)
+            {
+                RegisterPostError(operation.Exception.Message);
+                return View();
+            }
+            return RedirectToAction("Configurations", new { id = vm.Account });
+        }
     }
 }
