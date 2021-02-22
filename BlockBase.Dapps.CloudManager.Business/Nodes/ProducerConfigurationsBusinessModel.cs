@@ -36,5 +36,19 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             MaxSidechainGrowthPerMonth = MaxSidechainGrowthPerMonth.HasValue ? MaxSidechainGrowthPerMonth -= 1 : MaxSidechainGrowthPerMonth = null;
             MaxStakeToMonthlyIncomeRatio = MaxStakeToMonthlyIncomeRatio.HasValue ? MaxStakeToMonthlyIncomeRatio -= 1 : MaxStakeToMonthlyIncomeRatio = null;
         }
+
+        public bool HasValues()
+        {
+            foreach (var property in this.GetType().GetProperties())
+            {
+                if (property.PropertyType == typeof(string)) continue;
+                if (property.PropertyType == typeof(double?))
+                {
+                    var value = (double?) property.GetValue(this, null);
+                    if (value < 0) return true;
+                }
+            }
+            return false;
+        }
     }
 }

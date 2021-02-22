@@ -61,6 +61,6 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
             if (this.MaxSidechainGrowthPerMonth != null) toRet.MaxSidechainGrowthPerMonth = double.Parse(MaxSidechainGrowthPerMonth, CultureInfo.InvariantCulture);
             if (this.MaxStakeToMonthlyIncomeRatio != null) toRet.MaxStakeToMonthlyIncomeRatio = double.Parse(MaxStakeToMonthlyIncomeRatio, CultureInfo.InvariantCulture);
             return toRet;
-    }
+        }
     }
 }

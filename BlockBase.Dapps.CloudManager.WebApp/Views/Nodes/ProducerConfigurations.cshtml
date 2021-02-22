@@ -31,7 +31,7 @@
                 </div>
                 <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
                     <input asp-for="Account" type="hidden" value="@Model.Account" />
-                    <input asp-for="MaxRatioToStake" type="number" step=any min=0 class="form-control ml-2" />
+                    <input asp-for="MaxRatioToStake" type="number" step=any min=0/>
                     <span asp-validation-for="MaxRatioToStake" class="text-danger"></span>
                     <input type="submit" value="Set" class="btn btn btn-dark" />
                 </form>

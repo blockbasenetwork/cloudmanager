@@ -347,9 +347,10 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         {
 
             var operation = await _business.GetProducerConfigurations(id);
-            if (!operation.HasSucceeded)
+            var postError = CheckPostError();
+            if (!operation.HasSucceeded || postError)
             {
-                RegisterPostError(operation.Exception.Message);
+                if(!postError) RegisterError(operation.Exception.Message);
                 return View();
             }
             setProducerBreadCrumb(id, "Configurations");
@@ -365,7 +366,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             if (!operation.HasSucceeded)
             {
                 RegisterPostError(operation.Exception.Message);
-                return View();
+                return RedirectToAction("Configurations", new { id = vm.Account });
             }
             return RedirectToAction("Configurations", new { id = vm.Account });
         }
@@ -375,11 +376,15 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         {
 
             var model = vm.ToModel();
+            if (model.HasValues()) {
+                RegisterPostError("Cannot decrement under zero.");
+                return RedirectToAction("Configurations", new { id = vm.Account });
+            }
             var operation = await _business.ProducerSetIncrementDecrementConfiguration(model, isIncrement);
             if (!operation.HasSucceeded)
             {
                 RegisterPostError(operation.Exception.Message);
-                return View();
+                return RedirectToAction("Configurations", new { id = vm.Account });
             }
             return RedirectToAction("Configurations", new { id = vm.Account });
         }
