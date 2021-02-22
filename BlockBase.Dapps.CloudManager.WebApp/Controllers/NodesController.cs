@@ -351,7 +351,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             if (!operation.HasSucceeded || postError)
             {
                 if(!postError) RegisterError(operation.Exception.Message);
-                return View();
+                return View(new ProducerConfigurationViewModel(operation.Result) { Account = id });
             }
             setProducerBreadCrumb(id, "Configurations");
             return View(new ProducerConfigurationViewModel(operation.Result) { Account = id });
@@ -366,9 +366,9 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             if (!operation.HasSucceeded)
             {
                 RegisterPostError(operation.Exception.Message);
-                return RedirectToAction("Configurations", new { id = vm.Account });
+                return RedirectToAction("ProducerConfigurations", new { id = vm.Account });
             }
-            return RedirectToAction("Configurations", new { id = vm.Account });
+            return RedirectToAction("ProducerConfigurations", new { id = vm.Account });
         }
 
         [HttpPost]
@@ -376,17 +376,18 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         {
 
             var model = vm.ToModel();
-            if (model.HasValues()) {
+            if (isIncrement) model.IncrementNonNull(); else model.DecrementNonNull();
+            if (model.HasNegativeValues()) {
                 RegisterPostError("Cannot decrement under zero.");
-                return RedirectToAction("Configurations", new { id = vm.Account });
+                return RedirectToAction("ProducerConfigurations", new { id = vm.Account });
             }
-            var operation = await _business.ProducerSetIncrementDecrementConfiguration(model, isIncrement);
+            var operation = await _business.SetProducerConfigurations(model);
             if (!operation.HasSucceeded)
             {
                 RegisterPostError(operation.Exception.Message);
-                return RedirectToAction("Configurations", new { id = vm.Account });
+                return RedirectToAction("ProducerConfigurations", new { id = vm.Account });
             }
-            return RedirectToAction("Configurations", new { id = vm.Account });
+            return RedirectToAction("ProducerConfigurations", new { id = vm.Account });
         }
     }
 }
