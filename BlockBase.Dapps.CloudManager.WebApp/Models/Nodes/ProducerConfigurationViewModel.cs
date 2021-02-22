@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,51 +13,54 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
         public string Account { get; set; }
 
         [Display(Name = "Max Ratio To Stake")]
-        public double MaxRatioToStake { get; set; }
+        public string? MaxRatioToStake { get; set; }
 
         [Display(Name = "Min BBT Per Mb Ratio")]
-        public double MinBBTPerMbRatio { get; set; }
+        public string? MinBBTPerMbRatio { get; set; }
 
         [Display(Name = "Max Growth Per Month")]
-        public double MaxGrowthPerMonth { get; set; }
+        public string? MaxGrowthPerMonth { get; set; }
 
         [Display(Name = "Max Sidechains")]
-        public double MaxSidechains { get; set; }
+        public string? MaxSidechains { get; set; }
 
         [Display(Name = "Max BBT Per Empty Block")]
-        public double MaxBBTPerEmptyBlock { get; set; }
+        public string? MaxBBTPerEmptyBlock { get; set; }
 
         [Display(Name = "Max Sidechain Growth Per Month")]
-        public double MaxSidechainGrowthPerMonth { get; set; }
+        public string? MaxSidechainGrowthPerMonth { get; set; }
 
         [Display(Name = "Max Stake To Monthly Income Ratio")]
-        public double MaxStakeToMonthlyIncomeRatio { get; set; }
+        public string? MaxStakeToMonthlyIncomeRatio { get; set; }
 
         public ProducerConfigurationViewModel(ProducerConfigurationsBusinessModel bm)
         {
             Account = bm.Account;
-            MaxRatioToStake = bm.MaxRatioToStake;
-            MinBBTPerMbRatio = bm.MinBBTPerMbRatio;
-            MaxGrowthPerMonth = bm.MaxGrowthPerMonth;
-            MaxSidechains = bm.MaxSidechains;
-            MaxBBTPerEmptyBlock = bm.MaxBBTPerEmptyBlock;
-            MaxSidechainGrowthPerMonth = bm.MaxSidechainGrowthPerMonth;
-            MaxStakeToMonthlyIncomeRatio = bm.MaxStakeToMonthlyIncomeRatio;
+            MaxRatioToStake = bm.MaxRatioToStake.ToString();
+            MinBBTPerMbRatio = bm.MinBBTPerMbRatio.ToString();
+            MaxGrowthPerMonth = bm.MaxGrowthPerMonth.ToString();
+            MaxSidechains = bm.MaxSidechains.ToString();
+            MaxBBTPerEmptyBlock = bm.MaxBBTPerEmptyBlock.ToString();
+            MaxSidechainGrowthPerMonth = bm.MaxSidechainGrowthPerMonth.ToString();
+            MaxStakeToMonthlyIncomeRatio = bm.MaxStakeToMonthlyIncomeRatio.ToString();
+        }
+
+        public ProducerConfigurationViewModel()
+        {
         }
 
         public ProducerConfigurationsBusinessModel ToModel()
         {
-            return new ProducerConfigurationsBusinessModel()
-            {
-                Account = this.Account,
-                MaxRatioToStake = this.MaxRatioToStake,
-                MinBBTPerMbRatio = this.MinBBTPerMbRatio,
-                MaxGrowthPerMonth = this.MaxGrowthPerMonth,
-                MaxSidechains = this.MaxSidechains,
-                MaxBBTPerEmptyBlock = this.MaxBBTPerEmptyBlock,
-                MaxSidechainGrowthPerMonth = this.MaxSidechainGrowthPerMonth,
-                MaxStakeToMonthlyIncomeRatio = this.MaxStakeToMonthlyIncomeRatio,
-            };
+            var toRet = new ProducerConfigurationsBusinessModel();
+            toRet.Account = this.Account;
+            if (this.MaxRatioToStake != null) toRet.MaxRatioToStake = double.Parse(MaxRatioToStake, CultureInfo.InvariantCulture);
+            if (this.MinBBTPerMbRatio != null) toRet.MinBBTPerMbRatio = double.Parse(MinBBTPerMbRatio, CultureInfo.InvariantCulture);
+            if (this.MaxGrowthPerMonth != null) toRet.MaxGrowthPerMonth = double.Parse(MaxGrowthPerMonth, CultureInfo.InvariantCulture);
+            if (this.MaxSidechains != null) toRet.MaxSidechains = double.Parse(MaxSidechains, CultureInfo.InvariantCulture);
+            if (this.MaxBBTPerEmptyBlock != null) toRet.MaxBBTPerEmptyBlock = double.Parse(MaxBBTPerEmptyBlock, CultureInfo.InvariantCulture);
+            if (this.MaxSidechainGrowthPerMonth != null) toRet.MaxSidechainGrowthPerMonth = double.Parse(MaxSidechainGrowthPerMonth, CultureInfo.InvariantCulture);
+            if (this.MaxStakeToMonthlyIncomeRatio != null) toRet.MaxStakeToMonthlyIncomeRatio = double.Parse(MaxStakeToMonthlyIncomeRatio, CultureInfo.InvariantCulture);
+            return toRet;
     }
     }
 }

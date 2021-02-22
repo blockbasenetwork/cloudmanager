@@ -356,7 +356,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             return View(new ProducerConfigurationViewModel(operation.Result) { Account = id });
         }
 
-
+        [HttpPost]
         public async Task<IActionResult> ProducerSetConfigurations(ProducerConfigurationViewModel vm)
         {
 
@@ -367,10 +367,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterPostError(operation.Exception.Message);
                 return View();
             }
-            return View(new ProducerConfigurationViewModel(operation.Result) { Account = id });
+            return RedirectToAction("Configurations", new { id = vm.Account });
         }
-
-
-
-
     }
+}

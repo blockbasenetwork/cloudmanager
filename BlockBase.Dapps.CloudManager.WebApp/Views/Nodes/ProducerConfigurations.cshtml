@@ -15,7 +15,7 @@
                 </div>
                 <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
                     <input asp-for="Account" type="hidden" value="@Model.Account" />
-                    <input asp-for="MaxRatioToStake" value="@Model.Account" />
+                    <input asp-for="MaxRatioToStake" type="number" step=any min=0 class="form-control ml-2"/>
                     <span asp-validation-for="MaxRatioToStake" class="text-danger"></span>
                     <input type="submit" value="Set" class="btn btn btn-dark" />
                 </form>
@@ -36,7 +36,7 @@
                 </div>
                 <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
                     <input asp-for="Account" type="hidden" value="@Model.Account" />
-                    <input asp-for="MinBBTPerMbRatio" value="@Model.Account" />
+                    <input asp-for="MinBBTPerMbRatio" type="number" step=any min=0/>
                     <span asp-validation-for="MinBBTPerMbRatio" class="text-danger"></span>
                     <input type="submit" value="Set" class="btn btn btn-dark" />
                 </form>
@@ -61,7 +61,7 @@
                 </div>
                 <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
                     <input asp-for="Account" type="hidden" value="@Model.Account" />
-                    <input asp-for="MaxGrowthPerMonth" value="@Model.Account" />
+                    <input asp-for="MaxGrowthPerMonth" type="number" step=any min=0/>
                     <span asp-validation-for="MaxGrowthPerMonth" class="text-danger"></span>
                     <input type="submit" value="Set" class="btn btn btn-dark" />
                 </form>
@@ -82,7 +82,7 @@
                 </div>
                 <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
                     <input asp-for="Account" type="hidden" value="@Model.Account" />
-                    <input asp-for="MaxSidechains" value="@Model.Account" />
+                    <input asp-for="MaxSidechains" type="number" step=any min=0/>
                     <span asp-validation-for="MaxSidechains" class="text-danger"></span>
                     <input type="submit" value="Set" class="btn btn btn-dark" />
                 </form>
@@ -107,7 +107,7 @@
                 </div>
                 <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
                     <input asp-for="Account" type="hidden" value="@Model.Account" />
-                    <input asp-for="MaxBBTPerEmptyBlock" value="@Model.Account" />
+                    <input asp-for="MaxBBTPerEmptyBlock" type="number" step=any min=0/>
                     <span asp-validation-for="MaxBBTPerEmptyBlock" class="text-danger"></span>
                     <input type="submit" value="Set" class="btn btn btn-dark" />
                 </form>
@@ -128,7 +128,7 @@
                 </div>
                 <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
                     <input asp-for="Account" type="hidden" value="@Model.Account" />
-                    <input asp-for="MaxSidechainGrowthPerMonth" value="@Model.Account" />
+                    <input asp-for="MaxSidechainGrowthPerMonth" type="number" step=any min=0/>
                     <span asp-validation-for="MaxSidechainGrowthPerMonth" class="text-danger"></span>
                     <input type="submit" value="Set" class="btn btn btn-dark" />
                 </form>
@@ -151,7 +151,7 @@
                 </div>
                 <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
                     <input asp-for="Account" type="hidden" value="@Model.Account" />
-                    <input asp-for="MaxStakeToMonthlyIncomeRatio" value="@Model.Account" />
+                    <input asp-for="MaxStakeToMonthlyIncomeRatio" type="number" step=any min=0/>
                     <span asp-validation-for="MaxStakeToMonthlyIncomeRatio" class="text-danger"></span>
                     <input type="submit" value="Set" class="btn btn btn-dark" />
                 </form>
