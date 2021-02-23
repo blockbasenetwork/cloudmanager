@@ -1,4 +1,5 @@
 ﻿using BlockBase.Dapps.CloudManager.Business;
+using BlockBase.Dapps.CloudManager.Business.Nodes;
 using BlockBase.Dapps.CloudManager.Data;
 using System;
 using System.Collections.Generic;

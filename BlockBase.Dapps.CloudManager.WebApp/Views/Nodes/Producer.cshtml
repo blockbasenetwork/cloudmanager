@@ -1,3 +1,70 @@
 ﻿@using BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
 @model ProducerViewModel
 
+<div class="nodes-table" >
+    <p class="table-title">Working On</p>
+    <table id="workingOn-table" class="table" style="width:100%">
+        <thead class="thead-light">
+            <tr>
+                <th>Node </th>
+                <th>Status</th>
+                <th>Average Monthly Cost</th>
+                <th>Stake</th>
+                <th>Balance</th>
+                <th>Health</th>
+                <th></th>
+            </tr>
+        </thead>
+        @if (Model != null)
+        {
+            <tbody>
+                @foreach (var item in Model.WorkingOn)
+                {
+                <tr>
+                    <td>
+                        @Html.ActionLink((string)item.Account, actionName: "Requester",
+                            controllerName: "Nodes",
+                            routeValues: new { id = item.Account },
+                            htmlAttributes: null)
+                    </td>
+                    <td>
+                        @item.State
+                    </td>
+                    <td>
+                        @item.MonthlyCost
+                    </td>
+
+                    <td>
+                        @item.Stake
+                    </td>
+                    <td>
+                        @item.Balance
+                    </td>
+                    <td>
+                        <!-- Health -->
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <i class="fas fa-bars dropbtn"></i>
+                            <div class="dropdown-content">
+                                    <a href="/Deployment/StartNode?Account=@item.Account"><i class="fas fa-cloud"></i> Manage Stake</a>
+                                    <a href="#"><i class="fas fa-edit"></i> Blocks</a>
+                                    <a href="#"><i class="fas fa-copy"></i> Duplicate</a>
+                                    <a href="/Deployment/RemoveNode?Account=@item.Account"><i class="fas fa-trash"></i> Leave</a>
+                                }
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        }
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#workingOn-table').DataTable();
+    });
+</script>

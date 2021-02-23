@@ -22,7 +22,6 @@ namespace BlockBase.Dapps.CloudManager.Services
             if (await FetchRequesterState(req))
             {
                 await FetchBalance(req);
-                await FetchRequesterStake(req);
                 await GetAvgMonthlyCost(req);
             }
 
@@ -48,18 +47,13 @@ namespace BlockBase.Dapps.CloudManager.Services
                 return false;
             }
             var response = JsonStringNavigator.GetDeeper(jsonString, "response");
+            req.Stake = JsonStringNavigator.GetDeeper(response, "currentRequesterStake");
             var inProduction = bool.Parse(JsonStringNavigator.GetDeeper(response, "inProduction"));
             req.State = inProduction ? "ON" : "OFF";
             return true;
         }
 
-        private async Task FetchRequesterStake(RequesterPOCO req)
-        {
-            var requestResult = await Fetch.GetAsync(req.Ip + Resources.RequesterStake);
-            var json = JsonConvert.DeserializeObject<Dictionary<string, string>>(requestResult);
-            var stake = json["response"];
-            req.Stake = stake;
-        }
+
 
       
 
@@ -83,7 +77,7 @@ namespace BlockBase.Dapps.CloudManager.Services
             return blocksPerMonth * avgPaymentPerBlock + " BBT";
         }
 
-        double calcAverage(double a, double b, int c) => ((a + b) / 2) * c;
+        double calcAverage(double a, double b, int c) => Average(a,b) * c;
 
 
         public async Task FetchDetailedValues(DetailedRequesterPOCO req)
@@ -126,19 +120,20 @@ namespace BlockBase.Dapps.CloudManager.Services
             historyMin = Double.Parse(JsonStringNavigator.GetDeeper(response, "min_payment_per_block_history_producers"));
             validatorMax = Double.Parse(JsonStringNavigator.GetDeeper(response, "max_payment_per_block_validator_producers"));
             validatorMin = Double.Parse(JsonStringNavigator.GetDeeper(response, "min_payment_per_block_validator_producers"));
-            req.AvgBlockReward = average(average(fullMax, fullMin), average(historyMax, historyMin), average(validatorMax, validatorMin));
+            req.AvgBlockReward = Average(Average(fullMax, fullMin), Average(historyMax, historyMin), Average(validatorMax, validatorMin));
 
 
 
         }
-        private double average(params double[] input)
+        private double Average(params double[] input)
         {
+            if (input.Length == 0) return 0;
             double total = 0;
             Array.ForEach(input, it => total += it);
             return total / input.Length;
         }
 
-  
+
     }
 
 }

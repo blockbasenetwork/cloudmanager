@@ -67,7 +67,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
         {
             return await ExecuteAction(async () =>
             {
-                if (rc.CheckFields()) throw new Exception(message: "Cannot submit empty form");
+                if (rc.AllPropsNull()) throw new Exception(message: "Cannot submit empty form");
                 var ip = await _cloudPlugin.GetNodeIP(rc.Account);
                 var queryString = rc.QueryString();
                 await Fetch.PostAsync(ip + Resources.ChangeSideChainConfigurations + queryString);
@@ -233,7 +233,7 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             return await ExecuteFunction<DetailedProducerPOCO>(async () =>
             {
                 var res = await _nodeDAO.GetProducerAsync(node);
-                //await _reqService.FetchDetailedValues(res);
+                await _reqProducer.FetchDetailedValues(res);
                 return res;
             });
         }

@@ -84,7 +84,18 @@ namespace BlockBase.Dapps.CloudManager.Services
             var response = JsonStringNavigator.GetDeeper(result, "response");
         }
 
-        
+        public async Task FetchDetailedValues(DetailedProducerPOCO res)
+        {
+            var _reqService = new RequesterService();
+            var producingSidechainNames = await FetchProducingChains(res.IP);
+            foreach(var name in producingSidechainNames)
+            {
+                var working = new RequesterPOCO() { Account= name, Ip = res.IP};
+                await _reqService.FetchValues(working);
+                res.WorkingOn.Add(working);
+
+            }
+        }
     }
 }
 

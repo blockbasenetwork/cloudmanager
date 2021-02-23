@@ -53,13 +53,20 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
         {
             var toRet = new ProducerConfigurationsBusinessModel();
             toRet.Account = this.Account;
-            if (this.MaxRatioToStake != null) toRet.MaxRatioToStake = double.Parse(MaxRatioToStake, CultureInfo.InvariantCulture);
-            if (this.MinBBTPerMbRatio != null) toRet.MinBBTPerMbRatio = double.Parse(MinBBTPerMbRatio, CultureInfo.InvariantCulture);
-            if (this.MaxGrowthPerMonth != null) toRet.MaxGrowthPerMonth = double.Parse(MaxGrowthPerMonth, CultureInfo.InvariantCulture);
-            if (this.MaxSidechains != null) toRet.MaxSidechains = double.Parse(MaxSidechains, CultureInfo.InvariantCulture);
-            if (this.MaxBBTPerEmptyBlock != null) toRet.MaxBBTPerEmptyBlock = double.Parse(MaxBBTPerEmptyBlock, CultureInfo.InvariantCulture);
-            if (this.MaxSidechainGrowthPerMonth != null) toRet.MaxSidechainGrowthPerMonth = double.Parse(MaxSidechainGrowthPerMonth, CultureInfo.InvariantCulture);
-            if (this.MaxStakeToMonthlyIncomeRatio != null) toRet.MaxStakeToMonthlyIncomeRatio = double.Parse(MaxStakeToMonthlyIncomeRatio, CultureInfo.InvariantCulture);
+            if (this.MaxRatioToStake != null) 
+                toRet.MaxRatioToStake = double.Parse(MaxRatioToStake, CultureInfo.InvariantCulture);
+            if (this.MinBBTPerMbRatio != null) 
+                toRet.MinBBTPerMbRatio = double.Parse(MinBBTPerMbRatio, CultureInfo.InvariantCulture);
+            if (this.MaxGrowthPerMonth != null) 
+                toRet.MaxGrowthPerMonth = double.Parse(this?.MaxGrowthPerMonth, CultureInfo.InvariantCulture);
+            if (this.MaxSidechains != null) 
+                toRet.MaxSidechains = double.Parse(MaxSidechains, CultureInfo.InvariantCulture);
+            if (this.MaxBBTPerEmptyBlock != null) 
+                toRet.MaxBBTPerEmptyBlock = double.Parse(MaxBBTPerEmptyBlock, CultureInfo.InvariantCulture);
+            if (this.MaxSidechainGrowthPerMonth != null)
+                toRet.MaxSidechainGrowthPerMonth = double.Parse(MaxSidechainGrowthPerMonth, CultureInfo.InvariantCulture);
+            if (this.MaxStakeToMonthlyIncomeRatio != null) 
+                toRet.MaxStakeToMonthlyIncomeRatio = double.Parse(MaxStakeToMonthlyIncomeRatio, CultureInfo.InvariantCulture);
             return toRet;
         }
     }

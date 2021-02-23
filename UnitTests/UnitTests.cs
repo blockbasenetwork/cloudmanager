@@ -1,4 +1,3 @@
-using BlockBase.Dapps.CloudManager.Business.Nodes;
 using BlockBase.Dapps.CloudManager.Data;
 using BlockBase.Dapps.CloudManager.DataAccessLayer;
 using BlockBase.Dapps.CloudManager.Utils;
@@ -8,7 +7,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Transactions;
 
 namespace UnitTests
 {
@@ -84,7 +82,7 @@ namespace UnitTests
 
         [TestMethod]
         public async Task TestJsonStringNavigatorDeeper()
-        {//C:\Users\User01\source\repos\cloudmanager\UnitTests\bin\Debug\netcoreapp3.1
+        {
             String curDir = Directory.GetCurrentDirectory() + "\\..\\..\\..\\test.json";
             String jsonString = await FileEx.ReadFileAsync(curDir);
             var bbt = JsonStringNavigator.GetDeeper(jsonString, "BBTValueAutoConfig");

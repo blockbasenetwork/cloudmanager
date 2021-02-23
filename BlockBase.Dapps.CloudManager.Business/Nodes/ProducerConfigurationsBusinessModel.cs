@@ -37,8 +37,9 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             MaxStakeToMonthlyIncomeRatio = MaxStakeToMonthlyIncomeRatio.HasValue ? MaxStakeToMonthlyIncomeRatio -= 1 : MaxStakeToMonthlyIncomeRatio = null;
         }
 
-        public bool HasNegativeValues()
+        public  bool HasNegativeValues()
         {
+            this.HasDouble();
             var hasNegative = false;
             foreach (var property in this.GetType().GetProperties())
             {
@@ -50,6 +51,21 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
                 }
             }
             return hasNegative;
+        }
+
+    
+    }
+
+    public static class test
+    {
+        public static bool HasDouble(this object obj)
+        {
+            var properties = obj.GetType().GetProperties();
+            foreach (var propertie in properties)
+            {
+                if (propertie.PropertyType == typeof(double)) return true;
+            }
+            return false;
         }
     }
 }

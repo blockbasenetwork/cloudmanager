@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BlockBase.Dapps.CloudManager.Business
+namespace BlockBase.Dapps.CloudManager.Business.Nodes
 {
 
     public class RequesterConfigurationBusinessModel
     {
+
+
         private const string BLOCK_SIZE = "BlockSize={0}";
         private const string TIME_BETWEEN_BLOCKS = "TimeBetweenBlocks={0}";
 
-        public bool CheckFields() => MinimumCandidatureStake == null && TimeBetweenBlocks == null && BlockSize == null && Full.MaxPaymentPerBlock == null && Full.MinPaymentPerBlock == null && Full.Required == null
+        public bool AllPropsNull() => MinimumCandidatureStake == null && TimeBetweenBlocks == null && BlockSize == null && Full.MaxPaymentPerBlock == null && Full.MinPaymentPerBlock == null && Full.Required == null
             && Validator.MaxPaymentPerBlock == null && Validator.MinPaymentPerBlock == null && Validator.Required == null && History.MaxPaymentPerBlock == null && History.MinPaymentPerBlock == null && History.Required == null;
 
         public string Account { get; set; }
@@ -36,6 +38,14 @@ namespace BlockBase.Dapps.CloudManager.Business
             BlockSize = blockSize;
         }
 
+        public RequesterConfigurationBusinessModel()
+        {
+            Full = new ConfigNode();
+            Validator = new ConfigNode();
+            History = new ConfigNode();
+
+        }
+
         public string QueryString()
         {
             string queryToRet = "?";
@@ -46,12 +56,17 @@ namespace BlockBase.Dapps.CloudManager.Business
         }
     }
 
+
+
     public class ConfigNode
     {
         private const string MAX_PAYMENT_PER_BLOCK = "maxPaymentPerBlock{0}Producer={1}";
         private const string MIN_PAYMENT_PER_BLOCK = "minPaymentPerBlock{0}Producer={1}";
         private const string NUMBER_PRODUCERS_REQUIRED = "numberOf{0}ProducersRequired={1}";
 
+        public ConfigNode()
+        {
+        }
 
         public double? MinPaymentPerBlock { get; set; }
         public double? MaxPaymentPerBlock { get; set; }

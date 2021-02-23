@@ -11,5 +11,11 @@ namespace BlockBase.Dapps.CloudManager.Data
         public List<RequesterPOCO> AppliedTo { get; set; }
         public List<RequesterPOCO> SideChains { get; set; }
 
+        public DetailedProducerPOCO()
+        {
+            WorkingOn = new List<RequesterPOCO>();
+            AppliedTo = new List<RequesterPOCO>();
+            SideChains = new List<RequesterPOCO>();
+        }
     }
 }
