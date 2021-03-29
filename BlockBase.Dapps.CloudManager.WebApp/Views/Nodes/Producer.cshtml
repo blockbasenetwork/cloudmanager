@@ -149,9 +149,9 @@
                     <tr>
                         <td>
                             @Html.ActionLink((string)item.Account, actionName: "Requester",
-         controllerName: "Nodes",
-         routeValues: new { id = item.Account },
-         htmlAttributes: null)
+                                 controllerName: "Nodes",
+                                 routeValues: new { id = item.Account },
+                                 htmlAttributes: null)
                         </td>
                         <td>
                             @item.State
@@ -169,22 +169,27 @@
                         <td>
                             <!-- Health -->
                         </td>
-                        <td>
-                            <div class="dropdown">
-                                <i class="fas fa-bars dropbtn"></i>
-                                <div class="dropdown-content">
-                                    <a href="/Deployment/StartNode?Account=@item.Account"><i class="fas fa-cloud"></i> Manage Stake</a>
-                                    <a href="#"><i class="fas fa-edit"></i> Blocks</a>
-                                    <a href="#"><i class="fas fa-copy"></i> Duplicate</a>
-                                    <a href="/Deployment/RemoveNode?Account=@item.Account"><i class="fas fa-trash"></i> Leave</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="@item.Ip"><i class="fas fa-external-link-alt"></i> Swagger</a>
-                                    <a href="https://jungle3.bloks.io/account/@item.Account"><i class="fas fa-external-link-alt"></i> Bloks.io</a>
-                                    <a href="https://arm.chintai.io/portal"><i class="fas fa-external-link-alt"></i> Charm</a>
-                                    <div class="dropdown-divider"></div>
+                        @*<td>
+                            
+                            <i class="fas fa-times">
+                                @Html.Raw(@Html.ActionLink("12", actionName: "RemoveCandidature",
+                                    controllerName: "Nodes",
+                                    routeValues: new { account = item.Account },
+                                    htmlAttributes: null).)
+                            </i>
+                        </td>*@
 
-                                </div>
-                            </div>
+                        <td>
+                            <a href="@Url.Action("RemoveCandidature", "Nodes", new { account = item.Account })">
+                                <i style="color: black;" class="fas fa-times"></i>
+                            </a>
+
+                            @*<i class="fas fa-times">
+                                @Html.ActionLink("12", actionName: "RemoveCandidature",
+                                    controllerName: "Nodes",
+                                    routeValues: new { account = item.Account },
+                                    htmlAttributes: null)
+                            </i>*@
                         </td>
                     </tr>
                 }

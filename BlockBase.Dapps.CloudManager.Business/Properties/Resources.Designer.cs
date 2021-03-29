@@ -178,6 +178,15 @@ namespace BlockBase.Dapps.CloudManager.Business.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /api/Provider/RemoveCandidature?sidechainName=.
+        /// </summary>
+        internal static string RemoveCandidature {
+            get {
+                return ResourceManager.GetString("RemoveCandidature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /api/Requester/RemoveAccountPermission?accountToRemove=.
         /// </summary>
         internal static string RemovePermitted {

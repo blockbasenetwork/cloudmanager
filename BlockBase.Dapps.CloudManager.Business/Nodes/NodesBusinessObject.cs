@@ -325,7 +325,17 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             throw new NotImplementedException();
         }
 
-      
-        
+        public async Task<Operation> RemoveCandidature(string account)
+        {
+            return await ExecuteAction(async () =>
+            {
+                var ip = await _cloudPlugin.GetNodeIP(account);
+                var result = await Fetch.PostAsync(ip + Resources.RemoveCandidature + account);
+                var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
+                if (!(ResponseString == "true")) throw new Exception("Remove Failed");
+            });
+        }
+
+
     }
 }

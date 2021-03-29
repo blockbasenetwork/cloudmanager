@@ -388,5 +388,18 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             }
             return RedirectToAction("ProducerConfigurations", new { id = vm.Account });
         }
+
+        
+        public async Task<IActionResult> RemoveCandidature(string account)
+        {
+            var operation = await _business.RemoveCandidature(account);
+            
+            if (!operation.HasSucceeded)
+            {
+                RegisterPostError(operation.Exception.Message);
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -157,6 +157,9 @@
   <data name="RemoveBlackList" xml:space="preserve">
     <value>/api/Requester/RemoveAccountFromBlacklist?account=</value>
   </data>
+  <data name="RemoveCandidature" xml:space="preserve">
+    <value>/api/Provider/RemoveCandidature?sidechainName=</value>
+  </data>
   <data name="RemovePermitted" xml:space="preserve">
     <value>/api/Requester/RemoveAccountPermission?accountToRemove=</value>
   </data>
