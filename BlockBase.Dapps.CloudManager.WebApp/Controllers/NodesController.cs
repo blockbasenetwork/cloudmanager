@@ -237,7 +237,6 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
 
         public async Task<IActionResult> Producer(string id)
         {
-
             var operation = await _business.GetProducerAsync(id);
             if (!operation.HasSucceeded)
             {

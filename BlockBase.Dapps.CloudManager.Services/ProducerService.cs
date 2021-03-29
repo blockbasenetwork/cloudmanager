@@ -4,6 +4,7 @@ using BlockBase.Dapps.CloudManager.Services.Properties;
 using BlockBase.Dapps.CloudManager.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -88,13 +89,63 @@ namespace BlockBase.Dapps.CloudManager.Services
         {
             var _reqService = new RequesterService();
             var producingSidechainNames = await FetchProducingChains(res.IP);
+            var pastSidechainNames = await FetchPastChains(res.IP);
+
             foreach(var name in producingSidechainNames)
             {
                 var working = new RequesterPOCO() { Account= name, Ip = res.IP};
                 await _reqService.FetchValues(working);
-                res.WorkingOn.Add(working);
 
+                res.SideChains.Add(working);
+
+                if (await CheckCandidate(res.IP, name))
+                {
+                    res.AppliedTo.Add(working);                    
+                }
+                else
+                {
+                    res.WorkingOn.Add(working);
+                }
             }
+
+            foreach (var name in pastSidechainNames)
+            {
+                var past = new RequesterPOCO() { Account = name, Ip = res.IP };
+                await _reqService.FetchValues(past);
+
+                res.SideChains.Add(past);
+            }
+        }
+
+        public async Task<bool> CheckCandidate(String ip, String account)
+        {
+            var jsonString = await Fetch.GetAsync(ip + Resources.ProducingSideChains);
+            var succeeded = bool.Parse(JsonStringNavigator.GetDeeper(jsonString, "succeeded"));
+            if (!succeeded)
+            {
+                return false;
+            }
+            var response = JsonStringNavigator.GetDeeper<ProducingSidechain[]>(jsonString, "response");
+            var holder = response.Where(node => node.name == account);
+
+            return holder.First().sidechainState == "Candidature" ? true : false;
+        }
+
+        public async Task<List<string>> FetchPastChains(String ip)
+        {
+            var jsonString = await Fetch.GetAsync(ip + Resources.PastSideChains);
+            var succeeded = bool.Parse(JsonStringNavigator.GetDeeper(jsonString, "succeeded"));
+            if (!succeeded)
+            {
+                return null;
+            }
+            var response = JsonStringNavigator.GetDeeper<ProducingSidechain[]>(jsonString, "response");
+            List<string> past = new List<string>();
+            foreach (var sc in response)
+            {
+                past.Add(sc.name);
+            }
+            return past;
         }
     }
 }

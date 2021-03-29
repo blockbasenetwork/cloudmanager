@@ -123,6 +123,9 @@
   <data name="DBLocation" xml:space="preserve">
     <value>\\..\\BlockBase.Dapps.CloudManager.Data\\DB.db</value>
   </data>
+  <data name="PastSideChains" xml:space="preserve">
+    <value>/api/Provider/GetPastSidechains</value>
+  </data>
   <data name="ProducingSideChains" xml:space="preserve">
     <value>/api/Provider/GetProducingSidechains</value>
   </data>

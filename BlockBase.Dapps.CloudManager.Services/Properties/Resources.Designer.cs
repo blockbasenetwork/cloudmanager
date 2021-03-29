@@ -79,6 +79,15 @@ namespace BlockBase.Dapps.CloudManager.Services.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /api/Provider/GetPastSidechains.
+        /// </summary>
+        internal static string PastSideChains {
+            get {
+                return ResourceManager.GetString("PastSideChains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /api/Provider/GetProducingSidechains.
         /// </summary>
         internal static string ProducingSideChains {

@@ -1,7 +1,68 @@
 ﻿@using BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
 @model ProducerViewModel
 
-<div class="nodes-table" >
+<div class="nodes-table">
+    <p class="table-title">Sidechains</p>
+    <table id="sidechains-table" class="table" style="width:100%">
+        <thead class="thead-light">
+            <tr>
+                <th>Node </th>
+                <th>Producing</th>
+                <th>Workers Needed</th>
+                <th>Block rewards</th>
+                <th>Min BBT per Mb</th>
+                <th>Max Stake To Monthly Income</th>
+                <th>Max Sidechain Growth Per</th>
+            </tr>
+        </thead>
+        @if (Model != null)
+        {
+            <tbody>
+                @foreach (var item in Model.SideChains)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink((string)item.Account, actionName: "Requester",
+                                controllerName: "Nodes",
+                                routeValues: new { id = item.Account },
+                                htmlAttributes: null)
+                        </td>
+                        <td>
+                            @item.State
+                        </td>
+                        <td>
+                            @item.MonthlyCost
+                        </td>
+
+                        <td>
+                            @item.Stake
+                        </td>
+                        <td>
+                            @item.Balance
+                        </td>
+                        <td>
+                            <!-- Health -->
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <i class="fas fa-bars dropbtn"></i>
+                                <div class="dropdown-content">
+                                    <a href="/Deployment/StartNode?Account=@item.Account"><i class="fas fa-cloud"></i> Manage Stake</a>
+                                    <a href="#"><i class="fas fa-edit"></i> Blocks</a>
+                                    <a href="#"><i class="fas fa-copy"></i> Duplicate</a>
+                                    <a href="/Deployment/RemoveNode?Account=@item.Account"><i class="fas fa-trash"></i> Leave</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        }
+    </table>
+</div>
+
+<div class="nodes-table">
     <p class="table-title">Working On</p>
     <table id="workingOn-table" class="table" style="width:100%">
         <thead class="thead-light">
@@ -20,43 +81,107 @@
             <tbody>
                 @foreach (var item in Model.WorkingOn)
                 {
-                <tr>
-                    <td>
-                        @Html.ActionLink((string)item.Account, actionName: "Requester",
-                            controllerName: "Nodes",
-                            routeValues: new { id = item.Account },
-                            htmlAttributes: null)
-                    </td>
-                    <td>
-                        @item.State
-                    </td>
-                    <td>
-                        @item.MonthlyCost
-                    </td>
+                    <tr>
+                        <td>
+                            @Html.ActionLink((string)item.Account, actionName: "Requester",
+                                controllerName: "Nodes",
+                                routeValues: new { id = item.Account },
+                                htmlAttributes: null)
+                        </td>
+                        <td>
+                            @item.State
+                        </td>
+                        <td>
+                            @item.MonthlyCost
+                        </td>
 
-                    <td>
-                        @item.Stake
-                    </td>
-                    <td>
-                        @item.Balance
-                    </td>
-                    <td>
-                        <!-- Health -->
-                    </td>
-                    <td>
-                        <div class="dropdown">
-                            <i class="fas fa-bars dropbtn"></i>
-                            <div class="dropdown-content">
+                        <td>
+                            @item.Stake
+                        </td>
+                        <td>
+                            @item.Balance
+                        </td>
+                        <td>
+                            <!-- Health -->
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <i class="fas fa-bars dropbtn"></i>
+                                <div class="dropdown-content">
                                     <a href="/Deployment/StartNode?Account=@item.Account"><i class="fas fa-cloud"></i> Manage Stake</a>
                                     <a href="#"><i class="fas fa-edit"></i> Blocks</a>
                                     <a href="#"><i class="fas fa-copy"></i> Duplicate</a>
                                     <a href="/Deployment/RemoveNode?Account=@item.Account"><i class="fas fa-trash"></i> Leave</a>
-                                }
+                                    <div class="dropdown-divider"></div>
+                                    <a href="@item.Ip"><i class="fas fa-external-link-alt"></i> Swagger</a>
+                                    <a href="https://jungle3.bloks.io/account/ + @item.Account"><i class="fas fa-external-link-alt"></i> Bloks.io</a>
+                                    <a href="https://arm.chintai.io/portal"><i class="fas fa-external-link-alt"></i> Charm</a>
+                                    <div class="dropdown-divider"></div>
 
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        }
+    </table>
+</div>
+
+<div class="nodes-table">
+    <p class="table-title">Applied to</p>
+    <table id="appliedTo-table" class="table" style="width:100%">
+        <thead class="thead-light">
+            <tr>
+                <th>Node </th>
+                <th>Status</th>
+                <th>Average Monthly Cost</th>
+                <th>Stake</th>
+                <th>Balance</th>
+                <th>Health</th>
+                <th></th>
+            </tr>
+        </thead>
+        @if (Model != null)
+        {
+            <tbody>
+                @foreach (var item in Model.AppliedTo)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink((string)item.Account, actionName: "Requester",
+                                controllerName: "Nodes",
+                                routeValues: new { id = item.Account },
+                                htmlAttributes: null)
+                        </td>
+                        <td>
+                            @item.State
+                        </td>
+                        <td>
+                            @item.MonthlyCost
+                        </td>
+
+                        <td>
+                            @item.Stake
+                        </td>
+                        <td>
+                            @item.Balance
+                        </td>
+                        <td>
+                            <!-- Health -->
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <i class="fas fa-bars dropbtn"></i>
+                                <div class="dropdown-content">
+                                    <a href="/Deployment/StartNode?Account=@item.Account"><i class="fas fa-cloud"></i> Manage Stake</a>
+                                    <a href="#"><i class="fas fa-edit"></i> Blocks</a>
+                                    <a href="#"><i class="fas fa-copy"></i> Duplicate</a>
+                                    <a href="/Deployment/RemoveNode?Account=@item.Account"><i class="fas fa-trash"></i> Leave</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
                 }
             </tbody>
         }
@@ -65,6 +190,84 @@
 
 <script>
     $(document).ready(function () {
+        $('#sidechains-table').DataTable();
+    });
+
+    $(document).ready(function () {
         $('#workingOn-table').DataTable();
     });
+
+    $(document).ready(function () {
+        $('#appliedTo-table').DataTable();
+    });
 </script>
+
+@*<script>
+    $(document).ready(function () {
+        $('#sidechains-table').DataTable();
+        $('#appliedTo-table').DataTable();
+        $('#workingOn-table').DataTable();
+
+        var myTable = $('#sidechains-table').DataTable({
+            dom: 'Bfrtip',
+            buttons: {
+                buttons: [
+                    {
+                        className: "Refresh-btn",
+                        action: function (e, dt, node, config) {
+                            $("#nodes-table").load(location.href + "#nodes-table");
+                        }
+                    }
+                ],
+                dom: {
+                    button: {
+                        tag: "button",
+                        className: "btn btn-light"
+                    }
+                }
+            }
+        });
+
+        var myTable2 = $('#workingOn-table').DataTable({
+            dom: 'Bfrtip',
+            buttons: {
+                buttons: [
+                    {
+                        className: "Refresh-btn",
+                        action: function (e, dt, node, config) {
+                            $("#nodes-table").load(location.href + "#nodes-table");
+                        }
+                    }
+                ],
+                dom: {
+                    button: {
+                        tag: "button",
+                        className: "btn btn-light"
+                    }
+                }
+            }
+        });
+
+        var myTable3 = $('#appliedTo-table').DataTable({
+            dom: 'Bfrtip',
+            buttons: {
+                buttons: [
+                    {
+                        className: "Refresh-btn",
+                        action: function (e, dt, node, config) {
+                            $("#nodes-table").load(location.href + "#nodes-table");
+                        }
+                    }
+                ],
+                dom: {
+                    button: {
+                        tag: "button",
+                        className: "btn btn-light"
+                    }
+                }
+            }
+        });
+        $('.Refresh-btn').html('<i class="fas fa-redo"></i> Refresh');
+    });
+
+</script>*@

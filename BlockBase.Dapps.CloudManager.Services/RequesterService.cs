@@ -50,6 +50,7 @@ namespace BlockBase.Dapps.CloudManager.Services
             req.Stake = JsonStringNavigator.GetDeeper(response, "currentRequesterStake");
             var inProduction = bool.Parse(JsonStringNavigator.GetDeeper(response, "inProduction"));
             req.State = inProduction ? "ON" : "OFF";
+            
             return true;
         }
 
