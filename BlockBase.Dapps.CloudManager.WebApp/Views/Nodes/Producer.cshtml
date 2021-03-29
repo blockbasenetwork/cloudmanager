@@ -54,7 +54,6 @@
                                 </div>
                             </div>
                         </td>
-                        <td></td>
                     </tr>
                 }
             </tbody>
@@ -190,23 +189,9 @@
 
 <script>
     $(document).ready(function () {
-        $('#sidechains-table').DataTable();
-    });
-
-    $(document).ready(function () {
-        $('#workingOn-table').DataTable();
-    });
-
-    $(document).ready(function () {
-        $('#appliedTo-table').DataTable();
-    });
-</script>
-
-@*<script>
-    $(document).ready(function () {
-        $('#sidechains-table').DataTable();
-        $('#appliedTo-table').DataTable();
-        $('#workingOn-table').DataTable();
+        //$('#sidechains-table').DataTable();
+        //$('#appliedTo-table').DataTable();
+        //$('#workingOn-table').DataTable();
 
         var myTable = $('#sidechains-table').DataTable({
             dom: 'Bfrtip',
@@ -267,7 +252,7 @@
                 }
             }
         });
+
         $('.Refresh-btn').html('<i class="fas fa-redo"></i> Refresh');
     });
-
-</script>*@
+</script>
