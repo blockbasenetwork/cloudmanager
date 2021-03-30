@@ -83,9 +83,12 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             return RedirectToAction("Requester", new { id = vm.Account });
         }
         [HttpGet("Nodes/Requester/{id}/Stake")]
-        public async Task<IActionResult> RequesterStake(string id)
+        public async Task<IActionResult> RequesterStake(string id, string? error)
         {
+            if (error != null) ViewBag.Error = error;
+
             ViewBag.DetailedRequester = true;
+
             var operation = await _business.GetRequesterStake(id);
             if (!operation.HasSucceeded)
             {
@@ -99,10 +102,11 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         public async Task<IActionResult> RequesterStakeClaim(string id)
         {
             var operation = await _business.ClaimStake(id);
+         
             if (!operation.HasSucceeded)
             {
                 RegisterError(operation.Exception.Message);
-                return RedirectToAction("RequesterStake", new { id = id });
+                return RedirectToAction("RequesterStake", new { id = id , error = operation.Exception.Message});
             }
             return RedirectToAction("RequesterStake", new { id = id });
         }

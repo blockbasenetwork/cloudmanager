@@ -1,6 +1,15 @@
 ﻿@using BlockBase.Dapps.CloudManager.WebApp.Models.Nodes;
 @model RequesterStakeViewModel
 
+@if (@ViewBag.Error != null)
+{
+    <script>
+        $(document).ready(function() {
+            $('#errorClaim-modal').modal('show');
+        });
+    </script>
+}
+
 <div id="add-modal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -23,6 +32,22 @@
     </div>
 </div>
 
+<div id="errorClaim-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"> ERROR</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-header">
+                <h6 class="modal-title">@ViewBag.Error</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="most-outer">
     <div class="outer-outer">
         <div class="outter-Stake">
@@ -35,15 +60,14 @@
 
             <div class="stake-buttons">
                 <button class="btn-stake">Stake</button>
-<button class="btn-claim" onclick="window.location.href='/Nodes/RequesterStakeClaim/@Model.Account'">Claim</button>
+                <button class="btn-claim" onclick="window.location.href='/Nodes/RequesterStakeClaim/@Model.Account'">Claim</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    $('.btn-stake').click(() =>
-    {
+    $('.btn-stake').click(() => {
         $('#add-modal').modal('show')
     });
 </script>
