@@ -90,9 +90,18 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             return await ExecuteAction(async () =>
             {
                 var ip = await _cloudPlugin.GetNodeIP(node);
-                await Fetch.GetAsync(ip + Resources.ClaimStake);
-            });
+                var result = await Fetch.PostAsync(ip + Resources.ClaimStake);
 
+                var ResponseString = JsonStringNavigator.GetDeeper(result, "succeeded");
+
+                if (!(ResponseString == "true"))
+                {
+                    var ExceptionString = JsonStringNavigator.GetDeeper(result, "exception");
+                    var ErrorString = JsonStringNavigator.GetDeeper(ExceptionString, "code");
+
+                    if(ErrorString == "500") throw new Exception("Sidechain still producing");
+                }               
+            });
         }
 
         public async Task<Operation> AddStake(string node, double amount)
