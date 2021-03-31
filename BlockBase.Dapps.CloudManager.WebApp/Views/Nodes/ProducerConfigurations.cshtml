@@ -6,8 +6,9 @@
         <div class="outer-outer">
             <div class="outter-Stake">
                 <div class="stake-text">Max Ratio to Stake</div>
-                <div class="display-stake">
-                    <div class="arrows p-2 bd-highlight">
+                <div class="display-stake row">
+                    <div class="stake-value col m-auto">@Model.MaxRatioToStake</div>
+                    <div class="arrows p-2 bd-highlight col">
                         <div class="up-arrow">
                             <form asp-controller="Nodes" asp-action="ProducerSetIncrementDecrementConfiguration" asp-route-isIncrement="true">
                                 <input asp-for="Account" type="hidden" value="@Model.Account" />
@@ -27,11 +28,10 @@
                             </form>
                         </div>
                     </div>
-                    <div class="stake-value">@Model.MaxRatioToStake</div>
                 </div>
                 <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
                     <input asp-for="Account" type="hidden" value="@Model.Account" />
-                    <input asp-for="MaxRatioToStake" type="number" step=any min=0/>
+                    <input asp-for="MaxRatioToStake" type="number" step=any min=0 style="width:85%" />
                     <span asp-validation-for="MaxRatioToStake" class="text-danger"></span>
                     <input type="submit" value="Set" class="btn btn btn-dark" />
                 </form>
@@ -43,8 +43,9 @@
         <div class="outer-outer">
             <div class="outter-Stake">
                 <div class="stake-text">Min BBT per MB ratio</div>
-                <div class="display-stake">
-                    <div class="arrows p-2 bd-highlight">
+                <div class="display-stake row">
+                    <div class="stake-value col m-auto"> @Model.MinBBTPerMbRatio</div>
+                    <div class="arrows p-2 bd-highlight col">
                         <div class="up-arrow">
                             <form asp-controller="Nodes" asp-action="ProducerSetIncrementDecrementConfiguration" asp-route-isIncrement="true">
                                 <input asp-for="Account" type="hidden" value="@Model.Account" />
@@ -55,7 +56,7 @@
                             </form>
                         </div>
                         <div class="down-arrow">
-                            <form asp-controller="Nodes" asp-action="ProducerSetIncrementDecrementConfiguration"  asp-route-isIncrement="false">
+                            <form asp-controller="Nodes" asp-action="ProducerSetIncrementDecrementConfiguration" asp-route-isIncrement="false">
                                 <input asp-for="Account" type="hidden" value="@Model.Account" />
                                 <input asp-for="MinBBTPerMbRatio" type="hidden" value="@Model.MinBBTPerMbRatio" />
                                 <button class="icon-button" type="submit">
@@ -64,11 +65,10 @@
                             </form>
                         </div>
                     </div>
-                    <div class="stake-value"> @Model.MinBBTPerMbRatio</div>
                 </div>
                 <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
                     <input asp-for="Account" type="hidden" value="@Model.Account" />
-                    <input asp-for="MinBBTPerMbRatio" type="number" step=any min=0 />
+                    <input asp-for="MinBBTPerMbRatio" type="number" step=any min=0 style="width:85%" />
                     <span asp-validation-for="MinBBTPerMbRatio" class="text-danger"></span>
                     <input type="submit" value="Set" class="btn btn btn-dark" />
                 </form>
@@ -84,8 +84,9 @@
         <div class="outer-outer">
             <div class="outter-Stake">
                 <div class="stake-text">Max growth per month</div>
-                <div class="display-stake">
-                    <div class="arrows p-2 bd-highlight">
+                <div class="display-stake row">
+                    <div class="stake-value col m-auto">@Model.MaxGrowthPerMonth</div>
+                    <div class="arrows p-2 bd-highlight col">
                         <div class="up-arrow">
                             <form asp-controller="Nodes" asp-action="ProducerSetIncrementDecrementConfiguration" asp-route-isIncrement="true">
                                 <input asp-for="Account" type="hidden" value="@Model.Account" />
@@ -105,11 +106,10 @@
                             </form>
                         </div>
                     </div>
-                    <div class="stake-value">@Model.MaxGrowthPerMonth</div>
                 </div>
                 <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
                     <input asp-for="Account" type="hidden" value="@Model.Account" />
-                    <input asp-for="MaxGrowthPerMonth" type="number" step=any min=0 />
+                    <input asp-for="MaxGrowthPerMonth" type="number" step=any min=0 style="width:85%" />
                     <span asp-validation-for="MaxGrowthPerMonth" class="text-danger"></span>
                     <input type="submit" value="Set" class="btn btn btn-dark" />
                 </form>
@@ -121,8 +121,9 @@
         <div class="outer-outer">
             <div class="outter-Stake">
                 <div class="stake-text">Max sidechains</div>
-                <div class="display-stake">
-                    <div class="arrows p-2 bd-highlight">
+                <div class="display-stake row">
+                    <div class="stake-value col m-auto">@Model.MaxSidechains</div>
+                    <div class="arrows p-2 bd-highlight col">
                         <div class="up-arrow">
                             <form asp-controller="Nodes" asp-action="ProducerSetIncrementDecrementConfiguration" asp-route-isIncrement="true">
                                 <input asp-for="Account" type="hidden" value="@Model.Account" />
@@ -142,11 +143,10 @@
                             </form>
                         </div>
                     </div>
-                    <div class="stake-value">@Model.MaxSidechains</div>
                 </div>
                 <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
                     <input asp-for="Account" type="hidden" value="@Model.Account" />
-                    <input asp-for="MaxSidechains" type="number" step=any min=0 />
+                    <input asp-for="MaxSidechains" type="number" step=any min=0 style="width:85%" />
                     <span asp-validation-for="MaxSidechains" class="text-danger"></span>
                     <input type="submit" value="Set" class="btn btn btn-dark" />
                 </form>
@@ -162,8 +162,9 @@
         <div class="outer-outer">
             <div class="outter-Stake">
                 <div class="stake-text">Max BBT per empty block</div>
-                <div class="display-stake">
-                    <div class="arrows p-2 bd-highlight">
+                <div class="display-stake row">
+                    <div class="stake-value col m-auto">@Model.MaxBBTPerEmptyBlock</div>
+                    <div class="arrows p-2 bd-highlight col">
                         <div class="up-arrow">
                             <form asp-controller="Nodes" asp-action="ProducerSetIncrementDecrementConfiguration" asp-route-isIncrement="true">
                                 <input asp-for="Account" type="hidden" value="@Model.Account" />
@@ -183,11 +184,10 @@
                             </form>
                         </div>
                     </div>
-                    <div class="stake-value">@Model.MaxBBTPerEmptyBlock</div>
                 </div>
                 <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
                     <input asp-for="Account" type="hidden" value="@Model.Account" />
-                    <input asp-for="MaxBBTPerEmptyBlock" type="number" step=any min=0 />
+                    <input asp-for="MaxBBTPerEmptyBlock" type="number" step=any min=0 style="width:85%" />
                     <span asp-validation-for="MaxBBTPerEmptyBlock" class="text-danger"></span>
                     <input type="submit" value="Set" class="btn btn btn-dark" />
                 </form>
@@ -199,8 +199,9 @@
         <div class="outer-outer">
             <div class="outter-Stake">
                 <div class="stake-text">Max sidechain growth per month(MB)</div>
-                <div class="display-stake">
-                    <div class="arrows p-2 bd-highlight">
+                <div class="display-stake row">
+                    <div class="stake-value col m-auto">@Model.MaxSidechainGrowthPerMonth</div>
+                    <div class="arrows p-2 bd-highlight col">
                         <div class="up-arrow">
                             <form asp-controller="Nodes" asp-action="ProducerSetIncrementDecrementConfiguration" asp-route-isIncrement="true">
                                 <input asp-for="Account" type="hidden" value="@Model.Account" />
@@ -219,11 +220,11 @@
                                 </button>
                             </form>
                         </div>
-                        <div class="stake-value">@Model.MaxSidechainGrowthPerMonth</div>
                     </div>
+                </div>
                 <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
                     <input asp-for="Account" type="hidden" value="@Model.Account" />
-                    <input asp-for="MaxSidechainGrowthPerMonth" type="number" step=any min=0 />
+                    <input asp-for="MaxSidechainGrowthPerMonth" type="number" step=any min=0 style="width:85%" />
                     <span asp-validation-for="MaxSidechainGrowthPerMonth" class="text-danger"></span>
                     <input type="submit" value="Set" class="btn btn btn-dark" />
                 </form>
@@ -237,8 +238,9 @@
         <div class="outer-outer">
             <div class="outter-Stake">
                 <div class="stake-text">Max stake to monthly income ratio</div>
-                <div class="display-stake">
-                    <div class="arrows p-2 bd-highlight">
+                <div class="display-stake row">
+                    <div class="stake-value col m-auto">@Model.MaxStakeToMonthlyIncomeRatio</div>
+                    <div class="arrows p-2 bd-highlight col">
                         <div class="up-arrow">
                             <form asp-controller="Nodes" asp-action="ProducerSetIncrementDecrementConfiguration" asp-route-isIncrement="true">
                                 <input asp-for="Account" type="hidden" value="@Model.Account" />
@@ -258,11 +260,10 @@
                             </form>
                         </div>
                     </div>
-                    <div class="stake-value">@Model.MaxStakeToMonthlyIncomeRatio</div>
                 </div>
                 <form asp-controller="Nodes" asp-action="ProducerSetConfigurations">
                     <input asp-for="Account" type="hidden" value="@Model.Account" />
-                    <input asp-for="MaxStakeToMonthlyIncomeRatio" type="number" step=any min=0 />
+                    <input asp-for="MaxStakeToMonthlyIncomeRatio" type="number" step=any min=0 style="width:85%" />
                     <span asp-validation-for="MaxStakeToMonthlyIncomeRatio" class="text-danger"></span>
                     <input type="submit" value="Set" class="btn btn btn-dark" />
                 </form>
