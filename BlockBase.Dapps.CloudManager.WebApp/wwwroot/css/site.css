@@ -107,7 +107,7 @@
 }
 
 .link-layout {
-    color: white !important;
+    color: white;
     font-weight: 500;
     transition: all 200ms linear;
 }
@@ -534,3 +534,16 @@ body {
     }
 
 
+.currentPage {
+    color: #5C88C6 !important;
+}
+
+.currentPage:after {
+    position: absolute;
+    bottom: -0px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    content: '';
+    background-color: #5C88C6;
+}
