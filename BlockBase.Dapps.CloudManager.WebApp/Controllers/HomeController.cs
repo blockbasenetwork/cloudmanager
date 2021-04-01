@@ -2,8 +2,10 @@
 using BlockBase.Dapps.CloudManager.Business.Home;
 using BlockBase.Dapps.CloudManager.WebApp.Models;
 using BlockBase.Dapps.CloudManager.WebApp.Models.Home;
+using BlockBase.Dapps.CloudManager.WebApp.Models.HtmlComponents;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -29,6 +31,12 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 return View();
             }
             ViewBag.NrNodes = res.Result;
+
+            var breadcrumbItems = new List<BreadcrumbItem>(){
+                new BreadcrumbItem{Display = "Home" , URL = "/" }
+            };
+            SetBreadCrumb(breadcrumbItems);
+
             var toRet = new HomeViewModel(res.Result);  
             return View(toRet);
         }

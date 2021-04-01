@@ -41,6 +41,13 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterError(requesters.Exception.Message);
                 return View(viewModel);
             }
+
+            var breadcrumbItems = new List<BreadcrumbItem>(){
+                new BreadcrumbItem{Display = "Home" , URL = "/" },
+                new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes" }
+            };
+            SetBreadCrumb(breadcrumbItems);
+
             return View(viewModel);
         }
 
@@ -55,10 +62,13 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             }
 
             var breadcrumbItems = new List<BreadcrumbItem>(){
+                new BreadcrumbItem{Display = "Home" , URL = "/" },
                 new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes" },
-                new BreadcrumbItem{Display = $"Requester/{id}" , URL = null }
+                new BreadcrumbItem{Display = "Requester" , URL = null },
+                new BreadcrumbItem{Display = id , URL = $"/Nodes/Requester/{id}"}
             };
             SetBreadCrumb(breadcrumbItems);
+
             return View(new RequesterViewModel(res.Result));
         }
         [HttpGet("Nodes/Requester/{id}/Configurations")]
@@ -66,7 +76,17 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
         {
             ViewBag.DetailedRequester = true;
             CheckPostError();
-            SetRequesterBreadCrumb(id, "Configurations");
+
+            var breadcrumbItems = new List<BreadcrumbItem>(){
+                new BreadcrumbItem{Display = "Home" , URL = "/" },
+                new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes" },
+                new BreadcrumbItem{Display = "Requester" , URL = null },
+                new BreadcrumbItem{Display = id , URL = $"/Nodes/Requester/{id}"},
+                new BreadcrumbItem{Display = "Configurations" , URL = $"/Nodes/Requester/{id}/Configurations"}
+            };
+            SetBreadCrumb(breadcrumbItems);
+
+            //SetRequesterBreadCrumb(id, "Configurations");
             return View(new RequesterConfigurationViewModel() { Account = id });
         }
 
@@ -95,7 +115,17 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterPostError(operation.Exception.Message);
                 return View();
             }
-            SetRequesterBreadCrumb(id, "Stake");
+
+            var breadcrumbItems = new List<BreadcrumbItem>(){
+                new BreadcrumbItem{Display = "Home" , URL = "/" },
+                new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes" },
+                new BreadcrumbItem{Display = "Requester" , URL = null },
+                new BreadcrumbItem{Display = id , URL = $"/Nodes/Requester/{id}"},
+                new BreadcrumbItem{Display = "Stake" , URL = $"/Nodes/Requester/{id}/Stake"}
+            };
+            SetBreadCrumb(breadcrumbItems);
+
+            //SetRequesterBreadCrumb(id, "Stake");
             return View(new RequesterStakeViewModel() { Account = id, Stake = operation.Result });
         }
 
@@ -131,7 +161,17 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterError(operation.Exception.Message);
                 return View();
             }
-            SetRequesterBreadCrumb(id, "ManageAccess");
+
+            var breadcrumbItems = new List<BreadcrumbItem>(){
+                new BreadcrumbItem{Display = "Home" , URL = "/" },
+                new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes" },
+                new BreadcrumbItem{Display = "Requester" , URL = null },
+                new BreadcrumbItem{Display = id , URL = $"/Nodes/Requester/{id}"},
+                new BreadcrumbItem{Display = "ManageAccess" , URL = $"/Nodes/Requester/{id}/ManageAccess"}
+            };
+            SetBreadCrumb(breadcrumbItems);
+
+            //SetRequesterBreadCrumb(id, "ManageAccess");
             return View(new RequesterAccessViewModel(operation.Result));
         }
 
@@ -201,7 +241,17 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterError(operation.Exception.Message);
                 return View();
             }
-            SetRequesterBreadCrumb(id, "Database");
+
+            var breadcrumbItems = new List<BreadcrumbItem>(){
+                new BreadcrumbItem{Display = "Home" , URL = "/" },
+                new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes" },
+                new BreadcrumbItem{Display = "Requester" , URL = null },
+                new BreadcrumbItem{Display = id , URL = $"/Nodes/Requester/{id}"},
+                new BreadcrumbItem{Display = "Database" , URL = $"/Nodes/Requester/{id}/Database"}
+            };
+            SetBreadCrumb(breadcrumbItems);
+
+            //SetRequesterBreadCrumb(id, "Database");
             return View(new SandboxViewModel(operation.Result));
         }
 
@@ -248,11 +298,15 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 return View();
             }
             ViewBag.DetailedProducer = true;
+
             var breadcrumbItems = new List<BreadcrumbItem>(){
+                new BreadcrumbItem{Display = "Home" , URL = "/" },
                 new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes" },
-                new BreadcrumbItem{Display = $"Producer/{id}" , URL = null }
+                new BreadcrumbItem{Display = "Producer" , URL = null },
+                new BreadcrumbItem{Display = id , URL = $"/Nodes/Producer/{id}"}
             };
             SetBreadCrumb(breadcrumbItems);
+
             return View(new ProducerViewModel(operation.Result));
         }
 
@@ -266,7 +320,17 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterError(operation.Exception.Message);
                 return View();
             }
-            setProducerBreadCrumb(id, "Database");
+
+            var breadcrumbItems = new List<BreadcrumbItem>(){
+                new BreadcrumbItem{Display = "Home" , URL = "/" },
+                new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes" },
+                new BreadcrumbItem{Display = "Producer" , URL = null },
+                new BreadcrumbItem{Display = id , URL = $"/Nodes/Producer/{id}"},
+                new BreadcrumbItem{Display = "Database" , URL = $"/Nodes/Producer/{id}/Database"}
+            };
+            SetBreadCrumb(breadcrumbItems);
+
+            //setProducerBreadCrumb(id, "Database");
             return View(new ProducerDatabaseViewModel() { Account = id, ProducingSidechains = operation.Result });
         }
 
@@ -293,7 +357,17 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterPostError(operation.Exception.Message);
                 return View();
             }
-            setProducerBreadCrumb(id, "Stake");
+
+            var breadcrumbItems = new List<BreadcrumbItem>(){
+                new BreadcrumbItem{Display = "Home" , URL = "/" },
+                new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes" },
+                new BreadcrumbItem{Display = "Producer" , URL = null },
+                new BreadcrumbItem{Display = id , URL = $"/Nodes/Producer/{id}"},
+                new BreadcrumbItem{Display = "Stake" , URL = $"/Nodes/Producer/{id}/Stake"}
+            };
+            SetBreadCrumb(breadcrumbItems);
+
+            //setProducerBreadCrumb(id, "Stake");
             return View(new ProducerStakeViewModel() { Stake = operation.Result.Stake, Account = id, ProducingSidechains = operation.Result.ProducingIn });
         }
 
@@ -307,7 +381,17 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterPostError(operation.Exception.Message);
                 return View();
             }
-            setProducerBreadCrumb(id, "Sidechains");
+
+            var breadcrumbItems = new List<BreadcrumbItem>(){
+                new BreadcrumbItem{Display = "Home" , URL = "/" },
+                new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes" },
+                new BreadcrumbItem{Display = "Producer" , URL = null },
+                new BreadcrumbItem{Display = id , URL = $"/Nodes/Producer/{id}"},
+                new BreadcrumbItem{Display = "Sidechains" , URL = $"/Nodes/Producer/{id}/Sidechains"}
+            };
+            SetBreadCrumb(breadcrumbItems);
+
+            //setProducerBreadCrumb(id, "Sidechains");
             return View(new ProducerOtherSidechainViewModel() { Account = id, OtherSidechains = operation.Result });
         }
 
@@ -319,6 +403,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterPostError(operation.Exception.Message);
                 return RedirectToAction("RequesterStake", new { id });
             }
+
             return RedirectToAction("ProducerStake", new { id });
         }
 
@@ -356,7 +441,17 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 if(!postError) RegisterError(operation.Exception.Message);
                 return View(new ProducerConfigurationViewModel(operation.Result) { Account = id });
             }
-            setProducerBreadCrumb(id, "Configurations");
+
+            var breadcrumbItems = new List<BreadcrumbItem>(){
+                new BreadcrumbItem{Display = "Home" , URL = "/" },
+                new BreadcrumbItem{Display = "Nodes" , URL = "/Nodes" },
+                new BreadcrumbItem{Display = "Producer" , URL = null },
+                new BreadcrumbItem{Display = id , URL = $"/Nodes/Producer/{id}"},
+                new BreadcrumbItem{Display = "Configurations" , URL = $"/Nodes/Producer/{id}/Configurations"}
+            };
+            SetBreadCrumb(breadcrumbItems);
+
+            //setProducerBreadCrumb(id, "Configurations");
             return View(new ProducerConfigurationViewModel(operation.Result) { Account = id });
         }
 

@@ -74,14 +74,20 @@ namespace BlockBase.Dapps.CloudManager.Business.Nodes
             });
         }
 
-        public async Task<OperationResult<string>> GetRequesterStake(string node)
+        public async Task<OperationResult<RequesterStakeBusinessModel>> GetRequesterStake(string node)
         {
             return await ExecuteFunction(async () =>
             {
                 var ip = await _cloudPlugin.GetNodeIP(node);
                 var jsonstring = await Fetch.GetAsync(ip + Resources.RequesterStake);
                 var stake = JsonStringNavigator.GetDeeper(jsonstring, "response");
-                return stake;
+
+                var jsonString = await Fetch.GetAsync(ip + Resources.RequesterConfig);
+                var json = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonString);
+                var currencyBalance = JsonConvert.DeserializeObject<Dictionary<string, object>>(json["response"].ToString())["currencyBalance"];
+                var balance = ((currencyBalance as JArray).First as JValue).Value.ToString();
+
+                return new RequesterStakeBusinessModel() { Account = node, Stake = stake, Balance = balance };
             });
         }
 

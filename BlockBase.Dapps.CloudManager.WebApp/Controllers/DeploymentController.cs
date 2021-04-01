@@ -1,6 +1,7 @@
 ﻿
 using BlockBase.Dapps.CloudManager.Business.Deployment;
 using BlockBase.Dapps.CloudManager.WebApp.Models;
+using BlockBase.Dapps.CloudManager.WebApp.Models.HtmlComponents;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -30,6 +31,14 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterError(res.Exception.Message);
                 return View();
             }
+
+            var breadcrumbItems = new List<BreadcrumbItem>(){
+                new BreadcrumbItem{Display = "Home" , URL = "/" },
+                new BreadcrumbItem{Display = "Deployment" , URL = "/Deployment" }
+            };
+
+            SetBreadCrumb(breadcrumbItems);
+
             var viewModelList = new List<DeploymentViewModel>();
             res.Result.ForEach((it) => { viewModelList.Add(new DeploymentViewModel(it)); });
             return View(res.Result);
