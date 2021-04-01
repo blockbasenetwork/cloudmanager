@@ -46,9 +46,9 @@
         <!-- Errorpopup Menu begin -->
         <div class="modal" id="error-modal" tabindex="-1">
             <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Ups</h5>
+                <div class="modal-content ">
+                    <div class="modal-header bg-danger " >
+                        <h5 class="modal-title">Error</h5>
                     </div>
                     <div class="modal-body">
                         <p>@ViewBag.ErrorMsg</p>
@@ -215,6 +215,8 @@
                 $('#error-modal').modal('show');
             }
             $('.closebtn').click(() => { $('#error-modal').modal('hide'); });
+
+
             $('body').on('mouseenter mouseleave', '.nav-item', function (e) {
                 if ($(window).width() > 750) {
                     var _d = $(e.target).closest('.nav-item'); _d.addClass('show');

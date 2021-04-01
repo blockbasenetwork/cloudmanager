@@ -555,21 +555,26 @@ body {
     text-align: center;
 }
 
-    .add-stake input {
+.add-stake input {
         margin-top: 7px !important;
     }
 
-    .add-stake h7 {
+.add-stake h7 {
         opacity: 0.5;
     }
 
-    .add-stake input[type=number] {
+.add-stake input[type=number] {
         margin: 0 auto !important;
         width: 80%;
     }
 
-    .add-stake input[type=submit] {
+.add-stake input[type=submit] {
         margin: 0 auto;
-        width: 60%;
+        width: 40%;
     }
+
+    .add-stake input[type=button] {
+        width: 40% ;
+    }
+
 
