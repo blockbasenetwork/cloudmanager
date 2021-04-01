@@ -126,7 +126,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             SetBreadCrumb(breadcrumbItems);
 
             //SetRequesterBreadCrumb(id, "Stake");
-            return View(new RequesterStakeViewModel() { Account = id, Stake = operation.Result });
+            return View(new RequesterStakeViewModel() { Account = id, Stake = operation.Result.Stake, Balance=operation.Result.Balance });
         }
 
         public async Task<IActionResult> RequesterStakeClaim(string id)
