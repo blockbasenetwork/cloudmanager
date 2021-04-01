@@ -2,7 +2,7 @@
 @model NodesViewModel
 
 <div class="Nodes">
-    
+
 
     <div class="nodes-table" id="reqs">
         <p class="table-title">Requesters</p>
@@ -26,7 +26,7 @@
                             <td>
                                 @Html.ActionLink((string)item.Account, actionName: "Requester",
                                     controllerName: "Nodes",
-                                    routeValues: new {id= item.Account },
+                                    routeValues: new { id = item.Account },
                                     htmlAttributes: null)
                             </td>
                             <td>
@@ -100,10 +100,47 @@
     </div>
 </div>
 <script>
-    $(document).ready(function () {
-        $('#requester-table').DataTable();
-        $('#provider-table').DataTable();
+    var myTable1 = $('#requester-table').DataTable({
+        dom: 'Bfrtip',
+        buttons: {
+            buttons: [
+                {
+                    className: "Refresh-btn",
+                    action: function (e, dt, node, config) {
+                        $("#nodes-table").load(location.href + "#nodes-table");
+                    }
+                }
+            ],
+            dom: {
+                button: {
+                    tag: "button",
+                    className: "btn btn-light"
+                }
+            }
+        }
     });
+
+    var myTable2 = $('#provider-table').DataTable({
+        dom: 'Bfrtip',
+        buttons: {
+            buttons: [
+                {
+                    className: "Refresh-btn",
+                    action: function (e, dt, node, config) {
+                        $("#nodes-table").load(location.href + "#nodes-table");
+                    }
+                }
+            ],
+            dom: {
+                button: {
+                    tag: "button",
+                    className: "btn btn-light"
+                }
+            }
+        }
+    });
+
+    $('.Refresh-btn').html('<i class="fas fa-redo"></i> Refresh');
 </script>
 
 
