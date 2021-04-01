@@ -31,28 +31,20 @@
                             @item.State
                         </td>
                         <td>
-                            @item.MonthlyCost
+                            <!-- Workers Needed -->
                         </td>
 
                         <td>
-                            @item.Stake
+                            <!-- Block rewards -->
                         </td>
                         <td>
-                            @item.Balance
+                            <!-- Min BBT per Mb -->
                         </td>
                         <td>
-                            <!-- Health -->
+                            <!-- Max Stake To Monthly Income -->
                         </td>
                         <td>
-                            <div class="dropdown">
-                                <i class="fas fa-bars dropbtn"></i>
-                                <div class="dropdown-content">
-                                    <a href="/Deployment/StartNode?Account=@item.Account"><i class="fas fa-cloud"></i> Manage Stake</a>
-                                    <a href="#"><i class="fas fa-edit"></i> Blocks</a>
-                                    <a href="#"><i class="fas fa-copy"></i> Duplicate</a>
-                                    <a href="/Deployment/RemoveNode?Account=@item.Account"><i class="fas fa-trash"></i> Leave</a>
-                                </div>
-                            </div>
+                            <!-- Max Sidechain Growth Per -->
                         </td>
                     </tr>
                 }
@@ -170,14 +162,14 @@
                             <!-- Health -->
                         </td>
                         @*<td>
-                            
-                            <i class="fas fa-times">
-                                @Html.Raw(@Html.ActionLink("12", actionName: "RemoveCandidature",
-                                    controllerName: "Nodes",
-                                    routeValues: new { account = item.Account },
-                                    htmlAttributes: null).)
-                            </i>
-                        </td>*@
+
+                                <i class="fas fa-times">
+                                    @Html.Raw(@Html.ActionLink("12", actionName: "RemoveCandidature",
+                                        controllerName: "Nodes",
+                                        routeValues: new { account = item.Account },
+                                        htmlAttributes: null).)
+                                </i>
+                            </td>*@
 
                         <td>
                             <a href="@Url.Action("RemoveCandidature", "Nodes", new { account = item.Account })">
@@ -185,11 +177,11 @@
                             </a>
 
                             @*<i class="fas fa-times">
-                                @Html.ActionLink("12", actionName: "RemoveCandidature",
-                                    controllerName: "Nodes",
-                                    routeValues: new { account = item.Account },
-                                    htmlAttributes: null)
-                            </i>*@
+                                    @Html.ActionLink("12", actionName: "RemoveCandidature",
+                                        controllerName: "Nodes",
+                                        routeValues: new { account = item.Account },
+                                        htmlAttributes: null)
+                                </i>*@
                         </td>
                     </tr>
                 }

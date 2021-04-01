@@ -1,5 +1,4 @@
-﻿using BlockBase.Dapps.CloudManager.Business;
-using BlockBase.Dapps.CloudManager.Business.Nodes;
+﻿using BlockBase.Dapps.CloudManager.Business.Nodes;
 using BlockBase.Dapps.CloudManager.WebApp.Models;
 using BlockBase.Dapps.CloudManager.WebApp.Models.HtmlComponents;
 using BlockBase.Dapps.CloudManager.WebApp.Models.Nodes;
@@ -72,9 +71,9 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             return View(new RequesterViewModel(res.Result));
         }
         [HttpGet("Nodes/Requester/{id}/Configurations")]
-        public IActionResult RequesterConfigurations(string id)
+        public async Task<IActionResult> RequesterConfigurations(string id)
         {
-            ViewBag.DetailedRequester = true;
+            //ViewBag.DetailedRequester = true;
             CheckPostError();
 
             var breadcrumbItems = new List<BreadcrumbItem>(){
@@ -87,6 +86,14 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             SetBreadCrumb(breadcrumbItems);
 
             //SetRequesterBreadCrumb(id, "Configurations");
+            var res = await _business.GetRequesterAsync(id);
+            var postError = CheckPostError(); ViewBag.DetailedRequester = true;
+            if (!res.HasSucceeded || postError)
+            {
+                if (!postError) RegisterError(res.Exception.Message);
+                return View(new RequesterViewModel() { Account = id });
+            }
+            ViewBag.DetailedRequester = res.Result;
             return View(new RequesterConfigurationViewModel() { Account = id });
         }
 
@@ -126,17 +133,25 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             SetBreadCrumb(breadcrumbItems);
 
             //SetRequesterBreadCrumb(id, "Stake");
-            return View(new RequesterStakeViewModel() { Account = id, Stake = operation.Result.Stake, Balance=operation.Result.Balance });
+            var res = await _business.GetRequesterAsync(id);
+            var postError = CheckPostError(); ViewBag.DetailedRequester = true;
+            if (!res.HasSucceeded || postError)
+            {
+                if (!postError) RegisterError(res.Exception.Message);
+                return View(new RequesterViewModel() { Account = id });
+            }
+            ViewBag.DetailedRequester = res.Result;
+            return View(new RequesterStakeViewModel() { Account = id, Stake = operation.Result.Stake, Balance = operation.Result.Balance });
         }
 
         public async Task<IActionResult> RequesterStakeClaim(string id)
         {
             var operation = await _business.ClaimStake(id);
-         
+
             if (!operation.HasSucceeded)
             {
                 RegisterError(operation.Exception.Message);
-                return RedirectToAction("RequesterStake", new { id = id , error = operation.Exception.Message});
+                return RedirectToAction("RequesterStake", new { id = id, error = operation.Exception.Message });
             }
             return RedirectToAction("RequesterStake", new { id = id });
         }
@@ -172,6 +187,14 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             SetBreadCrumb(breadcrumbItems);
 
             //SetRequesterBreadCrumb(id, "ManageAccess");
+            var res = await _business.GetRequesterAsync(id);
+            var postError = CheckPostError(); ViewBag.DetailedRequester = true;
+            if (!res.HasSucceeded || postError)
+            {
+                if (!postError) RegisterError(res.Exception.Message);
+                return View(new RequesterViewModel() { Account = id });
+            }
+            ViewBag.DetailedRequester = res.Result;
             return View(new RequesterAccessViewModel(operation.Result));
         }
 
@@ -252,6 +275,14 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             SetBreadCrumb(breadcrumbItems);
 
             //SetRequesterBreadCrumb(id, "Database");
+            var res = await _business.GetRequesterAsync(id);
+            var postError = CheckPostError(); ViewBag.DetailedRequester = true;
+            if (!res.HasSucceeded || postError)
+            {
+                if (!postError) RegisterError(res.Exception.Message);
+                return View(new RequesterViewModel() { Account = id });
+            }
+            ViewBag.DetailedRequester = res.Result;
             return View(new SandboxViewModel(operation.Result));
         }
 
@@ -331,6 +362,14 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             SetBreadCrumb(breadcrumbItems);
 
             //setProducerBreadCrumb(id, "Database");
+            var res = await _business.GetProducerAsync(id);
+            var postError = CheckPostError(); ViewBag.DetailedProducer = true;
+            if (!res.HasSucceeded || postError)
+            {
+                if (!postError) RegisterError(res.Exception.Message);
+                return View(new RequesterViewModel() { Account = id });
+            }
+            ViewBag.DetailedProducer = res.Result;
             return View(new ProducerDatabaseViewModel() { Account = id, ProducingSidechains = operation.Result });
         }
 
@@ -368,6 +407,14 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             SetBreadCrumb(breadcrumbItems);
 
             //setProducerBreadCrumb(id, "Stake");
+            var res = await _business.GetProducerAsync(id);
+            var postError = CheckPostError(); ViewBag.DetailedProducer = true;
+            if (!res.HasSucceeded || postError)
+            {
+                if (!postError) RegisterError(res.Exception.Message);
+                return View(new RequesterViewModel() { Account = id });
+            }
+            ViewBag.DetailedProducer = res.Result;
             return View(new ProducerStakeViewModel() { Stake = operation.Result.Stake, Account = id, ProducingSidechains = operation.Result.ProducingIn });
         }
 
@@ -392,6 +439,14 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             SetBreadCrumb(breadcrumbItems);
 
             //setProducerBreadCrumb(id, "Sidechains");
+            var res = await _business.GetProducerAsync(id);
+            var postError = CheckPostError(); ViewBag.DetailedProducer = true;
+            if (!res.HasSucceeded || postError)
+            {
+                if (!postError) RegisterError(res.Exception.Message);
+                return View(new RequesterViewModel() { Account = id });
+            }
+            ViewBag.DetailedProducer = res.Result;
             return View(new ProducerOtherSidechainViewModel() { Account = id, OtherSidechains = operation.Result });
         }
 
@@ -438,7 +493,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             var postError = CheckPostError();
             if (!operation.HasSucceeded || postError)
             {
-                if(!postError) RegisterError(operation.Exception.Message);
+                if (!postError) RegisterError(operation.Exception.Message);
                 return View(new ProducerConfigurationViewModel(operation.Result) { Account = id });
             }
 
@@ -452,6 +507,14 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             SetBreadCrumb(breadcrumbItems);
 
             //setProducerBreadCrumb(id, "Configurations");
+            var res = await _business.GetProducerAsync(id);
+            var producerPostError = CheckPostError(); ViewBag.DetailedProducer = true;
+            if (!res.HasSucceeded || postError)
+            {
+                if (!producerPostError) RegisterError(res.Exception.Message);
+                return View(new RequesterViewModel() { Account = id });
+            }
+            ViewBag.DetailedProducer = res.Result;
             return View(new ProducerConfigurationViewModel(operation.Result) { Account = id });
         }
 
@@ -475,7 +538,8 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
 
             var model = vm.ToModel();
             if (isIncrement) model.IncrementNonNull(); else model.DecrementNonNull();
-            if (model.HasNegativeValues()) {
+            if (model.HasNegativeValues())
+            {
                 RegisterPostError("Cannot decrement under zero.");
                 return RedirectToAction("ProducerConfigurations", new { id = vm.Account });
             }
@@ -488,11 +552,11 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             return RedirectToAction("ProducerConfigurations", new { id = vm.Account });
         }
 
-        
+
         public async Task<IActionResult> RemoveCandidature(string account)
         {
             var operation = await _business.RemoveCandidature(account);
-            
+
             if (!operation.HasSucceeded)
             {
                 RegisterPostError(operation.Exception.Message);

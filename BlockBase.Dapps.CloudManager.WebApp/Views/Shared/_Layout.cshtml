@@ -121,6 +121,61 @@
                             </ul>
                         </div>
                     }
+
+                    @if (ViewBag.DetailedRequester is BlockBase.Dapps.CloudManager.DataAccessLayer.DetailedRequesterPOCO)
+                    {
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-requesterMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-requesterMenu">
+
+                            <ul class="navbar-nav mr-auto">
+                                @if (ViewBag.DetailedRequester.InProduction)
+                                {
+                                    <li>
+                                        <a asp-area="" asp-controller="Nodes" asp-action="RequesterPause" asp-route-id=@ViewBag.DetailedRequester.Account>
+                                            <i class="fas fa-pause"></i> Pause
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a asp-area="" asp-controller="Nodes" asp-action="RequesterResume" asp-route-id=@ViewBag.DetailedRequester.Account>
+                                            <i class="fas fa-play text-success"></i> Resume
+                                        </a>
+                                    </li>
+                                }
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterTerminate" asp-route-id=@ViewBag.DetailedRequester.Account>
+                                        <i class="fas fa-times text-danger">
+                                        </i> Terminate<span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterDatabase" asp-route-id=@ViewBag.DetailedRequester.Account>
+                                        <i class="fas fa-database"></i> Database<span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterManageAccess" asp-route-id=@ViewBag.DetailedRequester.Account>
+                                        <i class="fas fa-binoculars"></i> Manage Access<span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterStake" asp-route-id=@ViewBag.DetailedRequester.Account>
+                                        <i class="fas fa-university"></i> Manage Stake<span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterConfigurations" asp-route-id=@ViewBag.DetailedRequester.Account>
+                                        <i class="fas fa-bars"></i> Configurations<span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
                 </nav>
             </div>
         }
@@ -159,6 +214,42 @@
                                 </li>
                                 <li>
                                     <a asp-area="" asp-controller="Nodes" asp-action="ProducerConfigurations" asp-route-id=@Model.Account>
+                                        <i class="fas fa-bars"></i> Configurations
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+
+                    @if (ViewBag.DetailedProducer is BlockBase.Dapps.CloudManager.Data.DetailedProducerPOCO)
+                    {
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-producerMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent-producerMenu">
+                            <ul class="navbar-nav mr-auto">
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerStake" asp-route-id=@ViewBag.DetailedProducer.Account>
+                                        <i class="fas fa-gift"></i> Claim Rewards
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerSidechains" asp-route-id=@ViewBag.DetailedProducer.Account>
+                                        <i class="far fa-list-alt"></i> Sidechains
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerWarnings" asp-route-id=@ViewBag.DetailedProducer.Account>
+                                        <i class="fas fa-exclamation"></i> Warnings
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerDatabase" asp-route-id=@ViewBag.DetailedProducer.Account>
+                                        <i class="fas fa-database"></i> Database
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerConfigurations" asp-route-id=@ViewBag.DetailedProducer.Account>
                                         <i class="fas fa-bars"></i> Configurations
                                     </a>
                                 </li>
