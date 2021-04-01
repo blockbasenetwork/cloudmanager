@@ -1,118 +1,237 @@
 ﻿@using BlockBase.Dapps.CloudManager.WebApp.Models.Nodes;
 @model RequesterConfigurationViewModel
+@*<div class="req-config-card" style="max-width: 50%">
+        <form asp-controller="Nodes" asp-action="RequesterConfigurations">
+            <div class="card-padding">
+                <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item active"><a class="nav-link active" data-toggle="tab" href="#Full">Full</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Validator">Validator</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#History">History</a></li>
+                        </ul>
+                    </div>
 
-<div class="req-config-card" style="max-width: 50%">
+                    <div class="card-body">
+                        <input asp-for="Account" type="hidden" value="@Model.Account" />
+                        <div class="tab-content">
+                            <div id="Full" class="tab-pane fade in active show">
+                                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                                    <label asp-for="Full.MaxPaymentPerBlock" class="control-label"></label>
+                                    <input asp-for="Full.MaxPaymentPerBlock" type="number" class="form-control ml-2" step=any min=0 />
+                                    <span asp-validation-for="Full.MaxPaymentPerBlock" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                                    <label asp-for="Full.MinPaymentPerBlock" class="control-label"></label>
+                                    <input asp-for="Full.MinPaymentPerBlock" type="number" step=any min=0 class="form-control ml-2" />
+                                    <span asp-validation-for="Full.MinPaymentPerBlock" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                                    <label asp-for="Full.Required" class="control-label"></label>
+                                    <input asp-for="Full.Required" type="number" min=0 class="form-control ml-2" />
+                                    <span asp-validation-for="Full.Required" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div id="Validator" class="tab-pane fade">
+                                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                                    <label asp-for="Validator.MaxPaymentPerBlock" class="control-label"></label>
+                                    <input asp-for="Validator.MaxPaymentPerBlock" type="number" step=any min=0 class="form-control ml-2" />
+                                    <span asp-validation-for="Validator.MaxPaymentPerBlock" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                                    <label asp-for="Validator.MinPaymentPerBlock" class="control-label"></label>
+                                    <input asp-for="Validator.MinPaymentPerBlock" type="number" step=any min=0 class="form-control ml-2" />
+                                    <span asp-validation-for="Validator.MinPaymentPerBlock" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                                    <label asp-for="Validator.Required" class="control-label"></label>
+                                    <input asp-for="Validator.Required" type="number" min=0 class="form-control ml-2" />
+                                    <span asp-validation-for="Validator.Required" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div id="History" class="tab-pane fade">
+                                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                                    <label asp-for="History.MaxPaymentPerBlock" class="control-label"></label>
+                                    <input asp-for="History.MaxPaymentPerBlock" type="number" step=any min=0 class="form-control ml-2" />
+                                    <span asp-validation-for="History.MaxPaymentPerBlock" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                                    <label asp-for="History.MinPaymentPerBlock" class="control-label"></label>
+                                    <input asp-for="History.MinPaymentPerBlock" type="number" step=any min=0 class="form-control ml-2" />
+                                    <span asp-validation-for="History.MinPaymentPerBlock" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                                    <label asp-for="History.Required" class="control-label"></label>
+                                    <input asp-for="History.Required" type="number" min=0 class="form-control ml-2" />
+                                    <span asp-validation-for="History.Required" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-padding">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="float-left">
+                            State
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                            <label asp-for="MinimumCandidatureStake" class="control-label"></label>
+                            <input asp-for="MinimumCandidatureStake" type="number" step=any min=0 class="form-control ml-2" />
+                            <span asp-validation-for="MinimumCandidatureStake" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-padding">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="float-left">
+                            Block
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                            <label asp-for="BlockSize" class="control-label"></label>
+                            <input asp-for="BlockSize" type="number" class="form-control step=any min=0 ml-2" />
+                            <span asp-validation-for="BlockSize" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                            <label asp-for="TimeBetweenBlocks" class="control-label"></label>
+                            <input asp-for="TimeBetweenBlocks" type="number" min=0 class="form-control ml-2" />
+                            <span asp-validation-for="TimeBetweenBlocks" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group ml-4">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>*@
+
+<div class="req-config-card pt-0">
     <form asp-controller="Nodes" asp-action="RequesterConfigurations">
-        <div class="card-padding">
-            <div class="card">
-                <div class="card-header">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item active"><a class="nav-link active" data-toggle="tab" href="#Full">Full</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Validator">Validator</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#History">History</a></li>
-                    </ul>
-                </div>
 
-                <div class="card-body">
-                    <input asp-for="Account" type="hidden" value="@Model.Account" />
-                    <div class="tab-content">
-                        <div id="Full" class="tab-pane fade in active show">
-                            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-                                <label asp-for="Full.MaxPaymentPerBlock" class="control-label"></label>
-                                <input asp-for="Full.MaxPaymentPerBlock" type="number" class="form-control ml-2" step=any min=0/>
-                                <span asp-validation-for="Full.MaxPaymentPerBlock" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-                                <label asp-for="Full.MinPaymentPerBlock" class="control-label"></label>
-                                <input asp-for="Full.MinPaymentPerBlock" type="number" step=any min=0 class="form-control ml-2" />
-                                <span asp-validation-for="Full.MinPaymentPerBlock" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-                                <label asp-for="Full.Required" class="control-label"></label>
-                                <input asp-for="Full.Required" type="number" min=0 class="form-control ml-2" />
-                                <span asp-validation-for="Full.Required" class="text-danger"></span>
-                            </div>
+        <div class="d-flex flex-row bd-highlight mb-2 row">
+            <div class="most-outer col">
+                <div class="outer-outer">
+                    <div class="outter-Stake">
+                        <div class="stake-text">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item active"><a class="nav-link active" data-toggle="tab" href="#Full">Full</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Validator">Validator</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#History">History</a></li>
+                            </ul>
                         </div>
-                        <div id="Validator" class="tab-pane fade">
-                            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-                                <label asp-for="Validator.MaxPaymentPerBlock" class="control-label"></label>
-                                <input asp-for="Validator.MaxPaymentPerBlock" type="number" step=any min=0 class="form-control ml-2" />
-                                <span asp-validation-for="Validator.MaxPaymentPerBlock" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-                                <label asp-for="Validator.MinPaymentPerBlock" class="control-label"></label>
-                                <input asp-for="Validator.MinPaymentPerBlock" type="number"step=any min=0  class="form-control ml-2" />
-                                <span asp-validation-for="Validator.MinPaymentPerBlock" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-                                <label asp-for="Validator.Required" class="control-label"></label>
-                                <input asp-for="Validator.Required" type="number" min=0 class="form-control ml-2" />
-                                <span asp-validation-for="Validator.Required" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div id="History" class="tab-pane fade">
-                            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-                                <label asp-for="History.MaxPaymentPerBlock" class="control-label"></label>
-                                <input asp-for="History.MaxPaymentPerBlock" type="number" step=any min=0 class="form-control ml-2" />
-                                <span asp-validation-for="History.MaxPaymentPerBlock" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-                                <label asp-for="History.MinPaymentPerBlock" class="control-label"></label>
-                                <input asp-for="History.MinPaymentPerBlock" type="number" step=any min=0 class="form-control ml-2" />
-                                <span asp-validation-for="History.MinPaymentPerBlock" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-                                <label asp-for="History.Required" class="control-label"></label>
-                                <input asp-for="History.Required" type="number" min=0 class="form-control ml-2" />
-                                <span asp-validation-for="History.Required" class="text-danger"></span>
-                            </div>
-                        </div>
+                        <div class="display-stake px-5 pt-2 mb-0 row">
+                            <input asp-for="Account" type="hidden" value="@Model.Account" />
+                            <div class="tab-content">
+                                <div id="Full" class="tab-pane fade in active show">
+                                    <div class="form-group col-lg col-md col-sm">
+                                        <label asp-for="Full.MaxPaymentPerBlock" class="control-label"></label>
+                                        <input asp-for="Full.MaxPaymentPerBlock" type="number" class="form-control" step=any min=0 />
+                                        <span asp-validation-for="Full.MaxPaymentPerBlock" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-lg col-md col-sm">
+                                        <label asp-for="Full.MinPaymentPerBlock" class="control-label"></label>
+                                        <input asp-for="Full.MinPaymentPerBlock" type="number" step=any min=0 class="form-control" />
+                                        <span asp-validation-for="Full.MinPaymentPerBlock" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-lg col-md col-sm">
+                                        <label asp-for="Full.Required" class="control-label"></label>
+                                        <input asp-for="Full.Required" type="number" min=0 class="form-control" />
+                                        <span asp-validation-for="Full.Required" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div id="Validator" class="tab-pane fade">
+                                    <div class="form-group col-lg col-md col-sm">
+                                        <label asp-for="Validator.MaxPaymentPerBlock" class="control-label"></label>
+                                        <input asp-for="Validator.MaxPaymentPerBlock" type="number" step=any min=0 class="form-control" />
+                                        <span asp-validation-for="Validator.MaxPaymentPerBlock" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-lg col-md col-sm">
+                                        <label asp-for="Validator.MinPaymentPerBlock" class="control-label"></label>
+                                        <input asp-for="Validator.MinPaymentPerBlock" type="number" step=any min=0 class="form-control" />
+                                        <span asp-validation-for="Validator.MinPaymentPerBlock" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-lg col-md col-sm">
+                                        <label asp-for="Validator.Required" class="control-label"></label>
+                                        <input asp-for="Validator.Required" type="number" min=0 class="form-control" />
+                                        <span asp-validation-for="Validator.Required" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div id="History" class="tab-pane fade">
+                                    <div class="form-group col-lg col-md col-sm">
+                                        <label asp-for="History.MaxPaymentPerBlock" class="control-label"></label>
+                                        <input asp-for="History.MaxPaymentPerBlock" type="number" step=any min=0 class="form-control" />
+                                        <span asp-validation-for="History.MaxPaymentPerBlock" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-lg col-md col-sm">
+                                        <label asp-for="History.MinPaymentPerBlock" class="control-label"></label>
+                                        <input asp-for="History.MinPaymentPerBlock" type="number" step=any min=0 class="form-control" />
+                                        <span asp-validation-for="History.MinPaymentPerBlock" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-lg col-md col-sm">
+                                        <label asp-for="History.Required" class="control-label"></label>
+                                        <input asp-for="History.Required" type="number" min=0 class="form-control" />
+                                        <span asp-validation-for="History.Required" class="text-danger"></span>
+                                    </div>
+                                </div>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="most-outer col">
+                <div class="outer-outer">
+                    <div class="outter-Stake">
+                        <div class="stake-text">State</div>
+                        <div class="display-stake px-5 pt-2 mb-0  row">
+                            <div class="form-group col-lg col-md col-sm">
+                                <label asp-for="MinimumCandidatureStake" class="control-label"></label>
+                                <input asp-for="MinimumCandidatureStake" type="number" step=any min=0 class="form-control" />
+                                <span asp-validation-for="MinimumCandidatureStake" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="most-outer col">
+                <div class="outer-outer">
+                    <div class="outter-Stake">
+                        <div class="stake-text">Block</div>
+                        <div class="display-stake px-5 pt-2 mb-0 d-block row">
+                            <div class="form-group col-lg col-md col-sm">
+                                <label asp-for="BlockSize" class="control-label"></label>
+                                <input asp-for="BlockSize" type="number" min=0 class="form-control step=any" />
+                                <span asp-validation-for="BlockSize" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-lg col-md col-sm">
+                                <label asp-for="TimeBetweenBlocks" class="control-label"></label>
+                                <input asp-for="TimeBetweenBlocks" type="number" min=0 class="form-control" />
+                                <span asp-validation-for="TimeBetweenBlocks" class="text-danger"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card-padding">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="float-left">
-                        State
-                    </h2>
-                </div>
-                <div class="card-body">
-                    <div class="form-group col-lg-3 col-md-6 col-sm-12">
-                        <label asp-for="MinimumCandidatureStake" class="control-label"></label>
-                        <input asp-for="MinimumCandidatureStake" type="number" step=any min=0 class="form-control ml-2"/>
-                        <span asp-validation-for="MinimumCandidatureStake" class="text-danger"></span>
-                    </div>
-                </div>
+
+
+        <div class="d-flex flex-row bd-highlight mb-2">
+            <div class="form-group mx-auto">
+                <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
         </div>
-        <div class="card-padding">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="float-left">
-                        Block
-                    </h2>
-                </div>
-                <div class="card-body">
-                    <div class="form-group col-lg-3 col-md-6 col-sm-12">
-                        <label asp-for="BlockSize" class="control-label"></label>
-                        <input asp-for="BlockSize" type="number" class="form-control step=any min=0 ml-2"/>
-                        <span asp-validation-for="BlockSize" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-lg-3 col-md-6 col-sm-12">
-                        <label asp-for="TimeBetweenBlocks" class="control-label"></label>
-                        <input asp-for="TimeBetweenBlocks" type="number" min=0 class="form-control ml-2"/>
-                        <span asp-validation-for="TimeBetweenBlocks" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group ml-4">
-            <input type="submit" value="Submit" class="btn btn-primary" />
-        </div>
+
     </form>
 </div>
-
-
