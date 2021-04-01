@@ -11,5 +11,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Nodes
         public string Account { get; set; }
         [Display(Name = "Add Stake:")]
         public string Stake { get; set; }
+
+        public string Balance { get; set; }
     }
 }

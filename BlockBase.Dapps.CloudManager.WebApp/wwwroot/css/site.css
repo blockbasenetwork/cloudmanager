@@ -547,3 +547,29 @@ body {
     content: '';
     background-color: #5C88C6;
 }
+
+
+
+.add-stake {
+    margin: 7%;
+    text-align: center;
+}
+
+    .add-stake input {
+        margin-top: 7px !important;
+    }
+
+    .add-stake h7 {
+        opacity: 0.5;
+    }
+
+    .add-stake input[type=number] {
+        margin: 0 auto !important;
+        width: 80%;
+    }
+
+    .add-stake input[type=submit] {
+        margin: 0 auto;
+        width: 60%;
+    }
+
