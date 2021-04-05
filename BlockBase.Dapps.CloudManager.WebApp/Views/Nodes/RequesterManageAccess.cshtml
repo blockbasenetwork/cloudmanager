@@ -113,10 +113,9 @@
                                 @item.Type
                             </td>
                             <td>
-                                @Html.ActionLink("Remove", actionName: "DeleteReservedSeat",
-                                    controllerName: "Nodes",
-                                    routeValues: new { id = @Model.Account, toRemove = item.key },
-                                    htmlAttributes: null)
+                                <a href="@Url.Action("DeleteReservedSeat", "Nodes", new { id = @Model.Account, toRemove = item.key })">
+                                    <i style="color: black;" class="fas fa-trash"></i>
+                                </a>
                             </td>
                         </tr>
                     }
@@ -151,10 +150,9 @@
                                 @item.Type
                             </td>
                             <td>
-                                @Html.ActionLink("Remove", actionName: "DeletePermitted",
-                                   controllerName: "Nodes",
-                                   routeValues: new { id = @Model.Account, toRemove = item.key },
-                                   htmlAttributes: null)
+                                <a href="@Url.Action("DeletePermitted", "Nodes", new { id = @Model.Account, toRemove = item.key })">
+                                    <i style="color: black;" class="fas fa-trash"></i>
+                                </a>
                             </td>
 
                         </tr>
@@ -190,10 +188,9 @@
                                 @item.Type
                             </td>
                             <td>
-                                @Html.ActionLink("Remove", actionName: "DeleteBlackListed",
-                                  controllerName: "Nodes",
-                                  routeValues: new { id = @Model.Account, toRemove = item.key },
-                                  htmlAttributes: null)
+                                <a href="@Url.Action("DeleteBlackListed", "Nodes", new { id = @Model.Account, toRemove = item.key })">
+                                    <i style="color: black;" class="fas fa-trash"></i>
+                                </a>
                             </td>
                         </tr>
                     }
@@ -210,6 +207,12 @@
             dom: 'Bfrtip',
             buttons: {
                 buttons: [
+                    {
+                        className: "Refresh-btn",
+                        action: function (e, dt, node, config) {
+                            $("#nodes-table").load(location.href + "#nodes-table");
+                        }
+                    },
                     {
                         className: "Add-btn",
                         action: function (e, dt, node, config) {
@@ -231,6 +234,12 @@
             buttons: {
                 buttons: [
                     {
+                        className: "Refresh-btn",
+                        action: function (e, dt, node, config) {
+                            $("#nodes-table").load(location.href + "#nodes-table");
+                        }
+                    },
+                    {
                         className: "Add-btn",
                         action: function (e, dt, node, config) {
                             $('#add-modal-permitted').modal('show')
@@ -246,7 +255,26 @@
                 }
             }
         });
-        $('#blacklisted').DataTable();
+        $('#blacklisted').DataTable({
+            dom: 'Bfrtip',
+            buttons: {
+                buttons: [
+                    {
+                        className: "Refresh-btn",
+                        action: function (e, dt, node, config) {
+                            $("#nodes-table").load(location.href + "#nodes-table");
+                        }
+                    }
+                ],
+                dom: {
+                    button: {
+                        tag: "button",
+                        className: "btn btn-light"
+                    }
+                }
+            }
+        });
+        $('.Refresh-btn').html('<i class="fas fa-redo"></i> Refresh');
         $('.Add-btn').html('<i class="fas fa-plus"></i> Add');
 
     });

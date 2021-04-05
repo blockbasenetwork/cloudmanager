@@ -30,10 +30,10 @@
                                         <a class="nav-link link-layout text-light" id="home" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Home</a>
                                     </li>
                                     <li class="nav-item item-layout pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link link-layout text-light" asp-area="" asp-controller="Deployment" asp-action="Index"><i class="fas fa-cloud"></i> Deployment</a>
+                                        <a class="nav-link link-layout text-light" id="deployment" asp-area="" asp-controller="Deployment" asp-action="Index"><i class="fas fa-cloud"></i> Deployment</a>
                                     </li>
                                     <li class="nav-item item-layout pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a class="nav-link link-layout text-light" asp-area="" asp-controller="Nodes" asp-action="Index"><i class="fas fa-laptop"></i> Nodes</a>
+                                        <a class="nav-link link-layout text-light" id="nodes" asp-area="" asp-controller="Nodes" asp-action="Index"><i class="fas fa-laptop"></i> Nodes</a>
                                     </li>
                                 </ul>
                             </div>
@@ -61,7 +61,6 @@
             </div>
         </div>
         <!-- Errorpopup Menu end -->
-
         <!-- Informationpopup Menu begin -->
         <div class="modal" id="information-modal" tabindex="-1">
             <div class="modal-dialog">
@@ -80,8 +79,6 @@
             </div>
         </div>
         <!-- Informationpopup Menu end -->
-
-
         <!-- Menu Oper Requester -->
         @if (ViewBag.DetailedRequester != null)
         {
@@ -120,23 +117,23 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterDatabase" asp-route-id=@Model.Account>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterDatabase" asp-route-id=@Model.Account id="Database">
                                         <i class="fas fa-database"></i> Database<span class="sr-only">(current)</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterManageAccess" asp-route-id=@Model.Account>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterManageAccess" asp-route-id=@Model.Account id="ManageAccess">
                                         <i class="fas fa-binoculars"></i> Manage Access<span class="sr-only">(current)</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterStake" asp-route-id=@Model.Account>
-                                        <i class="fas fa-university"></i> Manage Stake<span class="sr-only">(current)</span>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterStake" asp-route-id=@Model.Account id="Stake">
+                                        <i class="fas fa-university"></i> Manage Stake
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterConfigurations" asp-route-id=@Model.Account>
-                                        <i class="fas fa-bars"></i> Configurations<span class="sr-only">(current)</span>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterConfigurations" asp-route-id=@Model.Account id="Configurations">
+                                        <i class="fas fa-bars"></i> Configurations
                                     </a>
                                 </li>
                             </ul>
@@ -175,24 +172,27 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterDatabase" asp-route-id=@ViewBag.DetailedRequester.Account>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterDatabase" asp-route-id=@ViewBag.DetailedRequester.Account id="Database">
                                         <i class="fas fa-database"></i> Database<span class="sr-only">(current)</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterManageAccess" asp-route-id=@ViewBag.DetailedRequester.Account>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterManageAccess" asp-route-id=@ViewBag.DetailedRequester.Account id="ManageAccess">
                                         <i class="fas fa-binoculars"></i> Manage Access<span class="sr-only">(current)</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterStake" asp-route-id=@ViewBag.DetailedRequester.Account>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterStake" asp-route-id=@ViewBag.DetailedRequester.Account id="Stake">
                                         <i class="fas fa-university"></i> Manage Stake<span class="sr-only">(current)</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterConfigurations" asp-route-id=@ViewBag.DetailedRequester.Account>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="RequesterConfigurations" asp-route-id=@ViewBag.DetailedRequester.Account id="Configurations">
                                         <i class="fas fa-bars"></i> Configurations<span class="sr-only">(current)</span>
                                     </a>
+                                </li>
+                                <li>
+                                    <a></a>
                                 </li>
                             </ul>
                         </div>
@@ -214,12 +214,12 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent-producerMenu">
                             <ul class="navbar-nav mr-auto">
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerStake" asp-route-id=@Model.Account>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerStake" asp-route-id=@Model.Account id="Stake">
                                         <i class="fas fa-gift"></i> Claim Rewards
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerSidechains" asp-route-id=@Model.Account>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerSidechains" asp-route-id=@Model.Account id="Sidechains">
                                         <i class="far fa-list-alt"></i> Sidechains
                                     </a>
                                 </li>
@@ -229,14 +229,17 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerDatabase" asp-route-id=@Model.Account>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerDatabase" asp-route-id=@Model.Account id="Database">
                                         <i class="fas fa-database"></i> Database
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerConfigurations" asp-route-id=@Model.Account>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerConfigurations" asp-route-id=@Model.Account id="Configurations">
                                         <i class="fas fa-bars"></i> Configurations
                                     </a>
+                                </li>
+                                <li>
+                                    <a></a>
                                 </li>
                             </ul>
                         </div>
@@ -250,12 +253,12 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent-producerMenu">
                             <ul class="navbar-nav mr-auto">
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerStake" asp-route-id=@ViewBag.DetailedProducer.Account>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerStake" asp-route-id=@ViewBag.DetailedProducer.Account id="Stake">
                                         <i class="fas fa-gift"></i> Claim Rewards
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerSidechains" asp-route-id=@ViewBag.DetailedProducer.Account>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerSidechains" asp-route-id=@ViewBag.DetailedProducer.Account id="Sidechains">
                                         <i class="far fa-list-alt"></i> Sidechains
                                     </a>
                                 </li>
@@ -265,14 +268,17 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerDatabase" asp-route-id=@ViewBag.DetailedProducer.Account>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerDatabase" asp-route-id=@ViewBag.DetailedProducer.Account id="Database">
                                         <i class="fas fa-database"></i> Database
                                     </a>
                                 </li>
                                 <li>
-                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerConfigurations" asp-route-id=@ViewBag.DetailedProducer.Account>
+                                    <a asp-area="" asp-controller="Nodes" asp-action="ProducerConfigurations" asp-route-id=@ViewBag.DetailedProducer.Account id="Configurations">
                                         <i class="fas fa-bars"></i> Configurations
                                     </a>
+                                </li>
+                                <li>
+                                    <a></a>
                                 </li>
                             </ul>
                         </div>
@@ -319,7 +325,8 @@
             @RenderBody()
         </main>
     </div>
-    <script> var error = '@ViewBag.ErrorMsg';
+    <script>
+ var error = '@ViewBag.ErrorMsg';
     var information = '@ViewBag.InformationMsg'</script>
     <script>
         (function ($) {
@@ -346,18 +353,43 @@
         })(jQuery);
 
     $(function () {
-        if ((location.pathname.split("/")[1]) !== "") {
-            $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('currentPage').removeClass('text-light');
-        }
-        else if ((location.pathname.split("/")[1]) == "") {
+        if ((location.pathname.split("/")[1]) == "") {
             var element = document.getElementById("home");
             element.classList.add("currentPage");
             element.classList.remove('text-light')
         }
+        if ((location.pathname.split("/").pop()) == "Deployment") {
+            var element = document.getElementById("deployment");
+            element.classList.add("currentPage");
+            element.classList.remove('text-light')
+        }
+        else if ((location.pathname.split("/").includes("Nodes"))) {
+            var element = document.getElementById("nodes");
+            element.classList.add("currentPage");
+            element.classList.remove('text-light')
+        }
+        else if ((location.pathname.split("/").pop()) == "Database") {
+            var element = document.getElementById("Database");
+            element.classList.add("d-none");
+        }
+        else if ((location.pathname.split("/").pop()) == "ManageAccess") {
+            var element = document.getElementById("ManageAccess");
+            element.classList.add("d-none");
+        }
+        else if ((location.pathname.split("/").pop()) == "Stake") {
+            var element = document.getElementById("Stake");
+            element.classList.add("d-none");
+        }
+        else if ((location.pathname.split("/").pop()) == "Configurations") {
+            var element = document.getElementById("Configurations");
+            element.classList.add("d-none");
+        }
+        else if ((location.pathname.split("/").pop()) == "Sidechains") {
+            var element = document.getElementById("Sidechains");
+            element.classList.add("d-none");
+        }
     });
-
     </script>
-
 
 
 
