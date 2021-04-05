@@ -570,13 +570,22 @@ body {
         width: 80%;
     }
 
-.add-stake input[type=submit] {
+    .add-stake input[type=submit] {
         margin: 0 auto;
         width: 40%;
+        background-color: #162e49 !important;
     }
 
     .add-stake input[type=button] {
-        width: 40% ;
+        width: 40%;
+        background-color: #162e49 !important;
     }
+
+
+#addStake {
+    color: #5C88C6 !important;
+    background-color: #162e49 !important;
+}
+
 
 

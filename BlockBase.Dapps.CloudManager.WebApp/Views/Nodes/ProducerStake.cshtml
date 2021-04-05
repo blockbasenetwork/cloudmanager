@@ -3,33 +3,34 @@
 
 <div id="add-modal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-        <div class="modal-content" style="min-width: 200px">
-            <div class="modal-header">
+        <div class="modal-content">
+            <div class="modal-header" id="addStake">
                 <h5 class="modal-title"> Add Stake</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
-            <form asp-controller="Nodes" asp-action="ProducerAddStake">
-                <label asp-for="Stake" class="control-label"></label>
-                <input asp-for="Account" type="hidden" value="@Model.Account" />
-                <input asp-for="Stake" type="number" step=any min=0 class="form-control ml-2" />
-                <br />
-                <select id="type-to-add" asp-for="AccountToAdd" class="form-control" Width="230px">
-                    <option Value="0">Select Account</option>
-                    @foreach(var item in Model.ProducingSidechains)
-                    {
-                        <option Value="@item">@item</option>
-                    }
-                </select>
-                <span asp-validation-for="Stake" class="text-danger"></span>
-                <div class="form-group form-end sub-button">
-                    <input type="submit" value="Submit" class="btn btn btn-dark" />
-                </div>
-            </form>
+            <div class="add-stake">
+                <h6>Amount : </h6>
+                <form asp-controller="Nodes" asp-action="ProducerAddStake">
+                    <input asp-for="Account" type="hidden" value="@Model.Account" />
+                    <input asp-for="Stake" type="number" step=any min=0 class="form-control ml-2" />
+                    <br />
+                    <select id="type-to-add" asp-for="AccountToAdd" class="form-control" Width="230px">
+                        <option Value="0">Select Account</option>
+                        @foreach (var item in Model.ProducingSidechains)
+                        {
+                            <option Value="@item">@item</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Stake" class="text-danger"></span>
+                    <div class="form-group form-end sub-button">
+                        <input type="submit" value="Submit" class="btn btn btn-dark" />
+                        <input type="button" class="btn btn btn-dark" value="Cancel" data-dismiss="modal" aria-label="Close" />
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
 
 <div class="most-outer">
     <div class="outer-outer">
@@ -50,8 +51,7 @@
 </div>
 
 <script>
-    $('.btn-stake').click(() =>
-    {
+    $('.btn-stake').click(() => {
         $('#add-modal').modal('show')
     });
 

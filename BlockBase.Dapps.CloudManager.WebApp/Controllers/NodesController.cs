@@ -167,6 +167,8 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             }
             return RedirectToAction("RequesterStake", new { id = vm.Account });
         }
+
+
         [HttpGet("Nodes/Requester/{id}/ManageAccess")]
         public async Task<IActionResult> RequesterManageAccess(string id)
         {
@@ -297,7 +299,6 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             else
             {
                 // RegisterInformation("Sidechain has been terminated");
-                //return RedirectToAction("Index");
                 return RedirectToAction("Index");
             }
         }
