@@ -138,7 +138,7 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             if (!res.HasSucceeded || postError)
             {
                 if (!postError) RegisterError(res.Exception.Message);
-                return View(new RequesterViewModel() { Account = id });
+                return View(new RequesterStakeViewModel() { Account = id });
             }
             ViewBag.DetailedRequester = res.Result;
             return View(new RequesterStakeViewModel() { Account = id, Stake = operation.Result.Stake, Balance = operation.Result.Balance });
@@ -292,9 +292,14 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             if (!operation.HasSucceeded)
             {
                 RegisterPostError(operation.Exception.Message);
-                RedirectToAction("Index");
+                return RedirectToAction("Requester", new { id });
             }
-            return RedirectToAction("Index");
+            else
+            {
+                // RegisterInformation("Sidechain has been terminated");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
         }
 
         public async Task<IActionResult> RequesterResume(string id)
@@ -458,7 +463,6 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterPostError(operation.Exception.Message);
                 return RedirectToAction("RequesterStake", new { id });
             }
-
             return RedirectToAction("ProducerStake", new { id });
         }
 
@@ -471,9 +475,10 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
                 RegisterPostError(operation.Exception.Message);
                 return RedirectToAction("ProducerStake", new { id = vm.Account });
             }
+           
             return RedirectToAction("ProducerStake", new { id = vm.Account });
         }
-
+            
         public async Task<IActionResult> Candidate(string id, [FromQuery(Name = "Account")] string account)
         {
             var operation = await _business.Candidate(id, account);

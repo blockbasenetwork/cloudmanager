@@ -15,6 +15,11 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Controllers
             ViewBag.ErrorMsg = error;
         }
 
+        public void RegisterInformation(string information)
+        {
+            ViewBag.InformationMsg = information;
+        }
+
         public void RegisterPostError(string error = "Something went wrong")
         {
             TempData[ERROR] = error;

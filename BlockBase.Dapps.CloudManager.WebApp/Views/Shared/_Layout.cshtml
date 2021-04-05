@@ -47,7 +47,7 @@
         <div class="modal" id="error-modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content ">
-                    <div class="modal-header bg-danger " >
+                    <div class="modal-header bg-danger ">
                         <h5 class="modal-title">Error</h5>
                     </div>
                     <div class="modal-body">
@@ -61,6 +61,27 @@
             </div>
         </div>
         <!-- Errorpopup Menu end -->
+
+        <!-- Informationpopup Menu begin -->
+        <div class="modal" id="information-modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content ">
+                    <div class="modal-header bg-info ">
+                        <h5 class="modal-title">Information</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>@ViewBag.InformationMsg</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary closebtn" data-bs-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Informationpopup Menu end -->
+
+
         <!-- Menu Oper Requester -->
         @if (ViewBag.DetailedRequester != null)
         {
@@ -298,7 +319,8 @@
             @RenderBody()
         </main>
     </div>
-    <script> var error = '@ViewBag.ErrorMsg' </script>
+    <script> var error = '@ViewBag.ErrorMsg';
+    var information = '@ViewBag.InformationMsg'</script>
     <script>
         (function ($) {
             "use strict";
@@ -306,6 +328,11 @@
                 $('#error-modal').modal('show');
             }
             $('.closebtn').click(() => { $('#error-modal').modal('hide'); });
+
+            if (information) {
+                $('#information-modal').modal('show');
+            }
+            $('.closebtn').click(() => { $('#information-modal').modal('hide'); });
 
 
             $('body').on('mouseenter mouseleave', '.nav-item', function (e) {
