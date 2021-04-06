@@ -13,6 +13,9 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Home
         public int Providers { get; set; }
         public int Requesters { get; set; }
         public int Full { get; set; }
+        public int On { get; set; }
+        public int Off { get; set; }
+
 
         public HomeViewModel(NodeCountPOCO nc)
         {
@@ -20,6 +23,8 @@ namespace BlockBase.Dapps.CloudManager.WebApp.Models.Home
             this.Providers = nc.NrProvider;
             this.Requesters = nc.NrRequester;
             this.Full = nc.NrFull;
+            this.On = nc.On;
+            this.Off = nc.Off;
         }
     }
 }

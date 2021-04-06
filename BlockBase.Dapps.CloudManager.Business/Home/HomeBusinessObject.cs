@@ -23,17 +23,21 @@ namespace BlockBase.Dapps.CloudManager.Business.Home
                
             NodeCountPOCO NodesCounter(List<Node> list)
             {
-                int total = 0, noRequesters = 0, noProviders = 0, noFull = 0;
+                int total = 0, noRequesters = 0, noProviders = 0, noFull = 0, on = 0, off = 0;
                 list.ForEach(
                     it => {
                         if (it.Type.Equals("Requester")) noRequesters++;
                         if (it.Type.Equals("Producer")) noProviders++;
                         if (it.Type.Equals("Full")) noFull++;
+
+                        if (it.Status.Equals("ON")) on++;
+                        else off++;
+
                         total++;
                     }
 
                 );
-                return new NodeCountPOCO(total,noFull,noRequesters,noProviders) ;
+                return new NodeCountPOCO(total,noFull,noRequesters,noProviders, on, off) ;
 
             }
         }
